@@ -1,8 +1,8 @@
 \label[intro]\chap Introduction
 
-The Real-Time Publish-Subscribe (RTPS)\cite[OMG:DDSI-RTPS22] is the protocol of Data Distribution Service (DDS)\cite[OMG:DDS] family, supporting Data-Centric Publish-Subscribe in real time and specifying communication in a decentralized network, where multiple nodes needs to send and/or receive data in real time. Specification of protocol is being developed by Object Management Group\cite[www:OMG] - international, open membership, not-for-profit technology standards consortium, since version 1.0 on February 2002 till version 2.2 on September 2014.
+The Real-Time Publish-Subscribe (\glref{RTPS})\cite[OMG:DDSI-RTPS22] is the protocol of Data Distribution Service (\glref{DDS})\cite[OMG:DDS] family, supporting Data-Centric Publish-Subscribe in real time and specifying communication in a decentralized network, where multiple nodes needs to send and/or receive data in real time. Specification of protocol is being developed by Object Management Group\cite[www:OMG] - international, open membership, not-for-profit technology standards consortium, since version 1.0 on February 2002 till version 2.2 on September 2014.
 
-This thesis aims on upgrading ORTE implementation of RTPS protocol to be compatible with the latest standard version 2.2. The structure is as follows. In Chapter \ref[intro], there is an introduction to RTPS and ORTE. Chapter \ref[compare] compares implemented RTPS 1.0 with the latest RTPS 2.2, chapter \ref[upgrade] covers changes needed for compatibility with version 2.2 of the RTPS protocol and chapter \ref[test] covers testing of new implementation of RTPS protocol in ORTE. In chapter \ref[shape], demo application of ORTE called {\em Shape} for Android is introduced. The application was developed as part of familiarization with ORTE, therefore ORTE with RTPS 1.0 implementation is used in this application. Security for DDS is discussed in chapter \ref[sec].
+This thesis aims on upgrading \glref{ORTE} implementation of \glref{RTPS} protocol to be compatible with the latest standard version 2.2. The structure is as follows. In Chapter \ref[intro], there is an introduction to \glref{RTPS} and \glref{ORTE}. Chapter \ref[compare] compares implemented \glref{RTPS} 1.0 with the latest \glref{RTPS} 2.2, chapter \ref[upgrade] covers changes needed for compatibility with version 2.2 of the \glref{RTPS} protocol and chapter \ref[test] covers testing of new implementation of \glref{RTPS} protocol in \glref{ORTE}. In chapter \ref[shape], demo application of \glref{ORTE} called {\em Shape} for Android is introduced. The application was developed as part of familiarization with \glref{ORTE}, therefore \glref{ORTE} with \glref{RTPS} 1.0 implementation is used in this application. Security for \glref{DDS} is discussed in chapter \ref[sec].
 
 \sec DDS
 
@@ -16,9 +16,13 @@ In the Data-Centric Publish-Subscribe network, data are sent by {\em Publishers}
 
 \sec RTPS
 
-Real-Time Publish-Subscribe is wire protocol developed to ensure interoperability between DDS implementations. It has been designed to be fault tolerant (decentralized), scalable, tunable, with plug-and-play connectivity and ability of best-effort and reliable communication in real time applications.
+Real-Time Publish-Subscribe is wire protocol developed to ensure interoperability between \glref{DDS} implementations. It has been designed to be fault tolerant (decentralized), scalable, tunable, with plug-and-play connectivity and ability of best-effort and reliable communication in real time applications.
 
 \sec ORTE
 
-Open Real-Time Ethernet (ORTE)\cite[FEE:ORTE] is the implementation of RTPS 1.0. It's implemented in Application layer of UDP/IP stack, written in C, under open source license, with own API. Because there are no special requirements, it should be easy to port ORTE to many platforms, where UDP/IP stack is implemented.
+Open Real-Time Ethernet (\glref{ORTE})\cite[FEE:ORTE] is the implementation of \glref{RTPS} 1.0. It's implemented in Application layer of UDP/IP stack, written in C, under open source license, with own API. Because there are no special requirements, it should be easy to port \glref{ORTE} to many platforms, where UDP/IP stack is implemented.
+
+\sec Symbols
+
+\makeglos
 
