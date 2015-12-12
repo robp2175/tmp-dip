@@ -1,3 +1,46 @@
 \label[sec]\chap Security for DDS
 
+In the modern world, security is often considered. Technologies for securing communication differs by \glref{TCP}/\glref{IP} layers \cite[www:tcp-ip] - security at Media access layer consists of preventing deterioration of physical media, environmental noise and access to media. At Network layer, \glref{IPsec} (\glref{IP} Security Architecture) protocol is used while Transport layer uses \glref{TLS} (Transport Layer Security) protocol. In this chapter, Application layer security for \glref{DDS} standard \cite[OMG:DDS-SECURITY] and possibilities of implementation in \glref{RTPS} protocol are considered.
+
+\sec Threats
+
+From point of view of \glref{DDS} standard, communication takes place in the domain consisting of participants with various number of publishers and subscribers. In this context, Application layer security threats are following:
+
+\begitems
+* Unauthorized\fnote{Difference between authentication and authorization has to be clear. Authentication is verification of (in this context) participant - that the participant is really the one it claims to be. On the other hand, authorization is process of allowing access to data for already authenticated participant.} subscription
+* Unauthorized publication
+* Tampering and replay
+* Unauthorized access to data
+\enditems
+
+{\em Unauthorized subscription} is a situation when malicious participant receives data for which it is not allowed to. In network infrastructure where access to media is shared, communication runs over multicast or participants sits on one node, it's practically unavoidable to restrict access to data. The solution is making data unreadable for malicious participant - in other words, applying encryption on publisher's side and sharing keys with authenticated subscribers only.
+
+When malicious participant attempts to send data which it is not allowed to, it's called {\em Unauthorized publication}. For subscriber it's important to receive data only from valid publishers to avoid influence of malicious participant on data. The solution is to include authentication information to data sent by valid publishers so subscribers would be able to recognize data by authenticated publishers from data sent by malicious participant. Two ways how to accomplish authentication of publishers in data are Hash-based message authentication code (\glref{HMAC}) and digital signature. \glref{HMAC} creates authentication code using secret key shared between publisher and subscriber. Digital signature is based on private/public key pair - authentication code is created as message digest encrypted by private key of publisher. Each subscriber has access to public key of publisher and can use it to decrypt the authentication code to message digest and compare it with message digest calculated by itself. The point is that these two message digests equals if and only if the authentication code is encrypted by publisher's private key and decrypted by publisher's public key. Digital signature is called {\em asymmetric cryptography} (private/public key pair) and is much slower then {\em symmetric cryptography} (shared key), therefore the use of \glref{HMAC} is preferred because of performance reasons.
+
+Valid publisher would send data to subcsriber and malicious participant (now, malicious participant will be allowed to subscribe but not to publish). However if the same key is shared between publisher, subscriber and malicious paritcipant, there is no way how to prevent malicious participant to use this shared key for mimicking publisher and sending data to subscriber. This threat is called {\em Tampering and Replay} and can be solved by sharing different keys between publishers and subscribers. When the communication is taken over multicast, multiple \glref{HMAC}s are needed to be included in data, but this solution is still more powerful than using digital signatures.
+
+In the \glref{DDS} network, some devices acts as relay devices forwarding data. These devices need to be trusted as valid publishers and subscribers, but it's not always desirable to let them understand data they work with. The solution for {\em Unauthorized Access to Data} is having different keys for \glref{HMAC} and data encryption and to share keys for decrypting of data only with desired endpoint devices.
+
+\sec Securing of messages
+
+Securing of messages is dependent on application. Sometimes it's needed to encrypt only user-data. In other applications, metadata as sequence numbers or writer/reader identifiers are needed to be secured. In the most secure application, metatraffic submessages are also considered confidential
+
+Metadata, user-data confidentiality
+
+depend on application:
+- DataWriter Submessage (Data, DataFrag, Gap, Heartbeat, HeartbeatFrag)
+- DataReader Submessages (AckNack, NackFrag)
+- Interpreter Submessages (all Info messages)
+
+- encrypt user data
+- encrypt submessage
+- encrypt message
+
+\sec Plugin architecture
+
+
+
+\sec Interoperability
+
+builtin plugins
 
