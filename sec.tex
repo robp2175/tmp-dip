@@ -17,26 +17,41 @@ From point of view of \glref{DDS} standard, communication takes place in the dom
 
 When malicious participant attempts to send data which it is not allowed to, it's called {\em Unauthorized publication}. For subscriber it's important to receive data only from valid publishers to avoid influence of malicious participant on data. The solution is to include authentication information to data sent by valid publishers so subscribers would be able to recognize data by authenticated publishers from data sent by malicious participant. Two ways how to accomplish authentication of publishers in data are Hash-based message authentication code (\glref{HMAC}) and digital signature. \glref{HMAC} creates authentication code using secret key shared between publisher and subscriber. Digital signature is based on private/public key pair - authentication code is created as message digest encrypted by private key of publisher. Each subscriber has access to public key of publisher and can use it to decrypt the authentication code to message digest and compare it with message digest calculated by itself. The point is that these two message digests equals if and only if the authentication code is encrypted by publisher's private key and decrypted by publisher's public key. Digital signature is called {\em asymmetric cryptography} (private/public key pair) and is much slower then {\em symmetric cryptography} (shared key), therefore the use of \glref{HMAC} is preferred because of performance reasons.
 
-Valid publisher would send data to subcsriber and malicious participant (now, malicious participant will be allowed to subscribe but not to publish). However if the same key is shared between publisher, subscriber and malicious paritcipant, there is no way how to prevent malicious participant to use this shared key for mimicking publisher and sending data to subscriber. This threat is called {\em Tampering and Replay} and can be solved by sharing different keys between publishers and subscribers. When the communication is taken over multicast, multiple \glref{HMAC}s are needed to be included in data, but this solution is still more powerful than using digital signatures.
+Valid publisher would send data to subcsriber and malicious participant (in this case, malicious participant will be allowed to subscribe but not to publish). However if the same key is shared between publisher, subscriber and malicious paritcipant, there is no way how to prevent malicious participant to use this shared key for mimicking publisher and sending data to subscriber. This threat is called {\em Tampering and Replay} and can be solved by sharing different keys between publishers and subscribers. When the communication is taken over multicast, multiple \glref{HMAC}s are needed to be included in data, but this solution is still more powerful than using digital signatures.
 
-In the \glref{DDS} network, some devices acts as relay devices forwarding data. These devices need to be trusted as valid publishers and subscribers, but it's not always desirable to let them understand data they work with. The solution for {\em Unauthorized Access to Data} is having different keys for \glref{HMAC} and data encryption and to share keys for decrypting of data only with desired endpoint devices.
+In the \glref{DDS} network, some participants acts as relay participants forwarding data. These participants need to be trusted as valid publishers and subscribers, but it's not always desirable to let them understand data they work with. The solution for {\em Unauthorized Access to Data} is having different keys for \glref{HMAC} and data encryption and to share keys for decrypting of data only with desired endpoints.
 
 \sec Securing of messages
 
-Securing of messages is dependent on application. Sometimes it's needed to encrypt only user-data. In other applications, metadata as sequence numbers or writer/reader identifiers are needed to be secured. In the most secure application, metatraffic submessages are also considered confidential
+Securing of messages is application dependent - sometimes it's sufficient to encrypt only user-data, in other applications, submessage's metadata as sequence numbers or writer/reader identifiers are needed to be secured too and in the most secure applications, the whole metatraffic submessages are considered confidential. In order to support of different application scenarios, mechanism called {\em Message Transformation} is introduced. It transforms one \glref{RTPS} message into another \glref{RTPS} message so that the original \glref{RTPS} message or it's submessages may be encrypted into the new one and protected by \glref{HMAC}.
 
-Metadata, user-data confidentiality
+Because of {\em Message Transformation}, new submessages and submessage elements are introduced and the questions about interoperability between secured and non-secured implementations of \glref{RTPS} protocol arises. In implementations of \glref{RTPS} protocol, unknown submessages should be skipped so the regular user-traffic should not be affected, but there is Discovery also. \glref{SPDP} is used by DomainParticipants to discover each other, informations as \glref{IP} address, port, vendor and version are exchanged to bootstrap the communication. Therefore it makes no sense to protect \glref{SPDP} communication, better to use it for exchange of informations needed to bootstrap the secured system. For both - secured and non-secured implementations of \glref{RTPS} protocol, {\em DCPSParticipants} Topic is used in \glref{SPDP} and there is no new secured Topic for \glref{SPDP}.
 
-depend on application:
-- DataWriter Submessage (Data, DataFrag, Gap, Heartbeat, HeartbeatFrag)
-- DataReader Submessages (AckNack, NackFrag)
-- Interpreter Submessages (all Info messages)
+\glref{SEDP} protocol is used for discovering {\em publishers} and {\em subscribers} of each DomainParitcipant. The {\em DCPSPublications} and {\em DCPSSubscriptions} Topics are used for communication with non-secured endpoints. However for DomainParticipants supporting \glref{DDS} Security, {\em DCPSPublicationsSecure} and {\em DCPSSubscriptionsSecure} Topics and associated DataWriters ({\em SEDPbuiltinPublicationsSecureWriter}, {\em SEDPbuiltinSubscriptionsSecureWriter}) and DataReaders ({\em SEDPbuiltinPublicationsSecureReader}, {\em SEDPbuiltinSubscriptionsSecureReader}) are introduced. These Topics should be used for communication that is considered sensitive.
 
-- encrypt user data
-- encrypt submessage
-- encrypt message
+In \glref{RTPS} protocol, Writer Liveliness Protocol is specified and because data exchange by this protocol could be considered sensitive, \glref{DDS} Security specifies alternate protected way to exchange liveliness information. {\em BuiltinParticipantMessageWriter} and {\em BuiltinParticipantMessageReader} are used to communicate liveliness information with non-secured endpoints. {\em ParticipantMessageSecure} Topic is introduced with associated {\em BuiltinParticipantMessageSecureWriter} and {\em BuiltinParticipantMessageSecureReader}, used to communication liveliness information with endpoints considered sensitive.
+
+Also, there are two completely new builtin Topics:
+\begitems
+* ParticipantStatelessMessage
+* ParticipantVolatileMessageSecure
+\enditems
+
+{\em ParticipantStatelessMessage} Topic is used to perform mutual authentication between DomainParticipants. While the mechanism for participant-to-participant communication already exists, it suffers from weakness of reliable protocol - sequence number prediction. HeartBeat messages containing {\em first available sequence number} can be abused by malicious participant to prevent other participants to communicate. Therefore new Topic {\em ParticipantStatelessMessage} with associated {\em BuiltinParticipantStatelessMessageWriter} (Best-Effort StatelessWriter) and {\em BuiltinParticipantStatelessMessageReader} (Best-Effort StatelessReader) is introduced.  
+
+For key exchange between DomainParticipants, reliable and secure communication is needed. On top of that, DURABILITY Qos needs to be VOLATILE to address only DomainParticipants that are currently in the system. {\em ParticipantStatelessMessage} is not suitable because it's not reliable nor secured. {\em ParticipantMessageSecure} Topic is not suitable because it's QoS has DURABILITY kind TRANSIENT\_LOCAL rather than VOLATILE (which is required). So new Topic {\em ParticipantVolatileMessageSecure} with associated {\em BuiltinParticipantVolatileMessageSecureWriter} and {\em BuitinParticipantVolatileMessageSecureReader} is introduced. 
 
 \sec Plugin architecture
+
+\secc Authentication plugin
+
+\secc Access Control plugin
+
+\secc Cryptographic plugin
+
+\secc Logging plugin
+
+\secc Data Tagging plugin
 
 
 
