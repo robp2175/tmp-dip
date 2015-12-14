@@ -43,19 +43,136 @@ For key exchange between DomainParticipants, reliable and secure communication i
 
 \sec Plugin architecture
 
+There are five \glref{SPI}s:
+\begitems
+* Authentication
+* Access-Control
+* Cryptographic
+* Logging
+* Data Tagging
+\enditems
+
+Interactions of plugins are shown in figure \ref[pic:sec-pa].
+
+\midinsert
+\label[pic:sec-pa]\picw=16cm \cinspic sec-pic/plugin-architecture.png
+\caption/f Plugin Architecture Model
+\endinsert
+
 \secc Authentication plugin
+
+{\em Authentication} is process of verifying that (in this case) DomainParticipant is really the one it claims to be. DomainParticipant is authenticated when joining a \glref{DDS} Domain, mutual authentication is supported and shared secret is established between DomainPariticpants.
 
 \secc Access Control plugin
 
+Ensures authorization - allows or deny protectected operations of DomainPariticipant as join domain, create Topic, publish to Topic or subscribe Topic.
+
 \secc Cryptographic plugin
+
+Encryption, decryption, digests, \glref{MAC}, \glref{HMAC}, key generating and exchange, signing and verifying of signatures is ensured by {\em Cryptographic plugin}. The plugin \glref{API} has to be general enough to allow specific requirements for cryptographic libraries, encryption and digest algorithms, message authentication and signing users of \glref{DDS} may need to deploy.
 
 \secc Logging plugin
 
+This plugin logs security events of DomainParticipant. Two options of collecting log data are logging all events to a local file and distributing log events securely over \glref{DDS}.
+
 \secc Data Tagging plugin
 
-
+Classification of data is performed by {\em Data Tagging plugin}. It can be used for access control based on tag, message prioritization or even don't have to be used by middleware (\glref{RTPS} implementation), but by application or service. There are four kinds of tagging:
+\begitems
+* Data Writer - used in specification, data received from DataWriter has it's tag.
+* Data Instance - each instance of the data has a tag.
+* Individual sample - each sample of data instance is tagged individually.
+* Per field - the most complex method of tagging.
+\enditems
 
 \sec Interoperability
 
-builtin plugins
+Out-of-the-box interoperability of \glref{DDS} Security implementations is ensured analogously to \glref{RTPS} implementations - while mandatory {\em builtin endpoints} ensures that each DomainParticipant is able to discover other DomainParticipants, in \glref{DDS} Security implementations, each DomainParticipant is able to secure data by at least mandatory {\em builtin plugins}.
+
+\secc Requirements
+
+This is resume of requirements for builtin plugins by out-of-the-box interoperability as presented in chapter 9.2 of \cite[OMG:DDS-SECURITY]. Following are essential functional requirements for builtin plugins:
+\begitems
+* Authentication of DomainParticipants joining a domain
+* Access control of applications subscribing to data
+* Message integrity and authentication
+* Encryption of a data by different keys
+\enditems
+
+Following are functions that should be required by builtin plugins:
+\begitems
+* Sending digitally signed data
+* Sending data securely over multicast
+* Data tagging
+* Integrating with open standard security plugins
+\enditems
+
+Following are functions considered useful:
+\begitems
+* Access control to certain samples
+* Access control to certain attributes within sample
+* Permissions for QoS usage by \glref{DDS} Entities
+\enditems
+
+Non-functional requirements are:
+\begitems
+* Performance and Scalability
+* Robustness and Availability
+* Fit to \glref{DDS} Data-Centric Information Model
+* Reuse of existing security infrastructure and technologies
+* Ease of use
+\enditems
+
+\secc Considerations
+
+Usually \glref{DDS} is deployed in systems where high performance for large number of DomainParticipants is needed, therefore actions performed by plugins shouldn't notably degrade system performance. In practice it means that asymmetric cryptography should be used only for discovery, authentication, session and shared-secret establishment, symmetric cryptography shoud be used for data, use of ciphers, \glref{HMAC}s or digital signatures should be selectable per Topic, there should be possibility of providing integrity via \glref{HMAC} without data encryption and there should be support for encrypted data over multicast.
+
+\glref{DDS} used to be deployad in system where {\em robustness and availability} is considered critical. It's required from system to continue operating even if partial fail occures, so centralized services reprezenting single point of failure have to be avoided, DomainParticipant components have to be self-contained to be able to operate securely, multi-party key agreement protocols should be avoided because of simplicity of discruption and tokens and keys should be compartmentalized as much as possible to avoid situations where multiple applications using same key are compromised if just one of them is compromised.
+
+\sec Implementation
+
+The implementation of \glref{DDS} Security into \glref{ORTE} consists of changes in Modules (presented in chapter 8 of \cite[OMG:DDSI-RTPS22]). Introduction of {\em SecureSubMsg} Submessage and {\em SecuredPayload} Submessage Element assumes modification of Message Module, Discovery Module is affected by {\em Builtin Secure Endpoints} - if configured to, discovery of {\em publishers} and {\em subscribers} is secured and Behavior Module needs to be modified to include {\em Builtin Plugins} which ensures security.
+
+\secc Builtin Endpoints
+
+This is the list of {\em Builtin Endpoints} presented in chapter 7.4.5 of \cite[OMG:DDS-SECURITY]. In order to ensure out-of-the-box compatibility, following {\em Builtin Secure Endpoints} needs to be implemented:
+\begitems
+* SEDPbuiltinPublicationsSecureWriter
+* SEDPbuiltinPublicationsSecureReader
+* SEDPbuiltinSubscriptionsSecureWriter
+* SEDPbuiltinSubscriptionsSecureReader
+* BuiltinParticipantMessageSecureWriter
+* BuiltinParticipantMessageSecureReader
+* BuiltinParticipantVolatileMessageSecureWriter
+* BuiltinParticipantVolatileMessageSecureReader
+\enditems
+
+\secc Builtin Plugins
+
+This is resume of {\em Builtin Plugins} presented in chapter 9.1 of \cite[OMG:DDS-SECURITY]. In order to ensure out-of-the-box compatibility, following {\em Builtin Plugins} needs to be implemented:
+\begitems
+* \glref{DDS}:Auth:\glref{PKI}-\glref{RSA}/\glref{DSA}-\glref{DH} (Authentication plugin)
+  \begitems\style x
+  * Uses \glref{PKI} with pre-configured shared Certificate Authority
+  * \glref{RSA} or \glref{DSA} and Diffie-Hellman for authentication and key exchange
+  \enditems
+* \glref{DDS}:Access:\glref{PKI}-Signed-\glref{XML}-Permissions (Access control plugin)
+  \begitems\style x
+  * Permissions document signed by shared Certificate Authority
+  \enditems
+* \glref{DDS}:Crypto:\glref{AES}-\glref{CTR}-\glref{HMAC}-\glref{RSA}/\glref{DSA}-\glref{DH} (Cryptographic plugin)
+  \begitems\style x
+  * \glref{AES}128 for encryption (counter mode)
+  * \glref{SHA}1 and \glref{SHA}256 for digest
+  * \glref{HMAC}-\glref{SHA}1 and \glref{HMAC}-256 for \glref{HMAC}
+  \enditems
+* \glref{DDS}:Tagging:\glref{DDS}\_Discovery (Data Tagging plugin)
+  \begitems\style x
+  * Send Tags via Endpoint Discovery
+  \enditems
+* \glref{DDS}:Logging:\glref{DDS}\_LogTopic (Logging plugin)
+  \begitems\style x
+  * Logs security events to a dedicated \glref{DDS} Log Topic
+  \enditems
+\enditems
 
