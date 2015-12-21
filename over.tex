@@ -1,0 +1,24 @@
+\label[over]\chap Technology overview
+
+\sec DDS
+
+There are two main models used in Data Distribution Services. {\em Centralized} model, where single server for the whole network is needed and all communication goes throw it, introduces single point of failure. When the server is unreachable, the whole network is non-functional. By contrast, {\em decentralized} approach has no central server, no single point of failure. When one node of the network is non-functional, the rest of the network can continue in data transfers.
+
+\sec DCPS
+
+In the Data-Centric Publish-Subscribe network, data are sent by {\em Publishers} and received by {\em Subscribers}. Node can be {\em Publisher}, {\em Subscriber} or both and each node can be interested in different data, timing and reliability. Data-Centric Publish-Subscribe network is responsible for delivery of right data between right nodes with right parameters.
+
+\rfc{obrazek}
+
+\sec RTPS
+
+Real-Time Publish-Subscribe is wire protocol developed to ensure interoperability between \glref{DDS} implementations. It has been designed to be fault tolerant (decentralized), scalable, tunable, with plug-and-play connectivity and ability of best-effort and reliable communication in real time applications.
+
+\sec ORTE
+
+Open Real-Time Ethernet (\glref{ORTE})\cite[FEE:ORTE] is the implementation of \glref{RTPS} 1.0. It's implemented in Application layer of UDP/IP stack, written in C, under open source license, with own API. Because there are no special requirements, it should be easy to port \glref{ORTE} to many platforms, where UDP/IP stack is implemented.
+
+\sec Symbols
+
+\makeglos
+
