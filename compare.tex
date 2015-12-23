@@ -1,3 +1,144 @@
 \label[compare]\chap Actual RTPS protocol
 
+This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in chapter 8 in \cite[OMG:DDSI-RTPS22]. It contains four modules - basic objects are discussed in section \ref[struct], messages used for communication is described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
+
+\label[struct]\sec Structure Module
+
+The communication take place in the \glref{RTPS} {\em Domain}, consisting of multiple {\em Entities}. Each {\em Entity} can be either {\em Participant} or {\em Endpoint}, where {\em Endpoints} can be specialized as {\em Writer} or {\em Reader}. Each {\em Endpoint} has it's own database of {\em Cache Changes} called {\em History Cache}. The whole structure is shown in figure \ref[pic:struct].
+
+\midinsert
+\label[pic:struct]\picw=14cm \cinspic pic-compare/structure_module.png
+\caption/f Structure Module diagram (chapter 7.1 in \cite[OMG:DDSI-RTPS22])
+\endinsert
+
+It should be mentioned that there is also proxy {\em Participant} - {\em Participant Proxy} and another two proxy {\em Endpoints} - {\em Reader Proxy} and {\em Writer Proxy}. These objects represents remote {\em Participants} and their {\em Writers} and {\em Readers} and are introduced in chapter 8.4 in \cite[OMG:DDSI-RTPS22]. The local {\em Participant} maintains the topology of the {\em Domain} and needs to store information about remote {\em Participants}. For this purpose, {\em Participant Proxy} is used. Sometimes, local {\em Writer} needs to store information about remote {\em Reader} and therefore, {\em Reader Proxy} is used. Also local {\em Readers} are sometimes in need of storing information about remote {\em Writers} and then {\em Writer Proxy} is used.
+
+\secc Participant
+
+{\em Domain Participant} is container for {\em Endpoints} within the same application. It has the following attributes:
+\begitems
+* \glref{GUID}
+* Protocol Version
+* Vendor Id
+* Default Unicast Locator List
+* Default Multicast Locator List
+\enditems
+
+Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}. {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of IP address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
+
+\secc Writer Endpoint
+
+Is the source of {\em Cache Changes} which are sent to {\em Readers}. It has the following attributes:
+\begitems
+* \glref{GUID}
+* Topic Kind
+* Reliability Level
+* Unicast Locator List
+* Multicast Locator List
+* Push Mode
+* Heartbeat Period
+* Nack Response Delay
+* Nack Suppression Duration
+* Last Change Sequence Number
+* Writer Cache
+\enditems
+
+Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, when the topic consists of more than one data instances identified by {\em key}. {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE, saying if it should be verified that {\em Cache Change} reached the {\em Reader}. {\em Unicast Locator List} and {\em Multicast Locator List} are lists of IP address and port combinations on which is the {\em Writer} listening. If there is no IP address and port combination in list, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. {\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery. {\em Heartbeat Period}, {\em Nack Response Delay} and {Nack Suppression Duration} are time parameters used for protocol tunning, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for just sent data ignored. {\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
+
+\secc Reader Endpoint
+
+Is the destination of {\em Cache Changes} which are sent by {\em Writers}. It has the following attributes:
+\begitems
+* \glref{GUID}
+* Topic Kind
+* Reliability Level
+* Unicast Locator List
+* Multicast Locator List
+* Expects Inline Qos
+* Heartbeat Response Delay
+* Heartbeat Suppression Duration
+* Reader Cache
+\enditems
+
+Where {\em Unicast Locator List} and {\em Multicast Locator List} are lists of IP address and port combinations on which is the {\em Reader} listening. If there is no IP address and port combination in list, it's presumed that {\em Reader} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. The value of {\em Expects Inline Qos} is set to TRUE if the {\em Reader} expects in-line Qos to be sent along with data. {\em Heartbeat Response Delay} and {\em Heartbeat Suppression Duration} are time parameters used for protocol tunning, which defines how long the acknowledgement of data should be delayed respective how long can be Heartbeat announces ignored after just received Heartbeat. {\em Reader Cache} is the {\em History Cache} of the {\em Reader} containing {\em Cache Changes} associted with the {\em Reader} itself.
+
+\secc History Cache
+
+Is the database of {\em Cache Changes} serving as the \glref{API} for {\em Writer} and {\em Reader} {\em Endpoints}. It has the following attributes:
+\begitems
+* Changes
+\enditems
+
+Where {\em Changes} are {\em Cache Changes} stored in the {\em History Cache}.
+
+\secc Cache Change
+
+Is the change of the data object that should be propagated from the {\em Writer} to the matching {\em Readers}. It has the following attributes:
+\begitems
+* Change Kind
+* Writer \glref{GUID}
+* Instance Handle
+* Sequence Number
+* Data value
+\enditems
+
+Where {\em Change Kind} can be ALIVE, NOT\_ALIVE\_DISPOSED or NOT\_ALIVE\_UNREGISTERED and is used to distinguish the change that was made to a data object. {\em Writer \glref{GUID}} is the identifier of the source of the {\em Cache Change}, {\em Instance Handle} identifies the instance of the data object (in \glref{DDS} the value of the {\em key} is used) and the {\em Sequence Number} is unique identifier of the {\em Cache Change} in the {\em History Cache} of the {\em Endpoint}. The last attribute, {\em Data value}, represents data associated to the {\em Cache Change}.
+
+\secc Participant Proxy
+
+Represents the information about remote {\em Participant} in the {\em Domain}. It has the following attributes:
+\begitems
+* Protocol Version
+* Guid Prefix
+* Vendor Id
+* Expects Inline Qos
+* Available Builtin Endpoints
+* Metatraffic Unicast Locator List
+* Metatraffic Multicast Locator List
+* Default Multicast Locator List
+* Default Unicast Locator List
+* Manual Liveliness Count
+* Lease Duration
+\enditems
+
+Where {\em Protocol Version} specify the version of the \glref{RTPS} protocol implementation used by remote {\em Participant} and the vendor of this implementation is represented by the {\em Vendor Id}. {\em Guid Prefix} is the common part of the \glref{GUID} for the {\em Participant} and all of it's {\em Endpoints}, {\em Expects Inline Qos} describes whether the {\em Readers} of the remote {\em Participant} expects in-line Qos sent along with data and {\em Available Builtin Endpoints} parameter specify which builtin {\em Endpoints} used for plug-and-play interoperability are available by remote {\em Participant}. {\em Metatraffic Unicast Locator List} and {\em Metatraffic Multicast Locator List} are IP address and port combinations that can be used to reach the remote builtin {\em Endpoints} and {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are IP address and port combinations that can be used to reach the remote {\em Endpoints} defined by user that serve for user data exchange. {\em Manual Liveliness Count} is used to implement MANUAL\_BY\_PARTICIPANT liveliness Qos and {\em Lease Duration} specify the time period for which the remote {\em Participant} should be considered alive.
+
+\secc Reader Proxy
+
+Represents the information about remote {\em Reader}. It has the following attributes:
+\begitems
+* Remote Reader \glref{GUID}
+* Unicast Locator List
+* Muticast Locator List
+* Changes for Reader
+* Expects Inline Qos
+* Is Active
+\enditems
+
+Where {\em Remote Reader \glref{GUID}} is unique identifier of remote {\em Reader}, {\em Unicast Locator List} and {\em Multicast Locator List} are lists of IP address and port combinations on which is the remote {\em Reader} listening, {\em Changes for Reader} is the list of {\em Cache Changes} that should be sent to the remote {\em Reader}, {\em Expects Inline Qos} attribute specify if the remote {\em Reader} expects in-line Qos to be sent along with data and attribute {\em Is Active} is set to TRUE if the remote {\em Reader} is responsive to the local {\em Writer}.
+
+\secc Writer Proxy
+
+Represents the information about remote {\em Writer}. It has the following attributes:
+\begitems
+* Remote Writer \glref{GUID}
+* Unicast Locator List
+* Multicast Locator List
+* Changes from Writer
+\enditems
+
+Where {\em Remote Writer \glref{GUID}} is unique identifier of remote {\em Writer}, {\em Unicat Locator List} and {\em Multicast Locator List} are lists of IP address and port combinations on which is the remote {\em Writer} listening and {\em Changes from Writer} is the list of {\em Cache Changes} that are received or expected from the remote {\em Writer}.
+
+
+\label[message]\sec Messages Module
+
+
+\label[behavior]\sec Behavior Module
+
+
+\label[discovery]\sec Discovery Module
+
+\label[rtps10]\sec RTPS 1.0
+
+
 
