@@ -24,7 +24,9 @@ It should be mentioned that there is also proxy {\em Participant} - {\em Partici
 * Default Multicast Locator List
 \enditems
 
-Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}. {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of IP address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
+Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier consisting of {\em \glref{GUID} Prefix} and {\em EntityId}, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}. {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of IP address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
+
+Each {\em Endpoint} within the same {\em Participant} has to have the same {\em \glref{GUID} Prefix}.
 
 \secc Writer Endpoint
 
@@ -132,6 +134,63 @@ Where {\em Remote Writer \glref{GUID}} is unique identifier of remote {\em Write
 
 \label[message]\sec Messages Module
 
+For communication between {\em Writers} and {\em Readers}, \glref{RTPS} messages are used. Each message consists of {\em Header} and one or more {\em Submessages}, where each {\em Submessage} has it's own {\em Submessage Header} and {\em Submessage Elements} based on the kind of the {\em Submessage}. The structure of \glref{RTPS} message is shown in figure \ref[pic:msg].
+
+\midinsert
+\label[pic:msg]\picw=14cm \cinspic pic-compare/messages_module.png
+\caption/f Structure of \glref{RTPS} message (chapter 8.3.3 in \cite[OMG:DDSI-RTPS22])
+\endinsert
+
+The interpretation of {\em Submessage} may depend on previously received {\em Submessages} within the same {\em Message}, therefore it's needed to store the state for each {\em Message}. {\em Message Receiver} ensures this function by storing information about {\em Source Protocol Version}, {\em Source Vendor Id}, {\em Source \glref{GUID} Prefix}, {\em Destination \glref{GUID} Prefix}, {\em Unicast Reply Locator List}, {\em Multicast Reply Locator List}, {\em Have Timestamp} and {\em Timestamp}. State of the {\em Message Receiver} is reset to default values each time the {\em Message} is received.
+
+Submesssages can be divided to {\em Entity Submessages} which target an \glref{RTPS} {\em Entity} affecting it's behavior and {\em Interpreter Submessages} changing the state of the {\em Message Receiver}.
+
+\secc Header
+
+The first change in the state of {\em Message Receiver} is made by {\em Header} of the received {\em Message}. The {\em Header} identify \glref{RTPS} {\em Message}, {\em Protocol Version} used, {\em Vendor} of the implementation and common part of \glref{GUID} - {\em \glref{GUID} Prefix} - used to interpret source {\em EntityId} in the {\em Submessage}.
+
+\secc Submessage Header
+
+{\em Submessage Header} is included in each {\em Submessage}, it has the following attributes:
+\begitems
+* Submessage Kind
+* Flags
+* Submessage Lenght
+\enditems
+
+Where {\em Submessage Kind} specify the meaning of {\em Submessage}, {\em Flags} is an array of 8 bits, which identifies endianness used in the {\em Submessage} (\glref{LSB}), the presence of optional elements and possibly changes the interpretation of the {\em Submessage}. The {\em Submessage Length} specify the length of the {\em Submessage}.
+
+\secc Interpreter Submessages
+
+List of {\em Submessages} and their changes to the {\em Message Receiver} follows.
+
+{\em\bf InfoDestination} is sent from {\em Writer} to {\em Reader} to modify the {\em Destination \glref{GUID} Prefix} value of {\em Message Receiver} used to interpret {\em Reader} {\em EntityId} in the {\em Submessage}.
+
+{\em\bf InfoReply} is sent from {\em Reader} to {\em Writer} to explicitly define where to send a reply to the {\em Submessage} that follow.
+
+{\em\bf InfoSource} modifies the source {\em Protocol Version}, {\em Vendor Id} and {\em \glref{GUID} Prefix} of the {\em Submessages} that follow.
+
+{\em\bf InfoTimestamp} is used to send the {\em Timestamp} that apply to the {\em Submessages} that follow.
+
+\secc Entity Submessages
+
+List of {\em Submessages} and their interpretation follows.
+
+{\em\bf AckNack} is sent by {\em Reader} to inform the {\em Writer} about which sequence numbers are received and which are missing.
+
+{\em\bf Data} is sent from {\em Writer} to {\em Reader} and is used to inform about changes to a data object. Changes may be in value or in lifecycle of the object.
+
+{\em\bf DataFrag} is used when the {\em\bf Data} {\em Submessage} exceeds the \glref{MTU} of lower communication layers, otherwise it has the same function as {\em\bf Data} {\em Submessage}.
+
+{\em\bf Gap} sent by {\em Writer} indicates to the {\em Reader} which sequence numbers are no longer relevant.
+
+{\em\bf Heartbeat} announces to {\em Readers} sequence numbers of {\em Cache Changes} that are available in {\em Writer}.
+
+{\em\bf HeartbeatFrag} is used when fragmentation occures and until all fragments are available. Once all fragments are available, {\em\bf Heartbeat} {\em Submessage} is used.
+
+{\em\bf NackFrag} is sent by {\em Reader} to inform the {\em Writer} about which fragments are missing.
+
+{\em\bf Pad} is padding message used for desired alignment. It has no other meaning.
 
 \label[behavior]\sec Behavior Module
 
