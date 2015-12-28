@@ -306,6 +306,25 @@ If the communication is RELIABLE and DATA submessage or GAP is received, expecte
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[discovery]\sec Discovery Module
 
+The communication as described in \ref[behavior] between {\em Endpoints} described in \ref[struct] throw the {\em Messages} described in \ref[message] assumes that both ends of communication are known. {\em Discovery Module} introduces two processes of probing {\em Domain} due to discovering {\em Participants} called {\em Simple Participant Discovery Protocol} and theirs {\em Endpoints} known as {\em Simple Endpoint Discovery Protocol}.
+
+\glref{SPDP} and \glref{SEDP} are only discovery protocols described in \glref{RTPS} specification and have to be implemented in order to enable interoperability between implementations. However vendor specific discovery protocols can be implemented in addition to overcome some drawbacks of {\em Simple Discovery Protocols}.
+
+The difference between {\em Builtin} and {\em User-defined} {\em Endpoints} needs to be clear. {\em Builtin Endpoints} are predefined by \glref{RTPS} specification and once a {\em Participant} is discovered, it can be assumed that {\em Builtin Endpoints} are present, while {\em User-defined Endpoints} are defined by user application and it's purpose and can't be known in advance. Therefore the purpose of {\em Discovery Module} can be roughly simplified to discovering {\em User-defined Endpoints} of remote {\em Participants} with help of {\em Builtin Endpoints}. {\em Builtin Endpoints} are used by {\em Simple Discovery Protocols}.
+
+\secc SPDP
+
+{\em Best-effort Writer} with predefined Entity Id\fnote{ENTITYID\_SPDP\_BUILTIN\_PARTICIPANT\_WRITER} and {\em Best-effort Reader} with predefined Entity Id\fnote{ENTITYID\_SPDP\_BUILTIN\_PARTICIPANT\_READER} are used to exchange {\em SPDPdiscoveredParticipantData} containing {\em Participant Proxy} information about remote {\em Participant}. This traffic is sent to predefined IP address and port discussed in \glref{PSM} in \cite[OMG:DDSI-RTPS22]. Remote {\em Participants} and their attributes are discovered by \glref{SPDP}.
+
+\secc SEDP
+
+{\em Reliable Writer} with predefined Entity Id\fnote{ENTITYID\_SEDP\_BUILTIN\_PUBLICATIONS\_WRITER} and {\em Reliable Reader} with predefined Entity Id\fnote{ENTITYID\_SEDP\_BUILTIN\_PUBLICATIONS\_READER} are used to exchange {\em DiscoveredWriterData} containing information about {\em Writers} of remote {\em Participant}.
+
+{\em Reliable Writer} with predefined Entity Id\fnote{ENTITYID\_SEDP\_BUILTIN\_SUBSCRIPTIONS\_WRITER} and {\em Reliable Reader} with predefined Entity Id\fnote{ENTITYID\_SEDP\_BUILTIN\_SUBSCRIPTIONS\_READER} are used to exchange {\em DiscoveredReaderData} containing information about {\em Readers} of remote {\em Participant}.
+
+The last pair of {\em Reliable Endpoints}\fnote{ENTITYID\_SEDP\_BUILTIN\_TOPIC\_WRITER and ENTITYID\_SEDP\_BUILTIN\_TOPIC\_READER} can be used to exchange {\em DiscoveredTopicData}, but these {\em Endpoints} aren't mandatory and the interoperability is not affected by them.
+
+{\em Writers} and {\em Readers} of remote {\em Participants} are discovered by \glref{SEDP}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
