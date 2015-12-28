@@ -2,6 +2,9 @@
 
 This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in chapter 8 in \cite[OMG:DDSI-RTPS22]. It contains four modules - basic objects are discussed in section \ref[struct], messages used for communication is described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% STRUCTURE MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[struct]\sec Structure Module
 
 The communication take place in the \glref{RTPS} {\em Domain}, consisting of multiple {\em Entities}. Each {\em Entity} can be either {\em Participant} or {\em Endpoint}, where {\em Endpoints} can be specialized as {\em Writer} or {\em Reader}. Each {\em Endpoint} has it's own database of {\em Cache Changes} called {\em History Cache}. The whole structure is shown in figure \ref[pic:struct].
@@ -131,7 +134,9 @@ Represents the information about remote {\em Writer}. It has the following attri
 
 Where {\em Remote Writer \glref{GUID}} is unique identifier of remote {\em Writer}, {\em Unicat Locator List} and {\em Multicast Locator List} are lists of IP address and port combinations on which is the remote {\em Writer} listening and {\em Changes from Writer} is the list of {\em Cache Changes} that are received or expected from the remote {\em Writer}.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MESSAGES MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[message]\sec Messages Module
 
 For communication between {\em Writers} and {\em Readers}, \glref{RTPS} messages are used. Each message consists of {\em Header} and one or more {\em Submessages}, where each {\em Submessage} has it's own {\em Submessage Header} and {\em Submessage Elements} based on the kind of the {\em Submessage}. The structure of \glref{RTPS} message is shown in figure \ref[pic:msg].
@@ -192,12 +197,120 @@ List of {\em Submessages} and their interpretation follows.
 
 {\em\bf Pad} is padding message used for desired alignment. It has no other meaning.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEHAVIOR MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[behavior]\sec Behavior Module
 
+The purpose of the \glref{RTPS} protocol can be simplified to propagating {\em Cache Change} from {\em Writer} to {\em Reader}. The manner of propagation in relation to properties of communication is discussed in this section. There are two main properties of communication:
+\begitems
+* Topic Kind
+* Reliability Level
+\enditems
 
+Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY and {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE. Pairing of {\em Writers} with {\em Readers} must acknowledge the following restrictions.
+
+{\em Writer} and {\em Reader} can be paired up and the communication may begin when the {\em Topic Kind} matches, because both {\em Endpoints} relate to the same \glref{DDS} Topic which is either NO\_KEY or WITH\_KEY.
+
+The reliability depends on the {\em Reader}. If the {\em Reader} has the {\em Reliability Level} set to RELIABLE, the corresponding {\em Writer} has to also have the {\em Reliability Level} set to RELIABLE, while the {\em Reader} has the {\em Reliability Level} set to BEST\_EFFORT, the {\em Reliability Level} of the corresponding {\em Writer} doesn't matter.
+
+The behavior required for interoperability between implementations is summarized in section \ref[inte]. In chapter 8.4 in \cite[OMG:DDSI-RTPS22], there are two reference implementations of {\em Endpoints} that are summarized in section \ref[impl]. In the remaining sections, these implementations are discussed in detail.
+
+\label[inte]\secc Interoperability
+
+In order to be compliant with protocol specification and interoperable with other implementations, the implementation of the \glref{RTPS} protocol must satisfy the following requirements.
+\begitems
+* General Requirements:
+  \begitems\style x
+  * Only \glref{RTPS} messages are used for communication.
+  * Message Receiver must be implemented.
+  * Timing characteristics must be tunable.
+  * \glref{SPDP} and \glref{SEDP} must be implemented.
+  * Writer Liveliness Protocol must be implemented.
+  \enditems
+
+* Required Writer Behavior:
+  \begitems\style x
+  * Data must be sent in-order.
+  * If requested, in-line Qos must be included.
+  \enditems
+
+* Additional requirements for Reliable Writer:
+  \begitems\style x
+  * Periodic HEARTBEAT messages must be sent.
+  * Response to ACKNACK message must be eventually sent.
+  \enditems
+
+* Required Reader Behavior:
+  \begitems\style x
+    * No specific behavior needed as best-effort reader is completely passive.
+  \enditems
+
+* Additional requirements for Reliable Reader:
+  \begitems\style x
+  * Response to HEARTBEAT with final flag not set must be eventually sent.
+  * Response to HEARTBEAT indicating missing sample must be eventually sent.
+  * Once acknowledged, always acknowledged.
+  * ACKNACK can be only sent in response to HEARTBEAT.
+  \enditems
+
+\enditems
+
+{\em\bf Writer Liveliness Protocol} is required by \glref{DDS} to exchange information about the Liveliness of {\em Writers} by {\em Participants}. Builtin {\em Endpoints} are used for sending samples at rate faster than the smallest lease duration among {\em Writers} sharing the same liveliness Qos.
+
+\label[impl]\secc Implementation
+
+In chapter 8.4 in \cite[OMG:DDSI-RTPS22], two reference implementations of \glref{RTPS} protocol are introduced.
+
+{\em\bf Stateless} implementation maintains no state about remote {\em Endpoints}, which suits for best-effort communication over multicast. While this implementation scales well in large systems and memory usage is reduced, additional bandwidth may be required.
+
+{\em\bf Stateful} implementation, on the other hand maintains full state on remote {\em Endpoints}. More memory is needed and scalability is limited, but bandwidth usage decreases. Also, strict reliable communication and Qos based filtering on the {\em Writer's} side may be applied.
+
+It's important to mention that these are {\em reference implementations}. It means that there is no need for two kinds of {\em Endpoints} - {\em Stateless} and {\em Stateful}, because the only behavior needed for interoperability is introduced in \ref[inte]. {\em Reference implementations} just helps to understand and implement this behavior. Both {\em reference implementations}, {\em Stateless} as well as {\em Stateful} may be BEST\_EFFORT, RELIABLE, NO\_KEY or WITH\_KEY. Excaptions are discussed and explained below.
+
+\secc Stateless Writer
+
+To be compliant with \ref[impl], {\em Stateless Writer} must send data in order and include in-line Qos if needed. BEST\_EFFORT {\em Stateless Writer} has no other requirements and data are sent each {\em Resend Data Period} or on demand by user application.
+
+If {\em Stateless Writer} is RELIABLE, periodic HEARTBEATs with available data are sent. Sending of data then depend on {\em Push Mode}. If {\em Push Mode} is TRUE, data are sent each {\em Resend Data Period} or on demand by user application, if it's FALSE, data are stored in {\em History Cache} of {\em Writer} and sent only in response to ACKNACK.
+
+{\em Readers} uses ACKNACK messages to request interesting data from {\em Reliable Writer}. DATA submessage is sent if data are still available in {\em Writer's} {\em History Cache} or GAP submessage indicating that data are no longer relevant.
+
+Even the bandwidth can be reduced if the information of acknowledged Sequence Numbers would be stored for remote {\em Readers}, it's not needed for interoperability.
+
+\secc Stateless Reader
+
+Receive and process data is the meaning of BEST\_EFFORT {\em Stateless Reader}. However, to ensure RELIABLE communication, the problem arise, because at least Sequence Numbers of announced, requested but not received {\em Cache Changes} are needed, so some information about remote {\em Writer} has to be stored and therefore {\em Reader} can't be {\em Stateless}.
+
+As mentioned above, this is the only exception. {\em Stateless Reader} can't be RELIABLE.
+
+\secc Stateful Writer
+
+For each remote {\em Reader}, {\em Stateful Writer} stores information in {\em Reader Proxy} structure. When {\em Cache Change} is added to the {\em History Cache} of {\em Writer}, filtering can occures to determine if {\em Cache Change} is relevant for {\em Reader} and consequently stored in {\em Changes for Reader} of {\em Reader Proxy}.
+
+BEST\_EFFORT traffic is sent on demand by user application to each {\em Reader Proxy} whenever there are any unsent changes in {\em Changes for Reader}.
+
+For RELIABLE {\em Stateful Writer}, periodic HEARTBEATs must be sent to each {\em Reader Proxy}. Sending of data then depends on {\em Push Mode} - when the value is TRUE, {\em Cache Change} pass the filter and is added to {\em Changes for Reader}, the {\em Cache Change} is marked as unsent and will be sent as soon as the needed resources would be available. When tha value of {\em Push Mode} is FALSE, only HEARTBEATs are sent and {\em Reader} has to ask for data by sending ACKNACK for interested data. In response to ACKNACK, {\em Reliable Writer} then sends DATA submessage if the data are still available or GAP submessage when the data are no longer relevant.
+
+It should be mentioned that in general, {\em Reader's Entity Id} of submessages is set to ENTITYID\_UNKNOWN, stating that each {\em Reader} of remote {\em Participant} should receive the data. The only situation when {\em Writer} knows exactly the destination and therefore may set {\em Reader's Entity Id} properly is sending DATA submessage in response to ACKNACK by {\em Stateful Writer}.
+
+\secc Stateful Reader
+
+For BEST\_EFFORT traffic, {\em Stateful Reader} stores information about expected Sequence Number for each remote  {\em Writer}. This information is stored in {\em Writer Proxy} structure. Storing Sequence Number ensures that there are no duplicated nor out-of-order data changes.
+
+If the communication is RELIABLE and DATA submessage or GAP is received, expected Sequence Number is set correspondingly. When HEARTBEAT is received, databases of missing and lost changes are updated for {\em Writer Proxy} and the rest of behavior depends on {\em Final} and {\em Liveliness Flags}. When both, {\em Final} and {\em Liveliness Flags} are set, nothing happens. When {\em Liveliness Flag} is not set, then ACKNACK with missing changes may be sent and when {\em Final Flag} is not set, ACKNACK must be sent.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DISCOVERY MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[discovery]\sec Discovery Module
 
-\label[rtps10]\sec RTPS 1.0
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% RTPS 1.0 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label[rtps10]\sec RTPS 1.0
 
 
