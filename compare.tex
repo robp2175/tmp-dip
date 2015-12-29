@@ -361,11 +361,11 @@ Following are changes in {\em Submessages}:
 
 \secc Behavior Module
 
-{\em Writers} are divided to {\em CSTWriters} and {\em Publishers}, {\em Readers} to {\em CSTWriters} and {\em Subscribers} in version 1.0.
+{\em Writers} are divided to {\em CSTWriters} and {\em Publications}, {\em Readers} to {\em CSTWriters} and {\em Subscriptions} in version 1.0.
 
 {\em CSTWriters} and {\em CSTReaders} are builtin ``endpoints'' used for Composite State Transfer protocol and the communication between them is reliable. Messages used are VAR, GAP, HEARTBEAT and ACK. {\em CSChanges} are exchanges between {\em CSTWriters} and {\em CSTReadres}.
 
-{\em Publishers} and {\em Subscribers} are used for user data exchange and the communication can be either reliable or best-effort. Messages used are ISSUE, HEARTBEAT and ACK. User data in ISSUE messages are represented in \glref{CDR} format.
+{\em Publications} and {\em Subscriptions} are used for user data exchange and the communication can be either reliable or best-effort. Messages used are ISSUE, HEARTBEAT and ACK. User data in ISSUE messages are represented in \glref{CDR} format.
 
 In version 2.2, only difference between builtin and user defined {\em Endpoints} are predefined Entity Ids. Both, builtin and user defined {\em Endpoints} can be reliable or best-effort and DATA, HEARTBEAT, GAP and ACKNACK submessages are used independently on the purpose of the communication.
 
