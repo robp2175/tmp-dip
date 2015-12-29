@@ -71,9 +71,73 @@ In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, 
 
 \label[orte:spec]\sec ORTE specific
 
-Object Entry database, HTim structure, Type Entry database of ORTETypeRegisters
+\secc Version 1.0
+
+In \glref{RTPS} 1.0 implementation, the core structure is "ORTEDomain". Following are specific types contained in "ORTEDomain" structure:
+\begitems
+* "TaskProp"
+* "TypeEntry"
+* "ObjectEntry"
+* "PSEntry"
+* "CSTPublications"
+* "CSTSubscriptions"
+\enditems
+
+"TaskProp" maintains properties of {\em Tasks}, including own socket, thread and "MessageBuffer" (used for sending and receiving data) for each {\em Task}. There are five {\em Tasks}: "taskRecvUnicastMetatraffic", "taskRecvMulticastMetatraffic", "taskRecvUnicastUserdata", "taskRecvMulticastUserdata" and "taskSend".
+
+"TypeEntry" is database of {\em Types} used for data encapsulation, containing name of {\em Type} and functions to serialize and deserialize it.
+
+The database of all ``endpoints'' is stored in "ObjectEntry". In "ORTEDomain", variable "objectEntry" of type "ObjectEntry" is the root of 3-layered AVL tree (\cite[www:ulan]), where each layer correspond to {\em Host Id}, {\em Application Id} and {\em Object Id}. Also, {\em Application Id} layer serves as the root for {\em Hierarchical Timer} (\cite[www:ulan]) used for timing in \glref{ORTE}.
+
+"PSEntry", "CSTPublications" and "CSTSubscriptions" are databases of {\em Publications} and {\em Subscriptions}. In context of version 1.0 of the \glref{RTPS} protocol, ``endpoints'' used for user data communication are stored here.
+
+Builtin ``endpoints'' are defined directly in "ORTEDomain" structure, there is nine of {\em CSTWriters} and {\em CSTReaders} used for \glref{CST} protocol:
+\begitems
+* "writerApplicationSelf"
+* "readerManagers"
+* "readerApplications"
+* "writerManagers"
+* "writerApplications"
+* "writerPublications"
+* "readerPublications"
+* "writerSubscriptions"
+* "readerSubscriptions".
+\enditems
+
+\secc Version 2.2
+
+Domain is abstract term involving communication of nodes that have something in common. The core structure in implementation of version 2.2 of \glref{RTPS} protocol was therefore renamed to "ORTEDomainParticipant". Following types persisted:
+\begitems
+* "TaskProp"
+* "TypeEntry"
+* "ObjectEntry"
+\enditems
+
+"TaskProp" has the same purpose as in previous implementation, just some of names changed to be more appropriate:
+\begitems\style x
+* "taskRecvUnicastDiscoveryTraffic"
+* "taskRecvMulticastDiscoveryTraffic"
+* "taskRecvUnicastUserTraffic"
+* "taskRecvMulticastUserTraffic".
+\enditems
+
+"TypeEntry" remains completely same.
+
+Because of substitution of {\em Host Id} and {\em Application Id} for {\em Guid Prefix}, "ObjectEntry" changed from 3-layered to 2-layered AVL tree (\cite[www:ulan]), where the first layer corresponds to {\em Guid Prefix} and the second one to {\em Entity Id}. The root for {\em Hierarchical Timer} (\cite[www:ulan]) is at the {\em Guid Prefix} layer.
+
+"ORTEEndpoint" structure was added to "ObjectEntry" at the {\em Entity Id} layer. "ORTEEndpoint" can be {\em Stateless Writer} or {\em Stateless Reader} at present (see \ref[upgrade]) and {\em Stateful Writer}, {\em Stateful Reader}, {\em Participant Proxy}, {\em Reader Proxy} and {\em Writer Proxy} will be added in the future. So one database containing all {\em Endpoints} in {\em Domain} is used for each {\em Participant} and there is no need for directly defined {\em Endpoints} or separate database of publishers and subscribers.
 
 \label[orte:struct]\sec Structure Module
+
+In the correspondence to \glref{PIM} (\ref[struct]) and as mentioned above, "ORTEDomain" structure changed to "ORTEDomainParticipant". Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github].
+
+Because {\em CSTWriter} evolves to {\em Stateful Writer} and {\em CSTReader} to {\em Stateful Reader}, new structures "StatelessWriter" and "StatelessReader" are introduced in correspondence to reference implementation.
+
+{\em Cache Change} is replacement of {\em CSChange} and is used as ``transfer unit'' for all exchanges in \glref{RTPS} 2.2.
+
+The implementation of {\em History Cache} remains the same - it's implemented as {\em List} (\cite[www:ulan]). This manner allows to save memory by maintaining only one {\em Cache Change}, pointed from more structures as multiple matched {\em Reader Proxy} or {\em Writer Proxy}.
+
+While the name changed for {\em CSTRemote Reader} and {\em CSTRemoteWriter} to {\em Reader Proxy} respective {\em Writer Proxy}, the function of this {\em Endpoints} remains the same.
 
 \label[orte:message]\sec Messages Module
 
