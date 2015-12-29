@@ -1,3 +1,87 @@
 \label[upgrade]\chap Required changes in ORTE
 
+In this chapter, changes required for \glref{ORTE} to be compatible with the version 2.2 of the \glref{RTPS} protocol are discussed. Following is the state of work, where what is \Blue done is blue\Black, \Green working is green\Black, \Red not finished is red \Black and needless for interoperability is black.
+
+\begitems
+\Black
+* Structure Module
+  \begitems\style x
+  \Blue
+  * Participant
+  * History Cache
+  * Cache Change
+  * Participant Proxy
+  \Green
+  * Writer Endpoint
+  * Reader Endpoint
+  * Reader Proxy
+  * Writer Proxy
+  \enditems
+
+\Black
+* Messages Module
+  \begitems\style x
+  \Blue
+  * Header
+  * Message Receiver
+  * Data
+  * InfoDestination
+  * InfoReply
+  * InfoSource
+  * InfoTimestamp
+  * Pad
+  \Green
+  * AckNack
+  * Gap
+  * Heartbeat
+  \Black
+  * DataFrag
+  * HeartbeatFrag
+  * NackFrag
+  \enditems
+
+\Black
+* Behavior Module
+  \begitems\style x
+  \Blue
+  * Best-Effort Stateless Writer
+  * Best-Effort Stateless Reader
+  \Red
+  * Reliable Stateless Writer
+  * Reliable Stateful Reader, Writer Proxy
+  \Black
+  * Best-Effort Stateful Writer
+  * Reliable Stateful Writer, Reader Proxy
+  * Best-Effort Stateful Reader
+  \enditems
+
+\Black
+* Discovery Module
+  \begitems\style x
+  \Blue
+  * SPDP
+  \Red
+  * SEDP
+  \enditems
+\enditems
+
+\Black
+
+In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, their purpose and legacy of previous implementation. In \ref[orte:struct], \ref[orte:message], \ref[orte:behavior] and \ref[orte:discovery], implementation of each module from chapter \ref[compare] is discussed. Proposal of consequential development is introduced in section \ref[orte:next].
+
+\label[orte:spec]\sec ORTE specific
+
+Object Entry database, HTim structure, Type Entry database of ORTETypeRegisters
+
+\label[orte:struct]\sec Structure Module
+
+\label[orte:message]\sec Messages Module
+
+\label[orte:behavior]\sec Behavior Module
+
+\label[orte:discovery]\sec Discovery Module
+
+\label[orte:next]\sec Next Steps
+
+
 
