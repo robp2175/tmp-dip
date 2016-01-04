@@ -91,7 +91,7 @@ The database of all ``endpoints'' is stored in "ObjectEntry". In "ORTEDomain", v
 
 "PSEntry", "CSTPublications" and "CSTSubscriptions" are databases of {\em Publications} and {\em Subscriptions}. In context of version 1.0 of the \glref{RTPS} protocol, ``endpoints'' used for user data communication are stored here.
 
-Builtin ``endpoints'' are defined directly in "ORTEDomain" structure, there is nine of {\em CSTWriters} and {\em CSTReaders} used for \glref{CST} protocol:
+Builtin ``endpoints'' are defined directly in "ORTEDomain" structure, there are nine of {\em CSTWriters} and {\em CSTReaders} used for \glref{CST} protocol:
 \begitems
 * "writerApplicationSelf"
 * "readerManagers"
@@ -113,13 +113,7 @@ Domain is abstract term involving communication of nodes that have something in 
 * "ObjectEntry"
 \enditems
 
-"TaskProp" has the same purpose as in previous implementation, just some of names changed to be more appropriate:
-\begitems\style x
-* "taskRecvUnicastDiscoveryTraffic"
-* "taskRecvMulticastDiscoveryTraffic"
-* "taskRecvUnicastUserTraffic"
-* "taskRecvMulticastUserTraffic".
-\enditems
+"TaskProp" has the same purpose as in previous implementation, just some of names changed to be more appropriate (see below).
 
 "TypeEntry" remains completely same.
 
@@ -129,7 +123,67 @@ Because of substitution of {\em Host Id} and {\em Application Id} for {\em Guid 
 
 \label[orte:struct]\sec Structure Module
 
-In the correspondence to \glref{PIM} (\ref[struct]) and as mentioned above, "ORTEDomain" structure changed to "ORTEDomainParticipant". Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github].
+\secc Participant
+
+In the correspondence to \glref{PIM} (\ref[struct]) and as mentioned above, "ORTEDomain" structure changed to "ORTEDomainParticipant":
+\begtt
+struct ORTEDomainParticipant {
+  uint32_t                    domainId;
+  ObjectEntryEID              *myself;
+  uint32_t                    participantId;
+
+  GUID_RTPS                   guid;
+  ProtocolVersion             protocolVersion;
+  VendorId                    vendorId;
+
+  Locator                     *defaultUnicastLocatorList;
+  uint32_t                    defaultUnicastNumLocators;
+  Locator                     *defaultMulticastLocatorList;
+  uint32_t                    defaultMulticastNumLocators;
+  Locator                     *sendingLocator;
+  uint32_t                    sendingNumLocators;
+
+  TaskProp                    taskRecvUnicastDiscoveryTraffic;
+  TaskProp                    taskRecvMulticastDiscoveryTraffic;
+  TaskProp                    taskRecvUnicastUserTraffic;
+  TaskProp                    taskRecvMulticastUserTraffic;
+  TaskProp                    taskSend;
+
+  TypeEntry                   typeEntry;
+  ObjectEntry                 objectEntry;
+};
+\endtt
+
+Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github]. The version of implementation is stored in "protocolVersion" attribute and the vendor of implementation in "vendorId" attribute. HERE CONTINUE
+
+The following functions are introduced for the "ORTEDomainPariticipant":
+
+\begitems
+* "ORTEDomainRecvThreadStart"
+* "ORTEDomainSendThreadStart"
+* "ORTEDomainRecvThreadStop"
+* "ORTEDomainSendThreadStop"
+* "ORTEDomainParticipant_new"
+* "ORTEDomainParticipant_start"
+* "ORTEDomainParticipant_destroy"
+\enditems
+
+Where
+\begitems\style x
+* "ORTEDomainRecvThreadStart"
+* "ORTEDomainSendThreadStart"
+* "ORTEDomainRecvThreadStop"
+* "ORTEDomainSendThreadStop"
+\enditems
+functions have the same purpose as in version 1.0 implementation, therefore there are no changes.
+
+The "ORTEDomainParticipant_new" function can be compared to "ORTEDomainCreate". Both return core structure ("ORTEDomainParticipant" in version 2.2 and "ORTEDomain" in version 1.0) and initialize core attributes, structures and tasks.
+
+The "ORTEDomainParticipant_start" function can be compared to "ORTEDomainStart". Both are used to start threads for corresponding {\em Tasks}.
+
+The "ORTEDomainParticipant_destroy" function can be compared to "ORTEDomainDestory". Both are used to release sources related to core structure ("ORTEDomainParticipant" or "ORTEDomain").
+
+\secc Endpoints
 
 Because {\em CSTWriter} evolves to {\em Stateful Writer} and {\em CSTReader} to {\em Stateful Reader}, new structures "StatelessWriter" and "StatelessReader" are introduced in correspondence to reference implementation.
 
@@ -141,11 +195,23 @@ While the name changed for {\em CSTRemote Reader} and {\em CSTRemoteWriter} to {
 
 \label[orte:message]\sec Messages Module
 
+Because of substitution of {\em Host Id} and {\em Application Id} for {\em Guid Prefix} (\ref[rtps10]), the {\em Header} of \glref{RTPS} messages has changed appropriately - instead of 4B for {\em Host Id} and 4B for {\em Application Id}, 12B for {\em Guid Prefix} are sent. The {\em Header} length is therefore resized to 20B.
+
+For {\em Submessages}, new structure "SubmessageHeader" is defined. When {\em Submessages} are sent, predefined macro "PUT_SHEADER(submessageHeader)" ensures putting the {\em Submessage Header} ``on the wire'' in contrast to version 1.0 implementation, where local variables "flags", "len", "length" and global structure "SubmessageId" were used. When receiving, {\em Submessage Header} is got ``from the wire'' only once in the thread of the receiving task. The pointer to "SubmessageHeader" and other pointers to "MessageInterpret" and "CDR_Codec" structures are then forwarded to the {\em Process} function of particular {\em Submessage}, preventing rewinding of "CDR_Codec"'s buffer and reading {\em Submessage Header}'s information again.
+
+According to {\em Guid Prefix} and {\em Locator} changes (\ref[rtps10]), "MessageInterpret" structure has changed - {\em Host Id} and {\em Application Id} are substituted by {\em Guid Prefix} and {\em Reply IP Addresses} are substituted by {\em Reply Locators Lists}.
+
+Generally for {\em Submessages}, name of the function responsible for processing of {\em Submessage} has changed by adding "Process" to the name (e.g. "RTPSInfoDST" function name changed to "RTPSInfoDSTProcess").
+
+According to \ref[rtps10], changes in {\em Interpreter Submessages} cover replacement of {\em Host Id} and {\em Application Id} by {\em Guid Prefix} and corresponding processing and updating of {\em Message Interpret}.
+
+
+
 \label[orte:behavior]\sec Behavior Module
 
 \label[orte:discovery]\sec Discovery Module
 
 \label[orte:next]\sec Next Steps
 
-
+MessageInterpret -> MessageReceiver
 
