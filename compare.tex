@@ -1,6 +1,8 @@
 \label[compare]\chap Actual RTPS protocol
 
-This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in chapter 8 in \cite[OMG:DDSI-RTPS22]. It contains four modules - basic objects are discussed in section \ref[struct], messages used for communication is described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
+When the {\em User Application} needs to exchange {\em Data Object} beetween multiple nodes in the network ({\em Entities} in the {\em Domain} in terms of \glref{RTPS}), the \glref{RTPS} protocol suits perfectly.
+
+This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in \cite[OMG:DDSI-RTPS22]. \glref{PIM} is divided in four modules: basic objects are discussed in section \ref[struct], messages used for communication is described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% STRUCTURE MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -11,7 +13,7 @@ The communication take place in the \glref{RTPS} {\em Domain}, consisting of mul
 
 \midinsert
 \label[pic:struct]\picw=14cm \cinspic pic-compare/structure_module.png
-\caption/f Structure Module diagram (chapter 7.1 in \cite[OMG:DDSI-RTPS22])
+\caption/f Structure Module diagram (chapter 7.1 in \cite[OMG:DDSI-RTPS22]).
 \endinsert
 
 It should be mentioned that there is also proxy {\em Participant} - {\em Participant Proxy} and another two proxy {\em Endpoints} - {\em Reader Proxy} and {\em Writer Proxy}. These objects represents remote {\em Participants} and their {\em Writers} and {\em Readers} and are introduced in chapter 8.4 in \cite[OMG:DDSI-RTPS22]. The local {\em Participant} maintains the topology of the {\em Domain} and needs to store information about remote {\em Participants}. For this purpose, {\em Participant Proxy} is used. Sometimes, local {\em Writer} needs to store information about remote {\em Reader} and therefore, {\em Reader Proxy} is used. Also local {\em Readers} are sometimes in need of storing information about remote {\em Writers} and then {\em Writer Proxy} is used.
@@ -33,7 +35,7 @@ Each {\em Endpoint} within the same {\em Participant} has to have the same {\em 
 
 \secc Writer Endpoint
 
-Is the source of {\em Cache Changes} which are sent to {\em Readers}. It has the following attributes:
+{\em Writer} is the source of {\em Cache Changes} which are sent to {\em Readers}. It has the following attributes:
 \begitems
 * \glref{GUID}
 * Topic Kind
@@ -48,11 +50,11 @@ Is the source of {\em Cache Changes} which are sent to {\em Readers}. It has the
 * Writer Cache
 \enditems
 
-Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, when the topic consists of more than one data instances identified by {\em key}. {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE, saying if it should be verified that {\em Cache Change} reached the {\em Reader}. {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Writer} listening. If there is no \glref{IP} address and port combination in list, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. {\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery. {\em Heartbeat Period}, {\em Nack Response Delay} and {Nack Suppression Duration} are time parameters used for protocol tunning, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for just sent data ignored. {\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
+Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, when the topic consists of more than one data instances identified by {\em key}. {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE, saying if it should be verified that {\em Cache Change} reached the {\em Reader}. {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Writer} listening. If lists are empty, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. {\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery. {\em Heartbeat Period}, {\em Nack Response Delay} and {\em Nack Suppression Duration} are protocol tunning parameters, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for rightly sent data ignored. {\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
 
 \secc Reader Endpoint
 
-Is the destination of {\em Cache Changes} which are sent by {\em Writers}. It has the following attributes:
+{\em Reader} is the destination of {\em Cache Changes} which are sent by {\em Writers}. It has the following attributes:
 \begitems
 * \glref{GUID}
 * Topic Kind
@@ -69,7 +71,7 @@ Where {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \
 
 \secc History Cache
 
-Is the database of {\em Cache Changes} serving as the \glref{API} for {\em Writer} and {\em Reader} {\em Endpoints}. It has the following attributes:
+{\em History Cache} is the database of {\em Cache Changes} serving as the \glref{API} for {\em Writer} and {\em Reader} {\em Endpoints}. It has the following attributes:
 \begitems
 * Changes
 \enditems
@@ -143,7 +145,7 @@ For communication between {\em Writers} and {\em Readers}, \glref{RTPS} messages
 
 \midinsert
 \label[pic:msg]\picw=14cm \cinspic pic-compare/messages_module.png
-\caption/f Structure of \glref{RTPS} message (chapter 8.3.3 in \cite[OMG:DDSI-RTPS22])
+\caption/f Structure of \glref{RTPS} message (chapter 8.3.3 in \cite[OMG:DDSI-RTPS22]).
 \endinsert
 
 The interpretation of {\em Submessage} may depend on previously received {\em Submessages} within the same {\em Message}, therefore it's needed to store the state for each {\em Message}. {\em Message Receiver} ensures this function by storing information about {\em Source Protocol Version}, {\em Source Vendor Id}, {\em Source \glref{GUID} Prefix}, {\em Destination \glref{GUID} Prefix}, {\em Unicast Reply Locator List}, {\em Multicast Reply Locator List}, {\em Have Timestamp} and {\em Timestamp}. State of the {\em Message Receiver} is reset to default values each time the {\em Message} is received.
@@ -225,7 +227,8 @@ In order to be compliant with protocol specification and interoperable with othe
   * Only \glref{RTPS} messages are used for communication.
   * Message Receiver must be implemented.
   * Timing characteristics must be tunable.
-  * \glref{SPDP} and \glref{SEDP} must be implemented.
+  * Simple Participant Discovery Protocol must be implemented.
+  * Simple Endpoint Discovery Protocol must be implemented.
   * Writer Liveliness Protocol must be implemented.
   \enditems
 
@@ -258,9 +261,9 @@ In order to be compliant with protocol specification and interoperable with othe
 
 {\em\bf Writer Liveliness Protocol} is required by \glref{DDS} to exchange information about the Liveliness of {\em Writers} by {\em Participants}. Builtin {\em Endpoints} are used for sending samples at rate faster than the smallest lease duration among {\em Writers} sharing the same liveliness Qos.
 
-\label[impl]\secc Implementation
+\label[impl]\secc State Maintenance
 
-In chapter 8.4 in \cite[OMG:DDSI-RTPS22], two reference implementations of \glref{RTPS} protocol are introduced.
+In \cite[OMG:DDSI-RTPS22], two reference implementations of \glref{RTPS} protocol are introduced.
 
 {\em\bf Stateless} implementation maintains no state about remote {\em Endpoints}, which suits for best-effort communication over multicast. While this implementation scales well in large systems and memory usage is reduced, additional bandwidth may be required.
 
@@ -306,7 +309,7 @@ If the communication is RELIABLE and DATA submessage or GAP is received, expecte
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[discovery]\sec Discovery Module
 
-The communication as described in \ref[behavior] between {\em Endpoints} described in \ref[struct] throw the {\em Messages} described in \ref[message] assumes that both ends of communication are known. {\em Discovery Module} introduces two processes of probing {\em Domain} due to discovering {\em Participants} called {\em Simple Participant Discovery Protocol} and theirs {\em Endpoints} known as {\em Simple Endpoint Discovery Protocol}.
+The communication as described in \ref[behavior] between {\em Endpoints} described in \ref[struct] by the {\em Messages} described in \ref[message] assumes that both ends of communication are known. {\em Discovery Module} introduces two processes of probing {\em Domain} due to discovering {\em Participants} called {\em Simple Participant Discovery Protocol} and theirs {\em Endpoints} known as {\em Simple Endpoint Discovery Protocol}.
 
 \glref{SPDP} and \glref{SEDP} are only discovery protocols described in \glref{RTPS} specification and have to be implemented in order to enable interoperability between implementations. However vendor specific discovery protocols can be implemented in addition to overcome some drawbacks of {\em Simple Discovery Protocols}.
 
@@ -324,7 +327,7 @@ The difference between {\em Builtin} and {\em User-defined} {\em Endpoints} need
 
 The last pair of {\em Reliable Endpoints}\fnote{ENTITYID\_SEDP\_BUILTIN\_TOPIC\_WRITER and ENTITYID\_SEDP\_BUILTIN\_TOPIC\_READER} can be used to exchange {\em DiscoveredTopicData}, but these {\em Endpoints} aren't mandatory and the interoperability is not affected by them.
 
-{\em Writers} and {\em Readers} of remote {\em Participants} are discovered by \glref{SEDP}.
+{\em Endpoints} of remote {\em Participants} are discovered by \glref{SEDP}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -336,7 +339,7 @@ The last pair of {\em Reliable Endpoints}\fnote{ENTITYID\_SEDP\_BUILTIN\_TOPIC\_
 
 \secc Structure Module
 
-In version 2.2, {\em \glref{GUID}} consists of {\em Guid Prefix} (12B) and {\em Entity Id} (4B), while in version 1.0, {\em \glref{GUID}} consists of {\em Host Id} (4B), {\em Application Id} (4B) and {\em Object Id} (4B). {\em Entity Id} may be compared with {\em Object Id} as well as {\em Guid Prefix} with {\em Host Id} and {\em Application Id}. The size of {\em \glref{GUID}} in version 2.2 was increased by 4B.
+Important change in version 2.2 is that the {\em \glref{GUID}} consists of {\em Guid Prefix} (12B) and {\em Entity Id} (4B), while in version 1.0, {\em \glref{GUID}} consists of {\em Host Id} (4B), {\em Application Id} (4B) and {\em Object Id} (4B). {\em Entity Id} may be compared with {\em Object Id} and {\em Guid Prefix} corresponds to {\em Host Id} and {\em Application Id}. The size of {\em \glref{GUID}} in version 2.2 was increased by 4B.
 
 New {\em Locator} type is introduced in version 2.2, containing \glref{IP} address, port and kind. {\em Locator} type is introduced because of \glref{IP}v6, it's kind can be either LOCATOR\_KIND\_UDPv4 or LOCATOR\_KIND\_UDPv6.
 
