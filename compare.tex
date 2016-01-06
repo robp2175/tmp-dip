@@ -29,7 +29,9 @@ It should be mentioned that there is also proxy {\em Participant} - {\em Partici
 * Default Multicast Locator List
 \enditems
 
-Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier consisting of {\em \glref{GUID} Prefix} and {\em EntityId}, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}. {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of \glref{IP} address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
+Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier consisting of {\em \glref{GUID} Prefix} and {\em EntityId}, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}.
+
+{\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of \glref{IP} address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
 
 Each {\em Endpoint} within the same {\em Participant} has to have the same {\em \glref{GUID} Prefix}.
 
@@ -50,7 +52,15 @@ Each {\em Endpoint} within the same {\em Participant} has to have the same {\em 
 * Writer Cache
 \enditems
 
-Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, when the topic consists of more than one data instances identified by {\em key}. {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE, saying if it should be verified that {\em Cache Change} reached the {\em Reader}. {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Writer} listening. If lists are empty, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. {\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery. {\em Heartbeat Period}, {\em Nack Response Delay} and {\em Nack Suppression Duration} are protocol tunning parameters, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for rightly sent data ignored. {\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
+Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, when the topic consists of more than one data instances identified by {\em key}. {\em Reliability Level} can be either BEST\_EFFORT or RELIABLE, saying if it should be verified that {\em Cache Change} reached the {\em Reader}.
+
+{\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Writer} listening. If lists are empty, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}.
+
+{\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery.
+
+{\em Heartbeat Period}, {\em Nack Response Delay} and {\em Nack Suppression Duration} are protocol tunning parameters, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for rightly sent data ignored.
+
+{\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
 
 \secc Reader Endpoint
 
@@ -67,7 +77,13 @@ Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, wh
 * Reader Cache
 \enditems
 
-Where {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Reader} listening. If there is no IP address and port combination in list, it's presumed that {\em Reader} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}. The value of {\em Expects Inline Qos} is set to TRUE if the {\em Reader} expects in-line Qos to be sent along with data. {\em Heartbeat Response Delay} and {\em Heartbeat Suppression Duration} are time parameters used for protocol tunning, which defines how long the acknowledgement of data should be delayed respective how long can be Heartbeat announces ignored after just received Heartbeat. {\em Reader Cache} is the {\em History Cache} of the {\em Reader} containing {\em Cache Changes} associted with the {\em Reader} itself.
+Where {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Reader} listening. If there is no IP address and port combination in list, it's presumed that {\em Reader} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}.
+
+The value of {\em Expects Inline Qos} is set to TRUE if the {\em Reader} expects in-line Qos to be sent along with data.
+
+{\em Heartbeat Response Delay} and {\em Heartbeat Suppression Duration} are time parameters used for protocol tunning, which defines how long the acknowledgement of data should be delayed respective how long can be Heartbeat announces ignored after just received Heartbeat.
+
+{\em Reader Cache} is the {\em History Cache} of the {\em Reader} containing {\em Cache Changes} associted with the {\em Reader} itself.
 
 \secc History Cache
 
@@ -89,7 +105,7 @@ Is the change of the data object that should be propagated from the {\em Writer}
 * Data value
 \enditems
 
-Where {\em Change Kind} can be ALIVE, NOT\_ALIVE\_DISPOSED or NOT\_ALIVE\_UNREGISTERED and is used to distinguish the change that was made to a data object. {\em Writer \glref{GUID}} is the identifier of the source of the {\em Cache Change}, {\em Instance Handle} identifies the instance of the data object (in \glref{DDS} the value of the {\em key} is used) and the {\em Sequence Number} is unique identifier of the {\em Cache Change} in the {\em History Cache} of the {\em Endpoint}. The last attribute, {\em Data value}, represents data associated to the {\em Cache Change}.
+Where {\em Change Kind}\fnote{Possible values are: ALIVE, NOT\_ALIVE\_DISPOSED and NOT\_ALIVE\_UNREGISTERED} is used to distinguish the change that was made to a data object. {\em Writer \glref{GUID}} is the identifier of the source of the {\em Cache Change}, {\em Instance Handle} identifies the instance of the data object (in \glref{DDS} the value of the {\em key} is used) and the {\em Sequence Number} is unique identifier of the {\em Cache Change} in the {\em History Cache} of the {\em Endpoint}. The last attribute, {\em Data value}, represents data associated to the {\em Cache Change}.
 
 \secc Participant Proxy
 
@@ -108,7 +124,11 @@ Represents the information about remote {\em Participant} in the {\em Domain}. I
 * Lease Duration
 \enditems
 
-Where {\em Protocol Version} specify the version of the \glref{RTPS} protocol implementation used by remote {\em Participant} and the vendor of this implementation is represented by the {\em Vendor Id}. {\em Guid Prefix} is the common part of the \glref{GUID} for the {\em Participant} and all of it's {\em Endpoints}, {\em Expects Inline Qos} describes whether the {\em Readers} of the remote {\em Participant} expects in-line Qos sent along with data and {\em Available Builtin Endpoints} parameter specify which builtin {\em Endpoints} used for plug-and-play interoperability are available by remote {\em Participant}. {\em Metatraffic Unicast Locator List} and {\em Metatraffic Multicast Locator List} are \glref{IP} address and port combinations that can be used to reach the remote builtin {\em Endpoints} and {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are \glref{IP} address and port combinations that can be used to reach the remote {\em Endpoints} defined by user that serve for user data exchange. {\em Manual Liveliness Count} is used to implement MANUAL\_BY\_PARTICIPANT liveliness Qos and {\em Lease Duration} specify the time period for which the remote {\em Participant} should be considered alive.
+Where {\em Protocol Version} specify the version of the \glref{RTPS} protocol implementation used by remote {\em Participant} and the vendor of this implementation is represented by the {\em Vendor Id}. {\em Guid Prefix} is the common part of the \glref{GUID} for the {\em Participant} and all of it's {\em Endpoints}, {\em Expects Inline Qos} describes whether the {\em Readers} of the remote {\em Participant} expects in-line Qos sent along with data and {\em Available Builtin Endpoints} parameter specify which builtin {\em Endpoints} used for plug-and-play interoperability are available by remote {\em Participant}.
+
+{\em Metatraffic Unicast Locator List} and {\em Metatraffic Multicast Locator List} are \glref{IP} address and port combinations that can be used to reach the remote builtin {\em Endpoints} and {\em Default Unicast Locator List} and {\em Default Multicast Locator List} are \glref{IP} address and port combinations that can be used to reach the remote {\em Endpoints} defined by user that serve for user data exchange.
+
+{\em Manual Liveliness Count} is used to implement MANUAL\_BY\_PARTICIPANT liveliness Qos and {\em Lease Duration} specify the time period for which the remote {\em Participant} should be considered alive.
 
 \secc Reader Proxy
 

@@ -149,49 +149,171 @@ struct ORTEDomainParticipant {
   TaskProp                    taskRecvMulticastUserTraffic;
   TaskProp                    taskSend;
 
+  // db of types (ORTETypeRegister)
   TypeEntry                   typeEntry;
+  // db of objects (ObjectEntryGP, ObjectEntryEID)
   ObjectEntry                 objectEntry;
 };
 \endtt
 
-Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github]. The version of implementation is stored in "protocolVersion" attribute and the vendor of implementation in "vendorId" attribute. HERE CONTINUE
+Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github]. The version of implementation is stored in "protocolVersion" and the vendor of implementation in "vendorId" attributes. {\em Domains} are distinguished by "domainId", only {\em Participants} in the same {\em Domain} can communicate. {\em Participants} within the {\em Domain} are distinguished by "participantId", so it's needed to be unique.
 
-The following functions are introduced for the "ORTEDomainPariticipant":
+{\em Locator Lists} are implemented as pointers\fnote{In C, pointer can be understood as array with need for memory allocation.} and corresponding number of elements. It's assumed that {\em Locator Lists} don't change frequently, so there is no need for AVL.
 
+{\em Task} for sending data doesn't make a difference between {\em Discoverry}, {\em User}, {\em Unicast} nor {\em Multicast} traffic, there is only one socket, thread and "MessageBuffer" for data sending. However each kind of receiving traffic like {\em Unicast Discovery}, {\em Multicast Discovery}, {\em Unicast User} or {\em Multicast User} has it's own {\em Task} and so it's own socket, thread and "MessageBuffer". This approach allows to process multiple kinds of traffic received on different ports at once.
+
+Because "ORTEDomainParticipant" containing database of all {\em Entities} in {\em Domain} is shared between {\em Tasks} (and so between all threads), rwlock and mutex are used for this shared database of {\em Endpoints} and theirs related {\em Timers} stored in "objectEntry" in order to prevent multiple access. Attribute "*myself" is used to store pointer to the {\em Participant} in the database of all {\em Entities}.
+
+The root for database of {\em Types} discussed above is "typeEntry".
+
+Basic functions for "ORTEDomainParticipant" are:
 \begitems
-* "ORTEDomainRecvThreadStart"
-* "ORTEDomainSendThreadStart"
-* "ORTEDomainRecvThreadStop"
-* "ORTEDomainSendThreadStop"
 * "ORTEDomainParticipant_new"
 * "ORTEDomainParticipant_start"
 * "ORTEDomainParticipant_destroy"
 \enditems
 
-Where
-\begitems\style x
-* "ORTEDomainRecvThreadStart"
-* "ORTEDomainSendThreadStart"
-* "ORTEDomainRecvThreadStop"
-* "ORTEDomainSendThreadStop"
-\enditems
-functions have the same purpose as in version 1.0 implementation, therefore there are no changes.
+Where "ORTEDomainParticipant_new" and "ORTEDomainCreate" functions can be compared - both return core structure ("ORTEDomainParticipant" in version 2.2 and "ORTEDomain" in version 1.0) and initialize core attributes, structures and tasks.
 
-The "ORTEDomainParticipant_new" function can be compared to "ORTEDomainCreate". Both return core structure ("ORTEDomainParticipant" in version 2.2 and "ORTEDomain" in version 1.0) and initialize core attributes, structures and tasks.
+The "ORTEDomainParticipant_start" function can be compared to "ORTEDomainStart" - both are used to start threads for corresponding {\em Tasks}.
 
-The "ORTEDomainParticipant_start" function can be compared to "ORTEDomainStart". Both are used to start threads for corresponding {\em Tasks}.
-
-The "ORTEDomainParticipant_destroy" function can be compared to "ORTEDomainDestory". Both are used to release sources related to core structure ("ORTEDomainParticipant" or "ORTEDomain").
+The "ORTEDomainParticipant_destroy" and "ORTEDomainDestroy" functions can be compared  - both are used to release sources related to the core structure.
 
 \secc Endpoints
 
 Because {\em CSTWriter} evolves to {\em Stateful Writer} and {\em CSTReader} to {\em Stateful Reader}, new structures "StatelessWriter" and "StatelessReader" are introduced in correspondence to reference implementation.
 
-{\em Cache Change} is replacement of {\em CSChange} and is used as ``transfer unit'' for all exchanges in \glref{RTPS} 2.2.
+\begtt
+struct StatelessWriter {
+  // it's Entity
+  GUID_RTPS              guid;
 
-The implementation of {\em History Cache} remains the same - it's implemented as {\em List} (\cite[www:ulan]). This manner allows to save memory by maintaining only one {\em Cache Change}, pointed from more structures as multiple matched {\em Reader Proxy} or {\em Writer Proxy}.
+  // it's Endpoint
+  TopicKind               topicKind;
+  ReliabilityKind         reliabilityLevel;
+  Locator                 *unicastLocatorList;
+    uint32_t                unicastNumLocators;
+  Locator                 *multicastLocatorList;
+    uint32_t                multicastNumLocators;
 
-While the name changed for {\em CSTRemote Reader} and {\em CSTRemoteWriter} to {\em Reader Proxy} respective {\em Writer Proxy}, the function of this {\em Endpoints} remains the same.
+  // it's Writer
+  Boolean                 pushMode;
+  Duration                heartbeatPeriod;
+    HTimFncUserNode         heartbeatTimer;
+  Duration                nackResponseDelay;
+    HTimFncUserNode         nackResponseTimer;
+  Duration                nackSuppressionDuration;
+    HTimFncUserNode         nackSuppressionTimer;
+  SequenceNumber          lastChangeSequenceNumber;
+
+  // it's StatelessWriter
+  Duration                resendDataPeriod;
+    HTimFncUserNode         resendDataTimer;
+
+  // Associations
+  ul_list_head_t          writerCache;  // HistoryCache
+  ul_list_head_t          readerLocators;
+
+  // others
+  gavl_node_t            node;  // StatelessPublications
+  ObjectEntryEID         *objectEntryEID;
+  ORTETypeRegister        *typeRegister;
+
+  // HistoryCache
+  SequenceNumber          firstSN;
+  SequenceNumber          lastSN;
+};
+\endtt
+
+Identifier of "StatelessWriter" is "guid". {\em Writer} is {\em Endpoint} contained in {\em Participant}, therefore it has the same {\em Guid Prefix} and differs by {\em Entity Id}. Predefined {\em Entity Ids} are used for {\em Builtin Endpoints}. {\em Builtin Endpoints} differs from {\em User Endpoints} by the last octet (called entityKind) of {\em Entity Id}, see table \ref[tab:entityId]. This description apply for each {\em Entity}.
+
+\midinsert \clabel[tab:entityId]{entityKind octet of an EntityId}
+\ctable{lll}{
+Kind of Entity & User-defined Entity & Built-in Entity \crl
+unknown & 0x00 & 0xc0 \cr
+Participant & N/A & 0xc1 \cr
+Writer (with Key) & 0x02 & 0xc2 \cr
+Writer (no Key) & 0x03 & 0xc3 \cr
+Reader (no Key) & 0x04 & 0xc4 \cr
+Reader (with Key) & 0x07 & 0xc7 \cr
+}
+\caption/t entityKind octet of an EntityId \cite[OMG:DDSI-RTPS22].
+\endinsert
+
+Attributes "topicKind", "reliabilityLevel" and "pushMode" are discussed in \ref[behavior].
+
+{\em Locator Lists} and "NtpTime" or "Duration" attributes of {\em Writer} and their purpose is discussed in \ref[struct]. For each "NtpTime" or "Duration" attribute, function can be inserted into {\em Hierarchical Timer} structure and automatically launched.
+
+The {\em History Cache} is implemented as doubly linked list \cite[www:ulan] with the head of "writerCache".
+
+{\em Reader Locator} wasn't introduced yet. It is auxiliary structure used by {\em Stateless Writer} to store information about where to send data. However it mustn't be confused with {\em Reader Proxy} of {\em Stateful Reader}, because {\em Reader Locator} doesn't store any information about {\em Endpoint}, just {\em Locator} (\glref{IP} address, port, kind), if Qos should be included and requested and unsent {\em Cache Changes} needed for RELIABLE {\em Reliability Level}. List of {\em Reader Locators} is implemented as doubly linked list \cite[www:ulan] with the head of "readerLocators".
+
+The remaining attributes are mostly auxiliary - "node" is needed because of AVL tree impementation, "*objectEntryEID" is pointer to {\em Writer} in database of all {\em Entities}, "firstSN" and "lastSN" are {\em Sequence Numbers} related to {\em History Cache}. Attribute "*typeRegister" is pointer to {\em Type} associated with {\em Writer}, which is used to serialize and deserialize {\em Data Object} related to {\em Writer}.
+
+\begtt
+struct StatelessReader {
+  // it's Entity
+  GUID_RTPS               guid;
+
+  // it's Endpoint
+  TopicKind               topicKind;
+  ReliabilityKind         reliabilityLevel;
+  Locator                 *unicastLocatorList;
+    uint32_t                unicastNumLocators;
+  Locator                 *multicastLocatorList;
+    uint32_t                multicastNumLocators;
+
+  // it's Reader
+  Boolean                 expectsInlineQos;
+  Duration                heartbeatResponseDelay;
+    HTimFncUserNode         heartbeatResponseTimer;
+  Duration                heartbeatSuppressionDuration;
+    HTimFncUserNode         heartbeatSuppressionTimer;
+
+  // it's StatelessReader
+
+  // Associations
+  ul_list_head_t          readerCache;  // HistoryCache
+
+  // others
+  gavl_node_t             node;
+  ObjectEntryEID          *objectEntryEID;
+  ORTETypeRegister        *typeRegister;
+};
+\endtt
+
+Attributes of {\em Stateless Reader} have the same meaning as attributes of {\em Stateless Writer} but "expectsInlineQos" is added, claiming demand of {\em DDS Reader} for including Qos along with data.
+
+\secc History Cache
+
+The content of {\em History Cache} is made by {\em Cache Changes} - the replacement of {\em CSChange}, which is used as ``transfer unit'' for all data exchanges in \glref{RTPS} 2.2. Because {\em History Cache} is implemented as doubly linked list \cite[www:ulan], there is no special structure for {\em History Cache}. The next is the structure of {\em Cache Change}.
+
+\begtt
+struct CacheChange {
+  // it's CacheChange
+  ChangeKind              kind;
+  GUID_RTPS               writerGuid;
+  InstanceHandle          instanceHandle;
+  SequenceNumber          sequenceNumber;
+
+  // Associations
+  uint8_t                 *data_value;
+  ul_list_head_t          inlineQos;
+
+  // Backward Associations
+  ul_list_node_t          nodeListHistoryCache; // for StatelessWriter
+  ul_list_node_t          nodeListRequestedChanges; // for ReaderLocator
+  ul_list_node_t          nodeListUnsentChanges;    // for ReaderLocator
+};
+\endtt
+
+Attributes of {\em Cache Chage} are discussed in \ref[struct]. "*data_value" is the pointer to {\em Data Object} of user {\em Application}. HERE CONTINUE
+
+The implementation of {\em History Cache} remains the same - it's implemented as doubly linked list (\cite[www:ulan]). This manner allows to save memory by maintaining only one {\em Cache Change}, pointed from more structures as multiple matched {\em Reader Proxy} or {\em Writer Proxy}.
+
+\secc Proxy Entities
+
+While the name changed for {\em CSTRemote Reader} and {\em CSTRemoteWriter} to {\em Reader Proxy} respective {\em Writer Proxy}, the function of this {\em Endpoints} remains the same. {\em Participant Proxy}, {\em Reader Proxy} and {\em Writer Proxy} follows important attributes of {\em Participant}, {\em Reader} respective {\em Writer}.
 
 \label[orte:message]\sec Messages Module
 
@@ -214,4 +336,4 @@ According to \ref[rtps10], changes in {\em Interpreter Submessages} cover replac
 \label[orte:next]\sec Next Steps
 
 MessageInterpret -> MessageReceiver
-
+Namespace
