@@ -1,0 +1,43 @@
+\label[future]\chap Future Development
+
+\glref{ORTE} is written to fit \glref{RTPS} 1.0. In version 2.2 there is no difference between meta traffic and user traffic, specification is divided to modules and the fashion of {\em Participants} and {\em Endpoints} discovery is revised. These are main differences needed to be considered when upgrading \glref{ORTE}. In the following sections, changes that haven't been made yet are discussed.
+
+\sec Stateful Endpoints
+
+It's not necessary to implement {\em Stateful Reference Endpoints}, only required behavior is discussed in \ref[inte]. However, for reliable communication desired by \glref{SEDP}, at least some state on each matched {\em Writer} must be stored in {\em Reader} and something that has been already done, would need to be reinvented. Also backward compatibility with version 1.0 of the \glref{RTPS} protocol would be easier, because approach similar to {\em Stateful Reference Implementation} is used. Therefore, it's advisable to add {\em Stateful Reference Implementation} into shor-term goals.
+
+\sec Refactoring
+
+Terminology changed in version 2.2 and in some cases (e.g. "MessageInterpret") \glref{ORTE} implementation doesn't correspond with specification. Clean code, suitable namespace and documentation is fundamental for changes, upgrades and fixes.
+
+\sec Directory Structure
+
+Four modules are introduced in \cite[OMG:DDSI-RTPS22] - Structure, Messages, Behavior and Discovery. It would be easier to maintain the code if these are stored in proper directory structure. Also additional directories for documentation can be considered.
+
+\sec DDS API
+
+It's mentioned in \cite[ORTE:conf] that first version of \glref{DDS} specification was introduced when it wasn't possible to change \glref{ORTE} \glref{API}. If there is an opportunity, it would be great to change it in correspondence to \glref{DDS}.
+
+\sec Backward compatibility
+
+One of the long-term goals could be backward compatibility with \glref{RTPS} 1.0. Ideally it would be implemented similar to \glref{SPDP} - as {\em User Application} with {\em Builtin Endpoints}.
+
+\sec Use Cases
+
+Some use cases would be good to consider when \glref{RTPS} is implemented in one {\em Node} (physical device) of {\em Network}. For this purpose, {\em Interpreter Submessages} discussed in \ref[message] were introduced.
+
+\begitems
+* 1 domain, 1 participant
+* 1 domain, x participants
+* y domains, 1 participant
+* y domains, x participants
+\enditems
+
+In the {\em 1-1} case, there are no special needs. Actual development consider this use case.
+
+For the {\em 1-x} case, sources consumption can be reduced by sharing common parts of {\em Domain} with other {\em Participants}.
+
+In the {\em y-1} case, {\em Participants} in different {\em Domains} listen on different ports. However sending sources can be shared.
+
+The last case {\em y-x} would benefit from the {\em 1-x} and {\em y-1} cases.
+
