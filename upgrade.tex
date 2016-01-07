@@ -499,7 +499,23 @@ Because the {\em Stateless Reader} is completely passive {\em Endpoint}, there a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[orte:discovery]\sec Discovery Module
 
-\label[orte:next]\sec Next Steps
+In order to be interoperable with other implementations, \glref{ORTE} must support \glref{SPDP} and \glref{SEDP}. Because {\em {\bf Data} Submessages} are used for user traffic as well as for discovery traffic, only difference between {\em User Application} and \glref{SPDP} respective \glref{SEDP} would be predefined {\em Entity Ids} denoting builtin {\em Endpoints}.
 
-MessageInterpret -> MessageReceiver
-Namespace
+\secc SPDP
+
+The approach to implement \glref{SPDP} is almost same as implementing {\em User Application} - new {\em Type} is registered with name {\em SPDPdiscoveredParticipantData}, serialize and deserialize functions are defined and new {\em Writer} and {\em Reader} are added. As an {\em Data Object}, "ORTEDomainParticipant" is used.
+
+Proper data encapsulation is needed because of interoperability between implementations. Encapsulation for \glref{SPDP} traffic is discussed in \cite[OMG:DDSI-RTPS22], approach similar to transfer of {\em Inline Qos} is used - {\em SPDPdiscoveredParticipantData} is encapsulated as {\em Parameter List}, each attribute correspond to one {\em Parameter}.
+
+"SPDPdiscoveredParticipantData_serialize" function is used to serialize information about "ORTEDomainParticipant" into {\em Parameter List} and put it ``on the wire''.
+
+"SPDPdiscoveredParticipantData_deserialize" function is used to deserialize information about remote {\em Participant} ``from the wire'' and store this {\em Participant} and it's available {\em Endpoints} in "objectEntry"\fnote{The root of database of all {\em Endpoints}.} of "ORTEDomainParticipant".
+
+For \glref{SPDP}, best-effort communication is required and therefore {\em Stateless Reference Implementation} is used. {\em Stateless Writer} and {\em Stateless Reader} with {\em SPDPdiscoveredParticipantData Type} are initialized in "RTPSSPDP_start" function used to enable \glref{SPDP}.
+
+\secc SEDP
+
+For \glref{SEDP}, the approach is similar to \glref{SPDP} implementation, except different {\em Types} as {\em DiscoveredWriterData} and {\em DiscoveredReaderData} are registered. Encapsulation as {\em Parameter List} remains the same.
+
+Also reliable communication is required for \glref{SEDP}, so {\em Statefull Reference Implementation} may be used. \glref{SEDP} is not implemented yet (see \ref[upgrade]).
+
