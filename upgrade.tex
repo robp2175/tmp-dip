@@ -291,7 +291,7 @@ Attributes "topicKind", "reliabilityLevel" and "pushMode" are discussed in \ref[
 
 The {\em History Cache} is implemented as doubly linked list \cite[www:ulan] with the head of "writerCache".
 
-{\em Reader Locator} wasn't introduced yet. It is auxiliary structure used by {\em Stateless Writer} to store information about where to send data. However it mustn't be confused with {\em Reader Proxy} of {\em Stateful Reader}, because {\em Reader Locator} doesn't store any information about {\em Endpoint}, just {\em Locator} (\glref{IP} address, port, kind), if Qos should be included and requested and unsent {\em Cache Changes} needed for RELIABLE {\em Reliability Level}. List of {\em Reader Locators} is implemented as doubly linked list \cite[www:ulan] with the head of "readerLocators".
+{\em Reader Locator} wasn't introduced yet. It is auxiliary structure used by {\em Stateless Writer} to store information about where to send data. However it mustn't be confused with {\em Reader Proxy} of {\em Stateful Writer}, because {\em Reader Locator} doesn't store any information about {\em Endpoint}, just {\em Locator} (\glref{IP} address, port, kind), if Qos should be included and requested and unsent {\em Cache Changes} needed for RELIABLE {\em Reliability Level}. List of {\em Reader Locators} is implemented as doubly linked list \cite[www:ulan] with the head of "readerLocators".
 
 The remaining attributes are mostly auxiliary - "node" is needed because of AVL tree impementation, "*objectEntryEID" is pointer to {\em Writer} in database of all {\em Entities}, "firstSN" and "lastSN" are {\em Sequence Numbers} related to {\em History Cache}. Attribute "*typeRegister" is pointer to {\em Type} associated with {\em Writer}, which is used to serialize and deserialize {\em Data Object} related to {\em Writer}.
 
@@ -472,6 +472,27 @@ Processing of {\em {\bf Data} Submessage} is ensured by "RTPSDataProcess" functi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEHAVIOR MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label[orte:behavior]\sec Behavior Module
+
+In order to enable communication, {\em Writer} and {\em Reader} {\em Endpoints} needs to be added to database of all {\em Endpoints} of the {\em Participant} and initialized. The function "objectEntryAdd" is used for the first task, functions used for the second one are "StatelessWriter_init" and "StatelessReader_init".
+
+\secc Stateless Writer
+
+When the {\em Writer} is in database of all {\em Endpoints} and it's attributes are initialized, following are steps necessary for proper functionality of the {\em Writer}.
+\begitems
+* {\em Reader Locators} needs to be added
+* {\em Cache Change} needs to be added
+* {\em Resend Data Timer} needs to be launched
+\enditems
+
+"StatelessWriter_readerLocatorAdd" function is used to associate {\em Reader Locator} with the {\em Stateless Writer}. {\em Reader Locator} is needed for information about where to send {\em Cache Changes} in the sense of \glref{IP} address and port\fnote{It shouldn't be confused with information about where to send data in the sence of destination \glref{GUID} used in {\em Stateful Reference Implementation}.}.
+
+"StatelessWriter_initChange" is used to initialize new {\em Cache Change}. Memory allocation have to precede this initialization and pointer to "CacheChange" is then forwarded to init function. The purpose of this approach is to prevent problems of storing {\em Cache Changes} on different memory stacks. Finally, "StatelessWriter_addChange" is used to associate new {\em Cache Change} with the {\em Writer}.
+
+"StatelessWriter_resendDataTimer" function is used to schedule periodic sending of {\em Cache Changes} by calling "ORTESendData" function and adding itself with period of "resendDataPeriod" to event system of \glref{ORTE} implemented as {\em Hierarchical Timer} \cite[www:ulan].
+
+\secc Stateless Reader
+
+Because the {\em Stateless Reader} is completely passive {\em Endpoint}, there are no special steps necessary for proper functionality. When the {\em Reader} is added to database of all {\em Endpoints} and initialized, it can be reached by each {\em Task}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DISCOVERY MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
