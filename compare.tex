@@ -11,8 +11,8 @@ This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS
 
 The communication take place in the \glref{RTPS} {\em Domain}, consisting of multiple {\em Entities}. Each {\em Entity} can be either {\em Participant} or {\em Endpoint}, where {\em Endpoints} can be specialized as {\em Writer} or {\em Reader}. Each {\em Endpoint} has it's own database of {\em Cache Changes} called {\em History Cache}. The whole structure is shown in figure \ref[pic:struct].
 
-\midinsert
-\label[pic:struct]\picw=14cm \cinspic pic-compare/structure_module.png
+\midinsert \clabel[pic:struct]{Structure Module diagram}
+\picw=14cm \cinspic pic-compare/structure_module.png
 \caption/f Structure Module diagram (chapter 7.1 in \cite[OMG:DDSI-RTPS22]).
 \endinsert
 
@@ -163,8 +163,8 @@ Where {\em Remote Writer \glref{GUID}} is unique identifier of remote {\em Write
 
 For communication between {\em Writers} and {\em Readers}, \glref{RTPS} messages are used. Each message consists of {\em Header} and one or more {\em Submessages}, where each {\em Submessage} has it's own {\em Submessage Header} and {\em Submessage Elements} based on the kind of the {\em Submessage}. The structure of \glref{RTPS} message is shown in figure \ref[pic:msg].
 
-\midinsert
-\label[pic:msg]\picw=14cm \cinspic pic-compare/messages_module.png
+\midinsert \clabel[pic:msg]{Structure of RTPS message}
+\picw=14cm \cinspic pic-compare/messages_module.png
 \caption/f Structure of \glref{RTPS} message (chapter 8.3.3 in \cite[OMG:DDSI-RTPS22]).
 \endinsert
 
