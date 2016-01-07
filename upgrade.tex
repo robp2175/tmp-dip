@@ -513,6 +513,27 @@ Proper data encapsulation is needed because of interoperability between implemen
 
 For \glref{SPDP}, best-effort communication is required and therefore {\em Stateless Reference Implementation} is used. {\em Stateless Writer} and {\em Stateless Reader} with {\em SPDPdiscoveredParticipantData Type} are initialized in "RTPSSPDP_start" function used to enable \glref{SPDP}.
 
+For out-of-the-box interoperability, {\em Writer} and {\em Reader} of \glref{SPDP} have to send respective receive data on {\em Default Multicast Locator} address and port.
+\begtt
+DefaultMulticastLocator = {
+  LOCATOR_KIND_UDPv4,
+  "239.255.0.1",
+  PB + DG * domainId + d0
+}
+\endtt
+
+Where
+
+\begtt
+PB = 7400
+DG = 250
+PG = 2
+d0 = 0
+d1 = 10
+d2 = 1
+d3 = 11
+\endtt
+
 \secc SEDP
 
 For \glref{SEDP}, the approach is similar to \glref{SPDP} implementation, except different {\em Types} as {\em DiscoveredWriterData} and {\em DiscoveredReaderData} are registered. Encapsulation as {\em Parameter List} remains the same.
