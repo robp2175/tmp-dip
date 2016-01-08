@@ -4,32 +4,60 @@ In reference to \ref[upgrade], only \glref{SPDP} was tested. The first test was 
 
 \sec ORTE to OpenDDS
 
-Following is comment for typical \glref{RTPS} {\em Messsage} received in ``debug'' mode, containing {\em SPDPdiscoveredParticipantData}, encoded as {\em Parameter List}.
+The following is commented ``debug`` output for typical \glref{RTPS} {\em Messsage} containing {\em SPDPdiscoveredParticipantData}, encoded as {\em Parameter List}.
 
 \begtt
 msg len 236
 header OK
 pv 2.2 vid 1.3 gp 0x0103001e 0x33862b64 0x76c10000
+\endtt
+RTPS Header received successfully.
+
+\begtt
  15 05 00 00  ; 15 = DATA; 05 = D,LE; 00 00 = till the end
  00 00 10 00  ; 00 00 = extra flags; 10 00 = 16B to next header
  00 00 00 00  ; Reader Id = ENTITYID_UNKNOW
  00 01 00 c2  ; Writer Id = ENTITYID_SPDP_BUILTIN_PARTICIPANT_WRITER
  00 00 00 00  ; SequenceNumber.high = 0
  01 00 00 00  ; SequenceNumber.low  = 1
+\endtt
+RTPS Data Submessage Header received successfully.
+
+\begtt
  00 03 00 00  ; 00 03 = PL_CDR_LE; 00 00 = skipped
+\endtt
+Information in {\em Data Submessage} is encoded as {\em Parameter List}, both the {\em Parameter List} and its {\em Parameters} are encapsulated using Little Endian.
+
+\begtt
  15 00 04 00  ; 15 00 = Protocol Version; 04 00 = length 4B
  02 02 00 00  ; 2.2
+\endtt
+The protocol version of sending implementation is 2.2.
+
+\begtt
  50 00 10 00  ; 50 00 = Participant GUID; 10 00 = length 16B
  01 03 00 1e  ; GuidPrefix
  33 86 2b 64  ; GuidPrefix
  76 c1 00 00  ; GuidPrefix
  00 00 01 c1  ; Entity Id = ENTITYID_PARTICIPANT
+\endtt
+The \glref{GUID} of the sending {\em Participant} is received.
+
+\begtt
  16 00 04 00  ; 16 00 = Vendor Id; 04 00 = length 4B
  01 03 00 00  ; 1.3
+\endtt
+The vendor id of sending implementation is 1.3.
+
+\begtt
  44 00 04 00  ; 44 00 = Builtin Endpoints; 04 00 = length 4B
  3f 0c 00 00  ; All required Builtin Endpoints present
  58 00 04 00  ; 58 00 = Builtin Endpoint Set; 04 00 = length 4B
  3f 0c 00 00  ; All required Builtin Endpoints present
+\endtt
+Sending {\em Participant} contains all {\em Builtin Endpoints} required for interoperability.
+
+\begtt
  32 00 18 00  ; 00 32 = Metatraffic Unicast Locator; 18 00 = length 24B
  01 00 00 00  ; Locator.kind = LOCATOR_KIND_UDPv4
  7f a9 00 00  ; Locator.port = 43391
@@ -37,13 +65,21 @@ pv 2.2 vid 1.3 gp 0x0103001e 0x33862b64 0x76c10000
  00 00 00 00  ;
  00 00 00 00  ;
  c0 a8 01 75  ; Locator.address = 192.168.1.117
- 32 00 18 00  ; 00 32 = Metatraffic Multicast Locator; length 24B
+\endtt
+Metatraffic Unicast Locator is used for communicating {\em Discovery Traffic}. It contains \glref{IP} address and port on which are sending {\em Participants} {\em Builtin Endpoints} listening.
+
+\begtt
+ 32 00 18 00  ; 00 32 = Metatraffic Unicast Locator; length 24B
  01 00 00 00  ; Locator.kind = LOCATOR_KIND_UDPv4
  7f a9 00 00  ; Locator.port = 43391
  00 00 00 00  ;
  00 00 00 00  ;
  00 00 00 00  ;
  0a 01 02 04  ; Locator.address = 10.1.2.4
+\endtt
+The second Metatraffic Unicast Locator is received, meaning that sending {\em Participants} {\em Builtin Endpoints} are listening on multiple \glref{IP} addresses (and same ports in this case).
+
+\begtt
  31 00 18 00  ; 31 00 = Default Unicast Locator; 18 00 = length 24B
  01 00 00 00  ; Locator.kind = LOCATOR_KIND_UDPv4
  39 30 00 00  ; Locator.port = 12345
@@ -51,6 +87,10 @@ pv 2.2 vid 1.3 gp 0x0103001e 0x33862b64 0x76c10000
  00 00 00 00  ;
  00 00 00 00  ;
  7f 00 00 01  ; Locator.address = 127.0.0.1
+\endtt
+{\em Default Unicast Locator} is used when there is no information about on which \glref{IP} address and port is {\em User Endpoint} of sending {\em Participant} listening. In such a case, {\em Default Unicast Locator} is used for sending {\em Unicast User Data Traffic}.
+
+\begtt
  48 00 18 00  ; 48 00 = Default Multicast Locator; 18 00 = length 24B
  01 00 00 00  ; Locator.kind = LOCATOR_KIND_UDPv4
  39 30 00 00  ; Locator.port = 12345
@@ -58,15 +98,28 @@ pv 2.2 vid 1.3 gp 0x0103001e 0x33862b64 0x76c10000
  00 00 00 00  ;
  00 00 00 00  ;
  7f 00 00 01  ; Locator.address = 127.0.0.1
+\endtt
+As well as {\em Default Unicast Locator}, also {\em Default Multicast Locator} is mandatory attribute of {\em Participant}. It has the same meaning, except {\em Multicast User Data Traffic} is considered. 
+
+\begtt
  34 00 04 00  ; 34 00 = Manual Liveliness Count; 04 00 = length 4B
  00 00 00 00  ;
+\endtt
+{\em Manual Liveliness Count} parameter is used for {\em Writer Liveliness Protocol} with manual Qos settings.
+
+\begtt
  02 00 08 00  ; 02 00 = Participant Lease Duration; 08 00 = length 8B
  14 00 00 00  ; NtpTime.seconds = 20
  00 00 00 00  ; NtpTime.fraction = 0
+\endtt
+Parameter containing the time period after which the sending {\em Participant} should be removed from "objectEntry" database is received.
+
+\begtt
  01 00 00 00  ; 01 00 = Sentinel (end of Parameter List)
 \endtt
+Sentinel parameter id determines the end of the {\em Parameter List}.
 
-Following is debug output of all {\em Entities} stored in "objectEntry" database of {\em Participant}. The whole output of receiving and processing \glref{RTPS} {\em Message} with \glref{SPDP} traffic is presented in appendix \ref[app:test1].
+The following is debug output of all {\em Entities} stored in "objectEntry" database of {\em Participant}. The whole output of receiving and processing \glref{RTPS} {\em Message} with \glref{SPDP} traffic is presented in appendix \ref[app:test1].
 
 \begtt
 1450639460.456 | GP:   00000000 0x0000c0a8 0x016525bc
