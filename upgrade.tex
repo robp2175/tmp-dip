@@ -67,7 +67,7 @@ In this chapter, changes required for \glref{ORTE} to be compatible with the ver
 
 \Black
 
-In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, their purpose and legacy of previous implementation. In \ref[orte:struct], \ref[orte:message], \ref[orte:behavior] and \ref[orte:discovery], implementation of each module from chapter \ref[compare] is discussed. Proposal of consequential development is introduced in section \ref[orte:next].
+In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, their purpose and legacy of previous implementation. In \ref[orte:struct], \ref[orte:message], \ref[orte:behavior] and \ref[orte:discovery], implementation of each module from chapter \ref[compare] is discussed.
 
 \label[orte:spec]\sec ORTE specific
 
@@ -189,15 +189,13 @@ struct ORTEDomainParticipant {
 };
 \endtt
 
-Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github]. The version of implementation is stored in "protocolVersion" and the vendor of implementation in "vendorId" attributes. {\em Domains} are distinguished by "domainId", only {\em Participants} in the same {\em Domain} can communicate. {\em Participants} within the {\em Domain} are distinguished by "participantId", so it's needed to be unique.
+Identifiers of "ORTEDomainParticipant" are "domainId", "participantId" and "guid", where "guid" is generated as discussed in \cite[www:github]. The version of implementation is stored in "protocolVersion" and the vendor of implementation in "vendorId" attributes. {\em Domains} are distinguished by "domainId", only {\em Participants} in the same {\em Domain} can communicate. {\em Participants} within the {\em Domain} are distinguished by unique "participantId".
 
-{\em Locator Lists} are implemented as pointers\fnote{In C, pointer can be understood as array with need for memory allocation.} and corresponding number of elements. It's assumed that {\em Locator Lists} don't change frequently, so there is no need for AVL.
+Pointer to "Locator" and the number of elements is used for {\em Locator Lists} implementation. Pointer to "Locator" supersedes function of array for which fixed number of elements have to be known in advance.
 
-{\em Task} for sending data doesn't make a difference between {\em Discoverry}, {\em User}, {\em Unicast} nor {\em Multicast} traffic, there is only one socket, thread and "MessageBuffer" for data sending. However each kind of receiving traffic like {\em Unicast Discovery}, {\em Multicast Discovery}, {\em Unicast User} or {\em Multicast User} has it's own {\em Task} and so it's own socket, thread and "MessageBuffer". This approach allows to process multiple kinds of traffic received on different ports at once.
+For sending {\em Task}, there is no difference between {\em Discoverry}, {\em User}, {\em Unicast} nor {\em Multicast} traffic, so there is only one socket, thread and "MessageBuffer" for data sending. However each kind of receiving traffic like {\em Unicast Discovery}, {\em Multicast Discovery}, {\em Unicast User} or {\em Multicast User} has it's own {\em Task} and so it's own socket, thread and "MessageBuffer". This approach allows to process multiple kinds of traffic received on different ports at once.
 
-Because "ORTEDomainParticipant" containing database of all {\em Entities} in {\em Domain} is shared between {\em Tasks} (and so between all threads), rwlock and mutex are used for this shared database of {\em Endpoints} and theirs related {\em Timers} stored in "objectEntry" in order to prevent multiple access. Attribute "*myself" is used to store pointer to the {\em Participant} in the database of all {\em Entities}.
-
-The root for database of {\em Types} discussed above is "typeEntry".
+Because "ORTEDomainParticipant" containing database of all {\em Entities} in {\em Domain} is shared between {\em Tasks} (and so between all threads), rwlock and mutex are used for {\em Endpoints} and theirs related {\em Timers} stored in "objectEntry" in order to prevent multiple access. Attribute "*myself" is used to store pointer to the {\em Participant} in the database of all {\em Entities}. The root for database of all {\em Endpoints} is "objectEntry", the root for database of {\em Types} is "typeEntry".
 
 Basic functions for "ORTEDomainParticipant" are:
 \begtt
@@ -282,7 +280,7 @@ Writer (no Key) & 0x03 & 0xc3 \cr
 Reader (no Key) & 0x04 & 0xc4 \cr
 Reader (with Key) & 0x07 & 0xc7 \cr
 }
-\caption/t entityKind octet of an EntityId \cite[OMG:DDSI-RTPS22].
+\caption/t EntityKind octet of an EntityId \cite[OMG:DDSI-RTPS22].
 \endinsert
 
 Attributes "topicKind", "reliabilityLevel" and "pushMode" are discussed in \ref[behavior].
@@ -291,7 +289,7 @@ Attributes "topicKind", "reliabilityLevel" and "pushMode" are discussed in \ref[
 
 The {\em History Cache} is implemented as doubly linked list \cite[www:ulan] with the head of "writerCache".
 
-{\em Reader Locator} wasn't introduced yet. It is auxiliary structure used by {\em Stateless Writer} to store information about where to send data. However it mustn't be confused with {\em Reader Proxy} of {\em Stateful Writer}, because {\em Reader Locator} doesn't store any information about {\em Endpoint}, just {\em Locator} (\glref{IP} address, port, kind), if Qos should be included and requested and unsent {\em Cache Changes} needed for RELIABLE {\em Reliability Level}. List of {\em Reader Locators} is implemented as doubly linked list \cite[www:ulan] with the head of "readerLocators".
+{\em Reader Locator} wasn't introduced yet. It is auxiliary structure used by {\em Stateless Writer}, containing information about where to send data. However it mustn't be confused with {\em Reader Proxy} of {\em Stateful Writer}, because {\em Reader Locator} doesn't store any state of {\em Endpoint}. Only {\em Locator} (\glref{IP} address, port, kind), if Qos should be included, requested {\em Cache Changes} and unsent {\em Cache Changes}\fnote{Requested cache changes and unsent cache changes are used for RELIABLE implementation.} are stored. List of {\em Reader Locators} is implemented as doubly linked list \cite[www:ulan] with the head of "readerLocators".
 
 The remaining attributes are mostly auxiliary - "node" is needed because of AVL tree impementation, "*objectEntryEID" is pointer to {\em Writer} in database of all {\em Entities}, "firstSN" and "lastSN" are {\em Sequence Numbers} related to {\em History Cache}. Attribute "*typeRegister" is pointer to {\em Type} associated with {\em Writer}, which is used to serialize and deserialize {\em Data Object} related to {\em Writer}.
 
@@ -385,7 +383,7 @@ typedef struct {
 
 {\em Inline Qos} is implemented as doubly linked list \cite[www:ulan] of {\em Parameters}. This approach is same as in version 1.0, only "ParameterSequence" name changed to "Parameter" and attributes of {\em Parameter} changed to correspond to version 2.2 types.
 
-Backward associations are needed for doubly linked list \cite[www:ulan] implementation.
+Implementation of doubly linked list \cite[www:ulan] depends on backward associations.
 
 The implementation of {\em History Cache} remains the same - it's implemented as doubly linked list \cite[www:ulan]. This manner allows to save memory by maintaining only one {\em Cache Change}, pointed from more structures as multiple matched {\em Reader Proxy} or {\em Writer Proxy}.
 
@@ -423,7 +421,7 @@ typedef struct {
 \endtt
 When {\em Submessages} are sent, predefined macro "PUT_SHEADER(submessageHeader)" ensures putting the {\em Submessage Header} ``on the wire'' in contrast to version 1.0 implementation, where local variables "flags", "len", "length" and global structure "SubmessageId" were used.
 
-When receiving, {\em Submessage Header} is got ``from the wire'' only once in the thread of the receiving task. The pointer to "SubmessageHeader" and other pointers to "MessageInterpret" and "CDR_Codec" structures are then forwarded to the {\em Process} function of particular {\em Submessage}, preventing rewinding of "CDR_Codec"'s buffer and reading {\em Submessage Header}'s information again.
+When receiving, {\em Submessage Header} is taken ``from the wire'' only once in the thread of the receiving task. The pointer to "SubmessageHeader" and other pointers to "MessageInterpret" and "CDR_Codec" structures are then forwarded to the {\em Process} function of particular {\em Submessage}, preventing rewinding of "CDR_Codec"'s buffer and reading {\em Submessage Header}'s information again.
 
 \secc Message Interpret
 
@@ -477,14 +475,14 @@ In order to enable communication, {\em Writer} and {\em Reader} {\em Endpoints} 
 
 \secc Stateless Writer
 
-When the {\em Writer} is in database of all {\em Endpoints} and it's attributes are initialized, following are steps necessary for proper functionality of the {\em Writer}.
+When the {\em Writer} is in database of all {\em Endpoints} and it's attributes are initialized, following steps shoud be performed for proper functionality of the {\em Writer}.
 \begitems
-* {\em Reader Locators} needs to be added
-* {\em Cache Change} needs to be added
-* {\em Resend Data Timer} needs to be launched
+* {\em Reader Locators} addition
+* {\em Cache Changes} addition
+* {\em Resend Data Timer} launch
 \enditems
 
-"StatelessWriter_readerLocatorAdd" function is used to associate {\em Reader Locator} with the {\em Stateless Writer}. {\em Reader Locator} is needed for information about where to send {\em Cache Changes} in the sense of \glref{IP} address and port\fnote{It shouldn't be confused with information about where to send data in the sence of destination \glref{GUID} used in {\em Stateful Reference Implementation}.}.
+"StatelessWriter_readerLocatorAdd" function is used to associate {\em Reader Locator} with the {\em Stateless Writer}. {\em Reader Locator} stores information about where to send {\em Cache Changes} in the sense of \glref{IP} address and port\fnote{It shouldn't be confused with information about where to send data in the sence of destination \glref{GUID} used in {\em Stateful Reference Implementation}.}.
 
 "StatelessWriter_initChange" is used to initialize new {\em Cache Change}. Memory allocation have to precede this initialization and pointer to "CacheChange" is then forwarded to init function. The purpose of this approach is to prevent problems of storing {\em Cache Changes} on different memory stacks. Finally, "StatelessWriter_addChange" is used to associate new {\em Cache Change} with the {\em Writer}.
 
@@ -522,17 +520,19 @@ DefaultMulticastLocator = {
 }
 \endtt
 
-Where
-
-\begtt
-PB = 7400
-DG = 250
-PG = 2
-d0 = 0
-d1 = 10
-d2 = 1
-d3 = 11
-\endtt
+\midinsert \clabel[tab:defval]{Port computation constants}
+\ctable{ccl}{
+Abbreviation & Value & Meaning \crl
+PB & 7400 & Port Base number \cr
+DG & 250 & Domain Gain \cr
+PG & 2 & Participant Gain \cr
+d0 & 0 & Additional offset \cr
+d1 & 10 & Additional offset \cr
+d2 & 1 & Additional offset \cr
+d3 & 11 & Additional offset \cr
+}
+\caption/t Constants for default port number computation.
+\endinsert
 
 \secc SEDP
 

@@ -1,6 +1,6 @@
 \label[test]\chap Testing of implementation
 
-In reference to \ref[upgrade], only \glref{SPDP} was tested. The first test was against OpenDDS \cite[www:opendds] - open source implementation of \glref{OMG} \glref{DDS} delivered with \glref{RTPS} Discovery test and it was run between 64-bit Debian \glref{PC} and 32-bit Linux Mint \glref{PC}. The second test was \glref{ORTE} against itself on 64-bit Debian \glref{PC}. The main purpose was to test if {\em Default Multicast Locator}'s \glref{IP} address and port are available for more {\em Participants} in same {\em Domain}.
+In reference to \ref[upgrade], only \glref{SPDP} tests were performed. Interoperability was tested against OpenDDS implementation \cite[www:opendds] - open source implementation of \glref{OMG} \glref{DDS} delivered with \glref{RTPS} Discovery test and it was run between 64-bit Debian \glref{PC} and 32-bit Linux Mint \glref{PC}. The main purpose of \glref{ORTE} against itself test was check of {\em Default Multicast Locator}'s \glref{IP} address and port availability for more {\em Participants} in same {\em Domain} on same node. Test was performed on 64-bit Debian \glref{PC}.
 
 \sec ORTE to OpenDDS
 
@@ -112,12 +112,12 @@ As well as {\em Default Unicast Locator}, also {\em Default Multicast Locator} i
  14 00 00 00  ; NtpTime.seconds = 20
  00 00 00 00  ; NtpTime.fraction = 0
 \endtt
-Parameter containing the time period after which the sending {\em Participant} should be removed from "objectEntry" database is received.
+Parameter containing the time period after which the sending {\em Participant} should be removed from "objectEntry" database.
 
 \begtt
  01 00 00 00  ; 01 00 = Sentinel (end of Parameter List)
 \endtt
-Sentinel parameter id determines the end of the {\em Parameter List}.
+Sentinel determines the end of {\em Parameter List}.
 
 The following is debug output of all {\em Entities} stored in "objectEntry" database of {\em Participant}. The whole output of receiving and processing \glref{RTPS} {\em Message} with \glref{SPDP} traffic is presented in appendix \ref[app:test1].
 
