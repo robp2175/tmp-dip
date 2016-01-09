@@ -412,11 +412,11 @@ typedef struct {
   uint16_t length;
 } SubmessageHeader;
 
-#define PUT_SHEADER(submessageHeader)                 \
-  do {                                                \
+#define PUT_SHEADER(submessageHeader)                     \
+  do {                                                    \
     CDR_put_octet(cdrCodec, (submessageHeader).kind);     \
-    CDR_put_octet(cdrCodec, (submessageHeader).flags);  \
-    CDR_put_ushort(cdrCodec, (submessageHeader).length); \
+    CDR_put_octet(cdrCodec, (submessageHeader).flags);    \
+    CDR_put_ushort(cdrCodec, (submessageHeader).length);  \
   } while(0)
 \endtt
 When {\em Submessages} are sent, predefined macro "PUT_SHEADER(submessageHeader)" ensures putting the {\em Submessage Header} ``on the wire'' in contrast to version 1.0 implementation, where local variables "flags", "len", "length" and global structure "SubmessageId" were used.
