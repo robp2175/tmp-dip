@@ -2,7 +2,7 @@
 
 When the {\em User Application} needs to exchange {\em Data Object} beetween multiple nodes in the network ({\em Entities} in the {\em Domain} in terms of \glref{RTPS}), the \glref{RTPS} protocol suits perfectly.
 
-This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in \cite[OMG:DDSI-RTPS22]. \glref{PIM} is divided in four modules: basic objects are discussed in section \ref[struct], messages used for communication is described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
+This chapter follows Platform Independent Model (\glref{PIM}) of the \glref{RTPS} protocol introduced in \cite[OMG:DDSI-RTPS22]. \glref{PIM} is divided in four modules: basic objects are discussed in section \ref[struct], messages used for communication are described in \ref[message] and behavior - messages exchange between objects - is discussed in \ref[behavior]. The last module of discovering {\em Domain} is convered in section \ref[discovery]. In the last section \ref[rtps10], versions 2.2 and 1.0 of \glref{RTPS} protocol are compared.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% STRUCTURE MODULE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,7 +31,7 @@ It should be mentioned that there is also proxy {\em Participant} - {\em Partici
 
 Where the {\em \glref{GUID}} is globally-unique \glref{RTPS}-entity identifier consisting of {\em \glref{GUID} Prefix} and {\em EntityId}, {\em Protocol Version} is version of actual implementation and vendor of implementation is represented by {\em Vendor Id}.
 
-{\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of \glref{IP} address and port combinations used to send User-data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
+{\em Default Unicast Locator List} and {\em Default Multicast Locator List} are lists of \glref{IP} address and port combinations used to send user data traffic to, when there is no such an information contained in {\em Writers} of the {\em Participant}.
 
 Each {\em Endpoint} within the same {\em Participant} has to have the same {\em \glref{GUID} Prefix}.
 
@@ -56,9 +56,9 @@ Where {\em Topic Kind} can be either NO\_KEY or WITH\_KEY. WITH\_KEY is used, wh
 
 {\em Unicast Locator List} and {\em Multicast Locator List} are lists of \glref{IP} address and port combinations on which is the {\em Writer} listening. If lists are empty, it's presumed that {\em Writer} is listening on {\em Default Unicast Locator List} respective {\em Default Multicast Locator List} of the {\em Participant}.
 
-{\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or just Heartbeats with Sequence Numbers of available {\em Cache Changes} and {\em Reader} has to ask for {\em Cache Change} delivery.
+{\em Push Mode} defines if data are sent ({\em Push Mode} is set to TRUE) or Heartbeats with Sequence Numbers of available {\em Cache Changes} ({\em Push Mode} is set to FALSE). In the second case, {\em Reader} has to ask for {\em Cache Change} delivery.
 
-{\em Heartbeat Period}, {\em Nack Response Delay} and {\em Nack Suppression Duration} are protocol tunning parameters, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be data request for rightly sent data ignored.
+{\em Heartbeat Period}, {\em Nack Response Delay} and {\em Nack Suppression Duration} are protocol tunning parameters, which defines announce interval of available data, how long the response to data request should be delayed respective how long can be request for just sent data ignored.
 
 {\em Last Change Sequence Number} is the highest Sequence Number in {\em History Cache} and the {\em Writer Cache} is the {\em History Cache} of the {\em Writer} containing {\em Cache Changes} associated with the {\em Writer} itself.
 
@@ -168,7 +168,7 @@ For communication between {\em Writers} and {\em Readers}, \glref{RTPS} messages
 \caption/f Structure of \glref{RTPS} message (chapter 8.3.3 in \cite[OMG:DDSI-RTPS22]).
 \endinsert
 
-The interpretation of {\em Submessage} may depend on previously received {\em Submessages} within the same {\em Message}, therefore it's needed to store the state for each {\em Message}. {\em Message Receiver} ensures this function by storing information about {\em Source Protocol Version}, {\em Source Vendor Id}, {\em Source \glref{GUID} Prefix}, {\em Destination \glref{GUID} Prefix}, {\em Unicast Reply Locator List}, {\em Multicast Reply Locator List}, {\em Have Timestamp} and {\em Timestamp}. State of the {\em Message Receiver} is reset to default values each time the {\em Message} is received.
+The interpretation of {\em Submessage} may depend on previously received {\em Submessages} within the same {\em Message}, therefore information shared between these {\em Submessages} must be stored. {\em Message Receiver} ensures this function by storing information about {\em Source Protocol Version}, {\em Source Vendor Id}, {\em Source \glref{GUID} Prefix}, {\em Destination \glref{GUID} Prefix}, {\em Unicast Reply Locator List}, {\em Multicast Reply Locator List}, {\em Have Timestamp} and {\em Timestamp}. State of the {\em Message Receiver} is reset to default values each time the {\em Message} is received.
 
 Submesssages can be divided to {\em Entity Submessages} which target an \glref{RTPS} {\em Entity} affecting it's behavior and {\em Interpreter Submessages} changing the state of the {\em Message Receiver}.
 
@@ -289,7 +289,7 @@ In \cite[OMG:DDSI-RTPS22], two reference implementations of \glref{RTPS} protoco
 
 {\em\bf Stateful} implementation, on the other hand maintains full state on remote {\em Endpoints}. More memory is needed and scalability is limited, but bandwidth usage decreases. Also, strict reliable communication and Qos based filtering on the {\em Writer's} side may be applied.
 
-It's important to mention that these are {\em reference implementations}. It means that there is no need for two kinds of {\em Endpoints} - {\em Stateless} and {\em Stateful}, because the only behavior needed for interoperability is introduced in \ref[inte]. {\em Reference implementations} just helps to understand and implement this behavior. Both {\em reference implementations}, {\em Stateless} as well as {\em Stateful} may be BEST\_EFFORT, RELIABLE, NO\_KEY or WITH\_KEY. Excaptions are discussed and explained below.
+It's important to mention that these are {\em reference implementations}. It means that there is no need for two kinds of {\em Endpoints} - {\em Stateless} and {\em Stateful}, because the only behavior needed for interoperability is introduced in \ref[inte]. {\em Reference implementations} just helps to understand and implement this behavior. Both {\em reference implementations}, {\em Stateless} as well as {\em Stateful} may be BEST\_EFFORT, RELIABLE, NO\_KEY or WITH\_KEY. Exceptions are discussed and explained below.
 
 \secc Stateless Writer
 
@@ -299,11 +299,11 @@ If {\em Stateless Writer} is RELIABLE, periodic HEARTBEATs with available data a
 
 {\em Readers} uses ACKNACK messages to request interesting data from {\em Reliable Writer}. DATA submessage is sent if data are still available in {\em Writer's} {\em History Cache} or GAP submessage indicating that data are no longer relevant.
 
-Even the bandwidth can be reduced if the information of acknowledged Sequence Numbers would be stored for remote {\em Readers}, it's not needed for interoperability.
+Even the bandwidth can be reduced if the information of acknowledged Sequence Numbers would be stored for remote {\em Readers}, it's not interoperability issue.
 
 \secc Stateless Reader
 
-Receive and process data is the meaning of BEST\_EFFORT {\em Stateless Reader}. However, to ensure RELIABLE communication, the problem arise, because at least Sequence Numbers of announced, requested but not received {\em Cache Changes} are needed, so some information about remote {\em Writer} has to be stored and therefore {\em Reader} can't be {\em Stateless}.
+The function of BEST\_EFFORT {\em Stateless Reader} is to receive and process data. However, to ensure RELIABLE communication, the problem arise, because at least sequence numbers of announced, requested but not received {\em Cache Changes} are needed, so some information about remote {\em Writer} has to be stored and therefore {\em Reader} can't be {\em Stateless}.
 
 As mentioned above, this is the only exception. {\em Stateless Reader} can't be RELIABLE.
 

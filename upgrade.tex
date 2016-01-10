@@ -137,7 +137,7 @@ typedef struct {
 } GUID_RTPS;
 \endtt
 
-"*GuidPrefix" is pointer because of AVL tree \cite[www:ulan] implementation.
+Because of AVL tree \cite[www:ulan] implementation, "*GuidPrefix" is a pointer.
 
 \begtt
 typedef struct {
@@ -195,7 +195,7 @@ Pointer to "Locator" and the number of elements is used for {\em Locator Lists} 
 
 For sending {\em Task}, there is no difference between {\em Discoverry}, {\em User}, {\em Unicast} nor {\em Multicast} traffic, so there is only one socket, thread and "MessageBuffer" for data sending. However each kind of receiving traffic like {\em Unicast Discovery}, {\em Multicast Discovery}, {\em Unicast User} or {\em Multicast User} has it's own {\em Task} and so it's own socket, thread and "MessageBuffer". This approach allows to process multiple kinds of traffic received on different ports at once.
 
-Because "ORTEDomainParticipant" containing database of all {\em Entities} in {\em Domain} is shared between {\em Tasks} (and so between all threads), rwlock and mutex are used for {\em Endpoints} and theirs related {\em Timers} stored in "objectEntry" in order to prevent multiple access. Attribute "*myself" is used to store pointer to the {\em Participant} in the database of all {\em Entities}. The root for database of all {\em Endpoints} is "objectEntry", the root for database of {\em Types} is "typeEntry".
+Because "ORTEDomainParticipant" containing database of all {\em Entities} in {\em Domain} is shared between {\em Tasks} (and so between all threads), rwlock and mutex are used for {\em Endpoints} and theirs related {\em Timers} stored in "objectEntry" in order to prevent access from multiple threads. Attribute "*myself" is used to store pointer to the {\em Participant} in the database of all {\em Entities}. The root for database of all {\em Endpoints} is "objectEntry", the root for database of {\em Types} is "typeEntry".
 
 Basic functions for "ORTEDomainParticipant" are:
 \begtt
@@ -475,11 +475,11 @@ In order to enable communication, {\em Writer} and {\em Reader} {\em Endpoints} 
 
 \secc Stateless Writer
 
-When the {\em Writer} is in database of all {\em Endpoints} and it's attributes are initialized, following steps shoud be performed for proper functionality of the {\em Writer}.
+When the {\em Writer} is added to database of all {\em Endpoints} and it's attributes are initialized, following steps shoud be performed for proper functionality of the {\em Writer}.
 \begitems
-* {\em Reader Locators} addition
-* {\em Cache Changes} addition
-* {\em Resend Data Timer} launch
+* Addition of {\em Reader Locators} to "readerLocators" database of the {\em Writer}.
+* Addition of {\em Cache Changes} into "writerCache" database of the {\em Writer}.
+* Launch of {\em Resend Data Timer}.
 \enditems
 
 "StatelessWriter_readerLocatorAdd" function is used to associate {\em Reader Locator} with the {\em Stateless Writer}. {\em Reader Locator} stores information about where to send {\em Cache Changes} in the sense of \glref{IP} address and port\fnote{It shouldn't be confused with information about where to send data in the sence of destination \glref{GUID} used in {\em Stateful Reference Implementation}.}.
@@ -503,7 +503,7 @@ In order to be interoperable with other implementations, \glref{ORTE} must suppo
 
 The approach to implement \glref{SPDP} is almost same as implementing {\em User Application} - new {\em Type} is registered with name {\em SPDPdiscoveredParticipantData}, serialize and deserialize functions are defined and new {\em Writer} and {\em Reader} are added. As an {\em Data Object}, "ORTEDomainParticipant" is used.
 
-Proper data encapsulation is needed because of interoperability between implementations. Encapsulation for \glref{SPDP} traffic is discussed in \cite[OMG:DDSI-RTPS22], approach similar to transfer of {\em Inline Qos} is used - {\em SPDPdiscoveredParticipantData} is encapsulated as {\em Parameter List}, each attribute correspond to one {\em Parameter}.
+Proper data encapsulation is the premise of interoperability between implementations. Encapsulation for \glref{SPDP} traffic is discussed in \cite[OMG:DDSI-RTPS22], approach similar to transfer of {\em Inline Qos} is used - {\em SPDPdiscoveredParticipantData} is encapsulated as {\em Parameter List}, each attribute correspond to one {\em Parameter}.
 
 "SPDPdiscoveredParticipantData_serialize" function is used to serialize information about "ORTEDomainParticipant" into {\em Parameter List} and put it ``on the wire''.
 

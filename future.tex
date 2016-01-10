@@ -1,10 +1,10 @@
 \label[future]\chap Future Development
 
-\glref{ORTE} is written to fit \glref{RTPS} 1.0. In version 2.2 there is no difference between meta traffic and user traffic, specification is divided to modules and the fashion of {\em Participants} and {\em Endpoints} discovery is revised. These are main differences needed to be considered when upgrading \glref{ORTE}. In the following sections, changes that haven't been made yet are discussed.
+\glref{ORTE} is written to fit \glref{RTPS} 1.0. In version 2.2 there is no difference between meta traffic and user traffic, specification is divided to modules and the fashion of {\em Participants} and {\em Endpoints} discovery is revised. These are main differences that should be considered when upgrading \glref{ORTE}. In the following sections, changes that haven't been made yet are discussed.
 
 \sec Stateful Endpoints
 
-It's not necessary to implement {\em Stateful Reference Endpoints}, only required behavior is discussed in \ref[inte]. However, for reliable communication desired by \glref{SEDP}, at least some state on each matched {\em Writer} must be stored in {\em Reader} and something that has been already done, would need to be reinvented. Also backward compatibility with version 1.0 of the \glref{RTPS} protocol would be easier, because approach similar to {\em Stateful Reference Implementation} is used. Therefore, it's advisable to add {\em Stateful Reference Implementation} into shor-term goals.
+It's not necessary to implement {\em Stateful Reference Endpoints}, only required behavior is discussed in \ref[inte]. However, for reliable communication desired by \glref{SEDP}, at least some state on each matched {\em Writer} must be stored in {\em Reader}. Also backward compatibility with version 1.0 of the \glref{RTPS} protocol would be easier, because approach similar to {\em Stateful Reference Implementation} is used. Therefore, it's advisable to add {\em Stateful Reference Implementation} into shor-term goals.
 
 \sec Refactoring
 
@@ -24,7 +24,7 @@ One of the long-term goals could be backward compatibility with \glref{RTPS} 1.0
 
 \sec Use Cases
 
-Some use cases would be good to consider when \glref{RTPS} is implemented in one {\em Node} (physical device) of {\em Network}. For this purpose, {\em Interpreter Submessages} discussed in \ref[message] were introduced.
+Some use cases can be considered when the \glref{RTPS} protocol is implemented in one {\em Node} (physical device) of {\em Network}. For this purpose, {\em Interpreter Submessages} discussed in \ref[message] were introduced.
 
 \begitems
 * 1 domain, 1 participant

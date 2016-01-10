@@ -2,11 +2,11 @@
 
 \sec DDS
 
-There are two main models used in Data Distribution Services. {\em Centralized} model with the single point of failure throw which all the communication goes is vulnerable. When the central server is unreachable, the whole network is non-functional. By contrast, {\em decentralized} approach has no central server, no single point of failure. When one node of the network is non-functional, the rest of the network can continue in data transfers.
+There are two main models used in Data Distribution Services. {\em Centralized} model with the single point of failure via which all the communication goes is vulnerable. When the central server is unreachable, the whole network is non-functional. By contrast, {\em decentralized} approach has no central server, single point of failure. When one node of the network is non-functional, the rest of the network can continue in data transfers.
 
 \sec DCPS
 
-In the Data-Centric Publish-Subscribe network, data are sent by {\em Publishers} and received by {\em Subscribers}. It depends on application what kind of data is {\em Published}, {\em Subscribed}, how are data sent and ifat all. Data-Centric Publish-Subscribe network is responsible for delivery of right data between right nodes with right parameters.
+In the Data-Centric Publish-Subscribe network, data are sent by {\em Publishers} and received by {\em Subscribers}. It depends on application what kind of data is {\em Published}, {\em Subscribed}, how are data sent and if at all. Data-Centric Publish-Subscribe network is responsible for delivery of right data between right nodes with right parameters.
 
 \midinsert \clabel[pic:dcps]{DCPS application model}
 \picw=14cm \cinspic pic-over/dcps.png
@@ -19,5 +19,5 @@ Real-Time Publish-Subscribe is wire protocol developed to ensure interoperabilit
 
 \sec ORTE
 
-Open Real-Time Ethernet (\glref{ORTE})\cite[FEE:ORTE] is the implementation of \glref{RTPS} 1.0. It's implemented in Application layer of UDP/IP stack, written in C, under open source license, with own API and it should be easy to port \glref{ORTE} to many platforms, where UDP/IP stack is implemented.
+Open Real-Time Ethernet (\glref{ORTE})\cite[FEE:ORTE] is the implementation of \glref{RTPS} 1.0. It's library implemented in Application layer of \glref{UDP}/\glref{IP} stack, written in C, with own API, under open source license and therefore it's easy to port \glref{ORTE} to many platforms, where \glref{UDP}/\glref{IP} stack is implemented.
 

@@ -1,6 +1,6 @@
 \label[test]\chap Testing of implementation
 
-In reference to \ref[upgrade], only \glref{SPDP} tests were performed. Interoperability was tested against OpenDDS implementation \cite[www:opendds] - open source implementation of \glref{OMG} \glref{DDS} delivered with \glref{RTPS} Discovery test and it was run between 64-bit Debian \glref{PC} and 32-bit Linux Mint \glref{PC}. The main purpose of \glref{ORTE} against itself test was check of {\em Default Multicast Locator}'s \glref{IP} address and port availability for more {\em Participants} in same {\em Domain} on same node. Test was performed on 64-bit Debian \glref{PC}.
+In reference to \ref[upgrade], only \glref{SPDP} tests were performed. Interoperability was tested against OpenDDS implementation \cite[www:opendds] - open source implementation of \glref{OMG} \glref{DDS} delivered with \glref{RTPS} Discovery test and it was run between 64-bit Debian \glref{PC} and 32-bit Linux Mint \glref{PC}. The main purpose of \glref{ORTE} against itself test was {\em Default Multicast Locator}'s \glref{IP} address and port availability for more {\em Participants} in same {\em Domain} on same node. Test was performed on 64-bit Debian \glref{PC}.
 
 \sec ORTE to OpenDDS
 
@@ -66,7 +66,7 @@ Sending {\em Participant} contains all {\em Builtin Endpoints} required for inte
  00 00 00 00  ;
  c0 a8 01 75  ; Locator.address = 192.168.1.117
 \endtt
-Metatraffic Unicast Locator is used for communicating {\em Discovery Traffic}. It contains \glref{IP} address and port on which are sending {\em Participants} {\em Builtin Endpoints} listening.
+Metatraffic Unicast Locator\fnote{Attributes of "Locator" structure introduced in \ref[orte:struct] are "kind", "port" - both integers and "address" - the array of 16B. As mentioned at start of {\em Parameter List}, Little Endian encapsulation is used in {\em Data Submessage}. Therefore {\em Locator}s kind and port are Little Endian encoded but address is sent per byte in network order.} is used for communicating {\em Discovery Traffic}. It contains \glref{IP} address and port on which are sending {\em Participants} {\em Builtin Endpoints} listening.
 
 \begtt
  32 00 18 00  ; 00 32 = Metatraffic Unicast Locator; length 24B
@@ -88,7 +88,7 @@ The second Metatraffic Unicast Locator is received, meaning that sending {\em Pa
  00 00 00 00  ;
  7f 00 00 01  ; Locator.address = 127.0.0.1
 \endtt
-{\em Default Unicast Locator} is used when there is no information about on which \glref{IP} address and port is {\em User Endpoint} of sending {\em Participant} listening. In such a case, {\em Default Unicast Locator} is used for sending {\em Unicast User Data Traffic}.
+{\em Default Unicast Locator} is used when \glref{IP} address and port aren't known for destination {\em User Endpoint}. In that case, {\em Default Unicast Locator} is used for sending {\em Unicast User Data Traffic}.
 
 \begtt
  48 00 18 00  ; 48 00 = Default Multicast Locator; 18 00 = length 24B
