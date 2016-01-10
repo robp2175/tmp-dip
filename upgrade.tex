@@ -67,11 +67,9 @@ In this chapter, changes required for \glref{ORTE} to be compatible with the ver
 
 \Black
 
-In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, their purpose and legacy of previous implementation. In \ref[orte:struct], \ref[orte:message], \ref[orte:behavior] and \ref[orte:discovery], implementation of each module from chapter \ref[compare] is discussed.
+In section \ref[orte:spec], specific types used in \glref{ORTE} are introduced, their purpose and legacy of the original implementation. In \ref[orte:struct], \ref[orte:message], \ref[orte:behavior] and \ref[orte:discovery], implementation of each module from chapter \ref[compare] is discussed.
 
 \label[orte:spec]\sec ORTE specific
-
-\secc Version 1.0
 
 In \glref{RTPS} 1.0 implementation, the core structure is "ORTEDomain". Following are specific types contained in "ORTEDomain" structure:
 \begitems
@@ -104,8 +102,6 @@ Builtin ``endpoints'' are defined directly in "ORTEDomain" structure, there are 
 * "readerSubscriptions".
 \enditems
 
-\secc Version 2.2
-
 Domain is abstract term involving communication of nodes that have something in common. The core structure in implementation of version 2.2 of \glref{RTPS} protocol was therefore renamed to "ORTEDomainParticipant". Following types persisted:
 \begitems
 * "TaskProp"
@@ -113,7 +109,7 @@ Domain is abstract term involving communication of nodes that have something in 
 * "ObjectEntry"
 \enditems
 
-"TaskProp" has the same purpose as in previous implementation, just some of names changed to be more appropriate (see below).
+"TaskProp" has the same purpose as in the original implementation, just some of names changed to be more appropriate (see below).
 
 "TypeEntry" remains completely same.
 
@@ -539,4 +535,57 @@ d3 & 11 & Additional offset \cr
 For \glref{SEDP}, the approach is similar to \glref{SPDP} implementation, except different {\em Types} as {\em DiscoveredWriterData} and {\em DiscoveredReaderData} are registered. Encapsulation as {\em Parameter List} remains the same.
 
 Also reliable communication is required for \glref{SEDP}, so {\em Statefull Reference Implementation} may be used. \glref{SEDP} is not implemented yet (see \ref[upgrade]).
+
+\sec Shape Demo
+
+For development purpose, demonstration application {\em Shape} was updated to be compatible with current implementation. However the implementation is still unstable and therefore functionality of {\em Shape Demo} is limited. Following are changes in demonstration application, similar changes are required for upgrading applications using \glref{ORTE} library.
+
+\begtt
+// FPublisher.h
+- ORTEDomain *domain;
++ ORTEDomainParticipant *domain;
+
+// FPublisher.cpp
+- domain=ORTEDomainAppCreate(ORTE_DEFAULT_DOMAIN,NULL,NULL,ORTE_FALSE);
++ domain=ORTEDomainParticipant_new(ORTE_DEFAULT_DOMAIN, 0);
+
+- publisher=ORTEPublicationCreate(
++ publisher=ORTEPublication_new(
+
+- ORTEDomainAppDestroy(domain);
++ ORTEDomainParticipant_destroy(domain);
+
+- ORTEPublicationSend(publisher);
++ ORTEPublication_send(domain, publisher);
+\endtt
+
+\begtt
+// FSubscriber.h
+- ORTEDomain *domain;
++ ORTEDomainParticipant *domain;
+
+// FSubscriber.cpp
+- ORTEDomainAppDestroy(domain);
++ ORTEDomainParticipant_destroy(domain);
+
+- domain=ORTEDomainAppCreate(ORTE_DEFAULT_DOMAIN,NULL,NULL,ORTE_FALSE);
++ domain=ORTEDomainParticipant_new(ORTE_DEFAULT_DOMAIN, 0);
+
+- subscriberBlue=ORTESubscriptionCreate(
++ subscriberBlue=ORTESubscription_new(
+
+- subscriberGreen=ORTESubscriptionCreate(
++ subscriberGreen=ORTESubscription_new(
+
+- subscriberRed=ORTESubscriptionCreate(
++ subscriberRed=ORTESubscription_new(
+
+- subscriberBlack=ORTESubscriptionCreate(
++ subscriberBlack=ORTESubscription_new(
+
+- subscriberYellow=ORTESubscriptionCreate(
++ subscriberYellow=ORTESubscription_new(
+
++ ORTEDomainParticipant_start(domain);
+\endtt
 
