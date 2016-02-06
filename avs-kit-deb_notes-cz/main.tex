@@ -1,0 +1,206 @@
+\input ctustyle
+\input opmac-bib
+\worktype [O/CZ]
+\workname {Návod na nastavení vývojového prostředí pro AVS kit v OS Debian}
+\faculty {F3}
+\department {Katedra měření}
+\title {AVS Kit pro Debian}
+\author {Jiří Hubáček}
+\date {Březen 2015}
+\makefront
+
+
+
+
+\chap Úvod
+
+AVS kit~\cite[avs-kit] s procesorem STM32F100RB, který je na bázi STM32VL DISCOVERY kitu, je používán v předmětu \uv{Aplikace vestavných systémů} pro seznámení studentů s moderními procesory s jádrem ARM cortex M3. Tento text slouží jako návod pro nastavení vývojového prostředí pro AVS kit v OS Debian. Text je distribuován pod licencí cc-by-sa~\cite[cc-by-sa].
+
+
+\sec Operační systém
+
+Návod je pro operační systém Debian GNU/Linux. Kapitola \ref[deb7] popisuje instalaci pro Debian 7.8 (wheezy), kapitola \ref[deb8] pak instalaci pro Debian 8 (jessie).
+
+
+
+
+\chap Instalace nástrojů
+
+Je třeba nainstalovat následující základní balíčky, příkazy je nutné provádět s oprávněním uživatele {\em root}.
+
+\begtt
+#apt-get install build-essential git autoconf libusb-1.0-0-dev pkg-config
+\endtt
+
+
+\sec ST-Link
+
+Pro nahrávání programů do procesoru je třeba program ST-Link~\cite[st-link-github], který poběží jako daemon a bude zprostředkovávat komunikaci mezi procesorem a GDB~\fnote{GNU debugger} pro ARM. ST-Link je třeba nakopírovat do vhodného umístění - lze předpokládat, že se jedná o adresář {\bf dev} v domovském adresáři uživatele - a ručně zkompilovat.
+
+\begtt
+#cd ~/dev/
+#git clone https://github.com/texane/stlink
+#cd stlink/
+#./autogen.sh
+#./configure
+#make
+\endtt
+
+\secc udev rules
+
+Před připojením AVS kitu je třeba přidat {\em udev rules}, restartovat {\em udev} daemona, přidat modprobe konfiguraci a znovunačíst {\em usb-storage} modul. Následující příkazy je nutné provádět s oprávněním uživatele {\em root} z adresáře, kde je umístěný ST-LINK (v tomto případě {\bf dev/stlink/}).
+
+\begtt
+#cp 49* /etc/udev/rules.d/
+#service udev restart
+#cp stlink_v1.modprobe.conf /etc/modprobe.d/
+#modprobe -r usb-storage && modprobe usb-storage
+\endtt
+
+
+\sec Upozornění
+
+Před přidáním testovacího repozitáře je nutné zkontrolovat, že až doposud vše funguje. Při instalaci balíčku z testovacího repozitáře se případné chybějící balíčky stáhnou a nainstalují, ovšem také z testovacího repozitáře, což je nežádoucí. 
+
+
+Následující příkaz spouští ST-Link daemona z adresáře {\bf dev/stlink/}, je nutné jej spustit až po připojení AVS kitu.
+
+\begtt
+#./st-util -1 -m
+\endtt
+
+Významy parametrů jsou {\bf -1} pro verzi 1 (STM32F100) a {\bf -m} proto, aby po odpojení GDB daemon nespadl.
+
+
+
+
+\chap Instalace GDB
+
+\label[deb7] \sec Debian 7.8 - Testing repository 
+
+Potřebný balíček \uv{gcc-arm-none-eabi} je dostupný pouze z repozitáře {\em testing}~\cite[gcc-arm-none-eabi], je tedy třeba přidat repozitář a nastavit pining. Je důrazně varováno před experimentováním s testing repozitáři na produkčních zařízeních. Následující nastavení předpokládá instalaci balíčků z {\em testing} pouze na vyžádání. Následující příkazy je nutné provádět s oprávněním uživatele {\em root}.
+
+\begtt
+#cat << EOF >> /etc/apt/sources.list.d/testing.list
+deb http://ftp.cz.debian.org/debian/ testing main contrib non-free
+deb-src http://ftp.cz.debian.org/debian/ testing main
+EOF
+\endtt
+
+\begtt
+#cat << EOF >> /etc/apt/preferences.d/testing.pref
+Package: *
+Pin: release a=testing
+Pin-Priority: -1
+EOF
+\endtt
+
+\begtt
+#apt-get update
+\endtt
+
+\begtt
+#apt-get -t testing install gdb-arm-none-eabi
+\endtt
+
+
+\label[deb8] \sec Debian 8 - Main repository
+
+V OS Debian 8 je potřebný balíček \uv{gcc-arm-none-eabi} již v hlavním repozitáři, není proto potřeba instalovat z testing. Následující příkazy je nutné provádět s oprávněním uživatele {\em root}.
+
+\begtt
+#apt-get install gdb-arm-none-eabi
+\endtt
+
+\sec Poznámka
+
+S balíčkem \uv{gdb-arm-none-eabi} je nainstalován i balíček \uv{gcc-arm-none-eabi} a tím je vývojové prostředí připraveno.
+
+
+
+
+\chap Práce v prostředí
+
+
+\sec Spuštění ST-Link
+
+\begtt
+#./st-util -1 -m
+\endtt
+
+
+\sec Spuštění GDB
+
+GDB se spouští ideálně z adresáře, kde je/bude vygenerovaný {\bf .elf} soubor. 
+
+\begtt
+#arm-none-eabi-gdb
+(gdb) target remote :4242
+(gdb) load main.elf
+(gdb) c
+\endtt
+
+Příkaz \uv{target remote :4242} zajišťuje připojení GDB k ST-Link daemonovi, příkaz \uv{load} nahraje program {\bf main.elf} do procesoru a příkazem \uv{c} se pokračuje v běhu programu (continue).
+
+
+\sec Šablona
+
+Pro vlastní projekty je vhodné použít šablonu pro procesor STM32F100 s předem připravenými knihovnami a skripty. Šablonu lze nakopírovat do vhodného umístění pomocí gitu. Lze předpokládat, že vhodné umístění je adresář {\bf dev} v domovském adresáři uživatele.
+
+\begtt
+#cd ~/dev/
+#git clone https://github.com/jeremyherbert/stm32vl-discovery-template-project
+#cd stm32vl-discovery-template-project
+\endtt
+
+Soubory {\bf .c} umístit do {\bf src}, sobory {\bf .h} do {\bf inc}. V souboru {\bf Makefile} editovat řádek začínající \uv{OBJS=...}, kde je třeba mít soubory projektu s koncovkou {\bf .o}. Následně už jen spustit příkaz \uv{make} v adresáři projektu obsahujícím {\bf Makefile}.
+
+\begtt
+#make
+\endtt
+
+
+\sec Upozornění
+
+Pokud projekt využívá zápis do paměti FLASH, je nutné upravit {\em ldscript}, tj. soubor {\bf stm32f100.ld}, řádek 23
+
+\begtt
+/* puvodni hodnota */
+FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 128K
+
+/* hodnota nutna pro povoleni zapisu do pameti FLASH */
+FLASH (rwx) : ORIGIN = 0x08000000, LENGTH = 128K
+\endtt
+
+
+\sec Hello World
+
+Šablona z minulé sekce obsahuje soubory programu typu \uv{Hello World}. Pro jejich otestování stačí spustit příkaz \uv{make} z adresáře, kde je přítomen {\bf Makefile} (v tomto případě {\bf dev/stm32vl-discovery-template-project}).
+
+
+\sec Poznámka
+
+Příkaz \uv{make} je možné spouštět i z konzole GDB pro ARM, což ušetří jeden panel při vývoji.
+
+
+
+
+\chap Závěr
+
+V tuto chvíli by mělo být nainstalováno funkční prostředí pro vývoj na AVS kitu a otestován program typu \uv{Hello World}. Za největší přínos je považována šablona prázdného projektu obsahující {\bf Makefile} s nastavením závislostí knihoven a ldskriptem pro procesor.
+
+
+\sec Úpravy dokumentu
+
+\begitems
+* 21. 6. 2015 - přidán postup instalace na Debian 8
+* 8. 4. 2015 - doplnění upozornění o zapisování do paměti flash
+* 20. 3. 2015 - úvodní verze návodu (instalace nástrojů, instalace z testing repository, práce v prostředí)
+\enditems
+
+
+\bibchap
+\usebib/c (simple) mybase
+
+\bye
+
