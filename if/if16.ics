@@ -1,0 +1,286 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Europe/Prague
+X-LIC-LOCATION:Europe/Prague
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART;TZID=Europe/Prague:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART;TZID=Europe/Prague:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T093000
+DTEND;TZID=Europe/Prague:20160305T095500
+UID:[T1] Turris Omnia [Z] (Martin Strbačka)
+SUMMARY:[T1] Turris Omnia [Z] (Martin Strbačka)
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T100000
+DTEND;TZID=Europe/Prague:20160305T105500
+UID:[T1] bash a zpracování textů [MP] (<a href='https://twitter.com/flash_sh'>Lukáš Bařinka</a>) 
+SUMMARY:[T1] bash a zpracování textů [MP] (<a href='https://twitter.com/flash_sh'>Lukáš Bařinka</a>) 
+DESCRIPTION:Možnosti bashe pro zpracování textů. Umíte to co pomocí nástrojů jako tr, grep, sed, awk také přímo v bashi?
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T110000
+DTEND;TZID=Europe/Prague:20160305T112500
+UID:[T1] Cen­trální logování [MP] (<a href='https://twitter.com/debuggercz'>Michal Strnad</a>) 
+SUMMARY:[T1] Cen­trální logování [MP] (<a href='https://twitter.com/debuggercz'>Michal Strnad</a>) 
+DESCRIPTION:Dnešní doba si žádá vysokou dostupnost a spolehlivost serverů a bezpečnost serverových aplikací. V případě problémů, musíme být schopni rychle dohledat příčinu a řešit případné potíže. Právě v takovýchto situacích bývájí nejčastějším zdrojem klasifikace problémů log soubory. Řešením může být jejich centralizace na logovací server a mít tak možnost mezi nimi rychle vyhledávat, porovnávat, a to i v případě, kdy se útočník dostane na nějaky vámi spravovaný frontend server, pozmění konfigurační soubory a uklidí po sobě (smaže historii příkazů a logy).
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T113000
+DTEND;TZID=Europe/Prague:20160305T123000
+UID:[T1] Automatizace nasazení Linuxu na AWS [P] (<a href='https://twitter.com/stepanb'>Štěpán Bechynský</a>) 
+SUMMARY:[T1] Automatizace nasazení Linuxu na AWS [P] (<a href='https://twitter.com/stepanb'>Štěpán Bechynský</a>) 
+DESCRIPTION:Ve firmě máme něco kolem tisícovky serverů na AWS. Několik desítek tvoří výpočetní farmy, které se budují a bourají dle potřeby. V přednášce se seznámíte s několika postupy a doporučeními z praxe, jak automatizovat nasazení virtuálních strojů s Linuxem jen s využitím služeb, které AWS nabízí..
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T140000
+DTEND;TZID=Europe/Prague:20160305T145500
+UID:[T1] Kontejnery != Docker [MP] (<a href='https://twitter.com/vpavlin'>Václav Pavlín</a>) 
+SUMMARY:[T1] Kontejnery != Docker [MP] (<a href='https://twitter.com/vpavlin'>Václav Pavlín</a>) 
+DESCRIPTION:V této přednášce vám představím různé dostupné technologie pro kontejnerizaci. Podíváme se do historie, zanalyzujeme současné trendy a můžeme si udělat malé okénko okultních věd a pokusit se nahlédnout do budoucnosti. Součástí přednášky budou ukázky jednotlivých technologií a jejich možných využití. Slovníček buzzwordů: Kernel, namespace, LXC, Docker, systemd-nspawn,  rocket, orchestrace, Kubernetes...
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T150000
+DTEND;TZID=Europe/Prague:20160305T155500
+UID:[T1] Let's Encrypt – nahoďte šifrování na webu [MP] (<a href='https://twitter.com/krcmar'>Petr Krčmář</a>) 
+SUMMARY:[T1] Let's Encrypt – nahoďte šifrování na webu [MP] (<a href='https://twitter.com/krcmar'>Petr Krčmář</a>) 
+DESCRIPTION:Iniciativa Let's Encrypt nabízí všem HTTPS certifikáty zdarma. Popíšeme si princip, řekneme si o novinkách a představíme si řadu klientů, které můžete pro vystavení certifikátu použít.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T160000
+DTEND;TZID=Europe/Prague:20160305T165500
+UID:[T1] Vlastní firmware, zavaděč nebo operační systém -- kde začít? [P] (<a href='https://twitter.com/mdecky'>Martin Děcký</a>) 
+SUMMARY:[T1] Vlastní firmware, zavaděč nebo operační systém -- kde začít? [P] (<a href='https://twitter.com/mdecky'>Martin Děcký</a>) 
+DESCRIPTION:Programování vlastního firmwaru, hypervisoru, boot loaderu nebo operačního systému určitě není pro většinu programátorů obvyklá náplň práce. Některé před takový úkol postaví náhoda, jiní si jej vyberou sami právě proto, že chtějí zkusit něco za hranicí všedních dnů. Programování přímo ""na železe"" má svá specifika a své kouzlo, protože se programátor dostane nejblíže k možnosti mít vše pod kontrolou. Na druhou stranu, vývoj low-level kódu bývá často obestřen různými mýty (například že je možné takový kód psát jen v assembleru). Během přednášky si posvítíme na to nejzajímavější z této velké oblasti.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T170000
+DTEND;TZID=Europe/Prague:20160305T175500
+UID:[T1] Buildsystemy k cemu nam ty priserne autotools vlastne jsou a jak se to pouziva [P] (Tomas Chvatal) 
+SUMMARY:[T1] Buildsystemy k cemu nam ty priserne autotools vlastne jsou a jak se to pouziva [P] (Tomas Chvatal) 
+DESCRIPTION:Lidi furt chteji pokracovani ""lehke intro do autotools"" takze jestli po tom touzite tak tohle je presne ono. Lehce neco zopakneme a povime si dalsi typy pro psani autotools. Mozna zbude i cas na CMake (nemam 100% pripravene materialy takze zjistim).
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T093000
+DTEND;TZID=Europe/Prague:20160305T095500
+UID:[T2] Je čas změnit základy ICT bezpečnosti  [P] (<a href='https://twitter.com/NapravnikJiri'>Jiří Nápravník</a>) 
+SUMMARY:[T2] Je čas změnit základy ICT bezpečnosti  [P] (<a href='https://twitter.com/NapravnikJiri'>Jiří Nápravník</a>) 
+DESCRIPTION:Problémy s bezpečnosti se stále opakují a situace se zhoršuje. Neudělalo se již na počátku něco špatně?  V roce 1962 řekl JF Kennedy, že do konce desetiletí dopraví astronauta na Měsíc a bezpečně zpět. To posádka Apollo 11 splnila. Vědci, technici a dělníci museli řešit mnoho nových úkolů z oblasti fyziky, chemie nebo řízení skutečně velkých projektů. Tvorba SW je exaktní lidská činnost, kde je možné vše jasně definovat, naprogramovat a otestovat. Žádné problémy s gravitací, kosmickým zářením nebo jinými přírodními nástrahami. Chyba v SW je výsledkem špatné lidské práce. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T100000
+DTEND;TZID=Europe/Prague:20160305T105500
+UID:[T2] HaveAPI: vytvořte si API k čemukoliv [MP] (<a href='https://twitter.com/vpsfree_cz'>Jakub Skokan, Pavel Šnajdr</a>) 
+SUMMARY:[T2] HaveAPI: vytvořte si API k čemukoliv [MP] (<a href='https://twitter.com/vpsfree_cz'>Jakub Skokan, Pavel Šnajdr</a>) 
+DESCRIPTION:Potřebujete rychle sestavit nové API? Stačí vám kousek kódu v Ruby, který vám vytvoří API a přidá k němu dokumentaci, binding do mnoha jazyků a možnost přístupu přes HTTP REST API a konzolovou utilitu. Součástí přednášky bude vytvoření GPIO API na Raspberry Pi.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T110000
+DTEND;TZID=Europe/Prague:20160305T112500
+UID:[T2] Nebojte se Archlinuxu [Z] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>) 
+SUMMARY:[T2] Nebojte se Archlinuxu [Z] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>) 
+DESCRIPTION:Přestože je některými uživateli a správci Archlinux považován za nestabilní systém, na desktopu ho lze bez problémů provozovat. Díky rolling release modelu můžete na svém stroji mít vždy aktuální verze balíků.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T113000
+DTEND;TZID=Europe/Prague:20160305T123000
+UID:[T2] Knot Resolver [MP] (<a href='https://twitter.com/oerdnj'>Ondřej Surý</a>) 
+SUMMARY:[T2] Knot Resolver [MP] (<a href='https://twitter.com/oerdnj'>Ondřej Surý</a>) 
+DESCRIPTION:Knot Resolver je nový rekurzivní DNSSEC-validující DNS resolver. Není to ovšem jen DNS resolver, ale díky flexibilní konfiguraci v jazyce Lua a rozšiřitelnosti pomocí modulů také platforma, na které se dají stavět komplexní DNS řešení včetně DDoS ochrany, podpory DNS64, dynamické změny v paketech, a další.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T140000
+DTEND;TZID=Europe/Prague:20160305T145500
+UID:[T2] Softwarově definované rádio [MP] (Jan Hrach) 
+SUMMARY:[T2] Softwarově definované rádio [MP] (Jan Hrach) 
+DESCRIPTION:Vysvětlíme si princip SDR, což je poslední dobou velmi populární technologie. Podíváme se, jaké signály kolem nás létají, a uděláme si jednoduchý přijímač v GnuRadiu.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T150000
+DTEND;TZID=Europe/Prague:20160305T155500
+UID:[T2] Úvod do STM32 [Z] (<a href='https://twitter.com/chiptronCZ'>Petr Hodina</a>) 
+SUMMARY:[T2] Úvod do STM32 [Z] (<a href='https://twitter.com/chiptronCZ'>Petr Hodina</a>) 
+DESCRIPTION:Ukázka vývojových kitů s mikrokontroléry STM32 a představení vývojových prostředí + přehled programovacích jazyků.  Návaznost STM32 na Arduino. Demostrace jednoduchého kódu v konfiguračním programu CubeMX. A samozřejmě dostatečný prostor pro dotazy.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T160000
+DTEND;TZID=Europe/Prague:20160305T165500
+UID:[T2] Efektivní implementace útoku na šifru A5/1 [HC] (Jan Hrach) 
+SUMMARY:[T2] Efektivní implementace útoku na šifru A5/1 [HC] (Jan Hrach) 
+DESCRIPTION:V přednášce bych chtěl zevrubně popsat postupy a techniky implementované v projektu <a href='https://brmlab.cz/project/gsm/deka/start'>Deka</a>, který dokáže zlomit klíč na skutečné síti během několika sekund. Prozkoumáme chyby v implementaci šifrování v GSM, zhodnotíme možnosti útoků na různé LFSR šifry, a nakonec navrhneme implementaci útoku, která využije potenciálu moderního hardware (SSD, grafické karty a vektorové jednotky). Obsahuje demo programování grafických karet, což kupodivu s balíčkem PyOpenCL není žádná magie.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T170000
+DTEND;TZID=Europe/Prague:20160305T175500
+UID:[T2] Ansible a Amazon AWS - HA a autoscaling [P] (David Karban) 
+SUMMARY:[T2] Ansible a Amazon AWS - HA a autoscaling [P] (David Karban) 
+DESCRIPTION:Přijďte se podívat, jak snadné je vybudovat vysoce dostupnou aplikaci s použitím Ansible a Amazon AWS.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T093000
+DTEND;TZID=Europe/Prague:20160306T102500
+UID:[T1] Arduino a ESP8266 [MP] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>) 
+SUMMARY:[T1] Arduino a ESP8266 [MP] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>) 
+DESCRIPTION:Arduino a ESP8266 - jak je propojit (a jestli vůbec) a jak programovat. Krátké srovnání obou platforem, výhody a nevýhody, výhled do budoucnosti.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T103000
+DTEND;TZID=Europe/Prague:20160306T105500
+UID:[T1] ESP8266 [Z] (<a href='https://twitter.com/bastlirna'>Vojta Suk, Adam Hořčica</a>) 
+SUMMARY:[T1] ESP8266 [Z] (<a href='https://twitter.com/bastlirna'>Vojta Suk, Adam Hořčica</a>) 
+DESCRIPTION:ESP8266 je Wi-Fi modul, který vám za cenu méně než 3$ dává k dispozici 32bit procesor, Wi-Fi a nějaké ty GPIO se kterými se dá dělat hodně muziky. V přednášce se podíváme na vlastnosti a možnosti programování tohoto modulu. Modul si můžete vyzkoušet na vlastní klávesnici v navazujícím workshopu.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T110000
+DTEND;TZID=Europe/Prague:20160306T112500
+UID:[T1] Distribuovaná data ve virtualizačním prostředí [MP] (Aleš Kapica) 
+SUMMARY:[T1] Distribuovaná data ve virtualizačním prostředí [MP] (Aleš Kapica) 
+DESCRIPTION:Využití distribuovaných systémů (Sheepdog, GlusterFS a CEPH) v prostředí virtualizačního clusteru
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T113000
+DTEND;TZID=Europe/Prague:20160306T123000
+UID:[T1] ELK - sežere Vaše logy [MP] (<a href='https://twitter.com/verosk'>Věroš Kaplan</a>) 
+SUMMARY:[T1] ELK - sežere Vaše logy [MP] (<a href='https://twitter.com/verosk'>Věroš Kaplan</a>) 
+DESCRIPTION:ELK stack - Logstash, Elasticsearch a Kibana - je mocný nástroj na zpracování logů.  Umožňuje logy číst, značkovat a  v nich i vyhledávat. Ukážeme si jak ELK funguje, jak jednotlivé části hrají dohromady a jak se to dá používat.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T140000
+DTEND;TZID=Europe/Prague:20160306T145500
+UID:[T1] Monitorování a bezpečnostní analýza v počítačové síti [MP] (<a href='https://twitter.com/tomcejka'>Tomáš Čejka</a>) 
+SUMMARY:[T1] Monitorování a bezpečnostní analýza v počítačové síti [MP] (<a href='https://twitter.com/tomcejka'>Tomáš Čejka</a>) 
+DESCRIPTION:Díky monitorovacím systémům a následné analýze dat jsme schopni odhalit škodlivý provoz na síti.  Jak se dá taková analýza provádět?  Co když nestačí pouze základní informace o síťových tocích?  Jak mohu začít monitorovat svou vlastní síť?  Na to a mnohem víc může odpovědět tento workshop.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T150000
+DTEND;TZID=Europe/Prague:20160306T155500
+UID:[T1] DNSSEC na vlastní doméně snadno a rychle [MP] (<a href='https://twitter.com/Oskar456'>Ondřej Caletka</a>) 
+SUMMARY:[T1] DNSSEC na vlastní doméně snadno a rychle [MP] (<a href='https://twitter.com/Oskar456'>Ondřej Caletka</a>) 
+DESCRIPTION:DNSSEC patří mezi technologie zavedené a roky stabilní, stále je jím zabezpečeno ale jen asi 40 % českých domén. V přednášce bude prakticky předvedeno, že k podepsání vlastní domény už není nutné hodiny studovat všechny technické detaily, ale jde o zhruba stejně složitou činnost jako konfiguraci TLS na webserveru.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T093000
+DTEND;TZID=Europe/Prague:20160306T095500
+UID:[T2] notmuch aneb jak zvládnout záplavu emailů [MP] (<a href='https://twitter.com/wentasah'>Michal Sojka</a>) 
+SUMMARY:[T2] notmuch aneb jak zvládnout záplavu emailů [MP] (<a href='https://twitter.com/wentasah'>Michal Sojka</a>) 
+DESCRIPTION:I v době sociálních sítí zůstává email důležitým prostředkem elektronické komunikace. Pokud člověk nechce nebo nemůže svěřit své maily ""cloudu"" a přesto chce pohodlně a rychle vyhledávat v miliónech svých emailů notmuch je ideální řešení. Jedná se o svobodný a stále se vylepšující software, který nabízí mnohem víc než tradiční emailové klienty. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T100000
+DTEND;TZID=Europe/Prague:20160306T102500
+UID:[T2] Práce se zvukem v Linuxu [Z] (<a href='https://twitter.com/sukovec'>SUK</a>) 
+SUMMARY:[T2] Práce se zvukem v Linuxu [Z] (<a href='https://twitter.com/sukovec'>SUK</a>) 
+DESCRIPTION:Používat linux pro práci se zvukem je sice značně neobvyklé, ale rozhodně ne nemožné. Jak a s jakými nástroji hudbu nahrávat či tvořit v počítači, jak je na tom podpora zvukového hardwaru? Dozvíte se na InstallFestu!
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T103000
+DTEND;TZID=Europe/Prague:20160306T105500
+UID:[T2] AppStream - budování katalogu aplikací [MP] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>) 
+SUMMARY:[T2] AppStream - budování katalogu aplikací [MP] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>) 
+DESCRIPTION:AppStream je formát metadat o aplikacích a jejich rozšířeních, která se používají k budování katalogů aplikací, jak je známe třeba z mobilních platforem. AppStream se pomalu prosazuje napříč distribucemi. Fedora ho již používá ve výchozím instalátoru aplikací. Ubuntu bude od verze 16.04. Ostatní distribuce mají na něm postavené katalogy alespoň v repozitářích. Přednáška posluchače seznámí s formátem a strukturou metadat, jak jsou distribuovány, balíčkovány v distribucích a jak se z nich sestavuje katalog. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T110000
+DTEND;TZID=Europe/Prague:20160306T112500
+UID:[T2] K čemu ARM devel board? [MP] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>) 
+SUMMARY:[T2] K čemu ARM devel board? [MP] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>) 
+DESCRIPTION:Na trhu je spousta ARM devel boardů, počínaje RaspberryPi, přes BananaPi až po třeba ODroid, Pine64 nebo Turris. Chtěl bych ukázat pár jednoduchých příkladů k čemu používám board(y) doma já, jen pro inspiraci...
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T113000
+DTEND;TZID=Europe/Prague:20160306T123000
+UID:[T2] Buildíme Fedoru pro Raspberry Pi po hackersku [MP] (Richard Marko) 
+SUMMARY:[T2] Buildíme Fedoru pro Raspberry Pi po hackersku [MP] (Richard Marko) 
+DESCRIPTION:Postavili jsme cluster z mnoha různých ARM desek a na něm zprovoznili build systém Koji. Na něm sestavujeme Fedoru pro Raspberrry Pi, která bude fungovat jako plnohodnotná náhrada výchozího Raspbianu. Konečně dostaneme na RPi pořádnou a přátelskou Fedoru.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T140000
+DTEND;TZID=Europe/Prague:20160306T145500
+UID:[T2] HAProxy v praxi - zkušenosti z integrace a provozu [P] (Michal Rychlík) 
+SUMMARY:[T2] HAProxy v praxi - zkušenosti z integrace a provozu [P] (Michal Rychlík) 
+DESCRIPTION:Proč jsme se rozhodli v LMC přejít právě na HAProxy? Na jaké problémy jsme narazili v testovacím provozu, při migraci a v reálném provozu a jak jsme je řešili? Hromada zkušeností a novinek volně k načerpání.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T150000
+DTEND;TZID=Europe/Prague:20160306T155500
+UID:[T2] FPGA intimne [MP] (Marek Vasut) 
+SUMMARY:[T2] FPGA intimne [MP] (Marek Vasut) 
+DESCRIPTION:Zacatek prednasky je zameren na obecny uvod do technologie FPGA. Nasleduje detailni rozbor hardwarove implementace FPGA na urovni LUT tabulek, programovatelneho propojeni a konfigurace celeho chipu. Druha cast prednasky bude venovana open-source nastrojum pro praci s FPGA, napr. IceStorm. Zaverem prednasky budou rozebrany metody ziskavani informaci o vnitrni strukture FPGA.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T093000
+DTEND;TZID=Europe/Prague:20160305T103000
+UID:[W] Předávání dat v shellu prakticky [MP] (Jan Žďárek) 
+SUMMARY:[W] Předávání dat v shellu prakticky [MP] (Jan Žďárek) 
+DESCRIPTION:O předávání dat do a ze skriptů nebo funkcí v něm již byl napsán nejeden článek a předvedena nejedna přednáška. Vyzkoušejme si některé z možností společně.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T103000
+DTEND;TZID=Europe/Prague:20160305T113000
+UID:[W] Instalace openSUSE na RaspberryPi nebo BananaPi [Z] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>) 
+SUMMARY:[W] Instalace openSUSE na RaspberryPi nebo BananaPi [Z] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>) 
+DESCRIPTION:Doneste si Pi (Raspberry I/II nebo Banana) s napajecim kabelem a SD kartou (idealne aspon 8G) a nainstalujeme si na nej openSUSE a podivame se i na nejaka zakladni nastaveni. Teoreticky muzeme zkusit i jinou distribuci/jinou ARM desku, ale tam vysledek neni zarucen.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T113000
+DTEND;TZID=Europe/Prague:20160305T123000
+UID:[W] Začněte s Ansible [MP] (<a href='https://twitter.com/verosk'>Věroš Kaplan</a>) 
+SUMMARY:[W] Začněte s Ansible [MP] (<a href='https://twitter.com/verosk'>Věroš Kaplan</a>) 
+DESCRIPTION:Ansible je mocný nástroj na automatizaci serverů. Na workshopu si pustíme si nějaké virtuální stroje a zkusíme si tam nainstalovat nějaký software.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T140000
+DTEND;TZID=Europe/Prague:20160305T155500
+UID:[W] Arduino 101 [MP] (<a href='https://twitter.com/stepanb'>Štěpán Bechynský</a>) 
+SUMMARY:[W] Arduino 101 [MP] (<a href='https://twitter.com/stepanb'>Štěpán Bechynský</a>) 
+DESCRIPTION:Půjčíme vám hardware a naučíme vás základy Arduino - digitální vstupy a výstupy, analogové senzory teploty a světla, práce se 7-segmentovým LED displejem a hodinami reálného času. Jediné co budete potřebovat je vlastní počítač s nainstalovanýmm Arduino IDE. Více na http://arduino101.cz/
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160305T160000
+DTEND;TZID=Europe/Prague:20160305T175500
+UID:[W] Naučte se vytvářet RPM balíčky nejen pro Fedoru [MP] (Miro Hrončok) 
+SUMMARY:[W] Naučte se vytvářet RPM balíčky nejen pro Fedoru [MP] (Miro Hrončok) 
+DESCRIPTION:Dodám později ;) 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T093000
+DTEND;TZID=Europe/Prague:20160306T113000
+UID:[W] Testování v openQA [MP] (<a href='https://twitter.com/aaannz'>Ondřej Holeček</a>) 
+SUMMARY:[W] Testování v openQA [MP] (<a href='https://twitter.com/aaannz'>Ondřej Holeček</a>) 
+DESCRIPTION:OpenQA je framework pro automatické testování kompletních distribucí. Stojí za úspěchem distribucí openSUSE Tumbleweed a Leap, pomalu již i Fedora Rawhide. Během workshopu si ukážeme jak pomocí openQA nainstalovat téměř libovolný OS. Účastníci workshopu budou pro aktivní účast potřebovat vlastní a dostatečně moderní HW a SW s podporou vnořené  virtualizace a současný běh dvou virtuálních strojů.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T113000
+DTEND;TZID=Europe/Prague:20160306T123000
+UID:[W] ESP8266 – Workshop #1 (AT, Lua, Arduino) [MP] (<a href='https://twitter.com/bastlirna'>Adam Hořčica, Vojta Suk</a>) 
+SUMMARY:[W] ESP8266 – Workshop #1 (AT, Lua, Arduino) [MP] (<a href='https://twitter.com/bastlirna'>Adam Hořčica, Vojta Suk</a>) 
+DESCRIPTION:Prvotní seznámení s ESP8266. Vyzkoušíte se jak modul flashovat. A co vám nabízí hotové firmwary (AT, Lua). Pro milovníky Arduina se podíváme jaké možnosti mají pro programování ESP8266 oni. Každý účastník bude mít zapůjčen demo-kit s modulem ESP8266. Kapacita bude omezená.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T140000
+DTEND;TZID=Europe/Prague:20160306T145500
+UID:[W] ESP8266 – Workshop #2 (C SDK) [P] (<a href='https://twitter.com/bastlirna'>Vojta Suk, Adam Hořčica</a>) 
+SUMMARY:[W] ESP8266 – Workshop #2 (C SDK) [P] (<a href='https://twitter.com/bastlirna'>Vojta Suk, Adam Hořčica</a>) 
+DESCRIPTION:Dřív nebo později se nativnímu C SDK pro ESP8266 nevyhnete. A to ani v případě že budete používat Arduino SDK nebo třeba Luu. V tomto navazujícím workshopu si vyzkoušíte, jak se používá nativní C SDK a co všechno vám nabízí. Každý účastník bude mít zapůjčen demo-kit s modulem ESP8266. Kapacita bude omezená.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20160306T150000
+DTEND;TZID=Europe/Prague:20160306T165500
+UID:[W] Monitorování a bezpečnostní analýza v počítačové síti [MP] (<a href='https://twitter.com/tomcejka'>Tomáš Čejka</a>) 
+SUMMARY:[W] Monitorování a bezpečnostní analýza v počítačové síti [MP] (<a href='https://twitter.com/tomcejka'>Tomáš Čejka</a>) 
+DESCRIPTION:Díky monitorovacím systémům a následné analýze dat jsme schopni odhalit škodlivý provoz na síti.  Jak se dá taková analýza provádět?  Co když nestačí pouze základní informace o síťových tocích?  Jak mohu začít monitorovat svou vlastní síť?  Na to a mnohem víc může odpovědět tento workshop.
+END:VEVENT
+END:VCALENDAR
