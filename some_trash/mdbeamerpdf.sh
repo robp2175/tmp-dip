@@ -4,4 +4,4 @@
 # This script convert file $1 to pdf by vbatts/pandoc docker image.
 #
 
-exec docker run --rm -v $(pwd)/$1:/input/in.pdf:ro -v $(pwd)/:/output/ vbatts/pandoc -f markdown_github -t beamer -o /output/out.pdf /input/in.pdf
+exec docker run --rm -v $(pwd)/:/input/:ro -v $(pwd)/:/output/ vbatts/pandoc -f markdown_github -t beamer -o /output/out.pdf /input/$1
