@@ -5,6 +5,9 @@
 #
 
 case "$1" in
+  off)
+    xrandr --output eDP1 --auto --output HDMI1 --off
+    ;;
   l)
     xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate left --brightness 0.8
     ;;
