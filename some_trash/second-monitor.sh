@@ -4,5 +4,13 @@
 # This script runs the second monitor on the right side, 90 dgree rotated.
 #
 
-xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate left --brightness 0.8
+case "$1" in
+  l)
+    xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate left --brightness 0.8
+    ;;
+  *)
+    xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate normal --brightness 0.8
+    ;;
+esac
+
 feh --bg-center ~/pics/nagato.jpg
