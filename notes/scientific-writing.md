@@ -154,3 +154,78 @@ Section with (!) in name should be the 2nd nature (the most important).
   * nouns in apposition,
   * adjectives,
   * and adjective phrases
+
+## Week 2 - Tomas Polcar
+
+* Why to write a project proposal?
+  * Why me?
+  * When?
+  * Benefits for me?
+  * Benefits for society?
+
+### Before you start
+
+* Read carefully the call, conditions, requirements.
+* Get the text of successful project submitted to similar call.
+* Feedback from other people.
+* Find out details about evaluation process.
+  * Panel members?
+* Get reviewer reports.
+  * And templates.
+
+### Objectives
+
+* Should be SMART:
+  * specific
+  * measurable
+  * achievable
+  * relevant
+  * time-bound
+* Challenge is not impossibility.
+* What is the risk? Risk management.
+  * Gantt chart
+
+### Target audience
+
+* Easy language.
+* Easy understanding.
+* Use graphs/schemes.
+* Help reviewers.
+
+### Suggestions
+
+* science
+* impact (!)
+* implementation (!)
+
+(!) People loose points in this.
+
+* Impact on society.
+* Coapacity of the researcher.
+
+### Learn from feedback
+
+* Do not blame reviewers always.
+* Part Beyond the State of the Art is important.
+  * Copywriting.
+* Read successfull reviews also.
+
+### Last remarks
+
+* Be ambitious but realistic.
+* Try, fail, improve, try again, fail, improve, try again, ...
+* Failure is part of the project.
+* Reviewers - sometimes provides good info, sometimes are dull.
+* Try to be original.
+* Try really hard.
+* Abstract and summary is read first typically.
+  * spend enought time on that
+  * write it to be eligible
+* Follow rules.
+  * deadlines
+* Typical time of proposal writing:
+  * ~ 2 weeks fulltime for the 1st time
+* Write 10 pages proposal:
+  * write 5 pages
+  * review
+  * write the rest
