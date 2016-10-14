@@ -229,3 +229,81 @@ Section with (!) in name should be the 2nd nature (the most important).
   * write 5 pages
   * review
   * write the rest
+
+## Week 2 - The structure of a scientific article
+
+* abstract
+* intro
+* methodology (!)
+  * what done
+* results (!)
+  * what found
+* discussion/conclusion
+
+(!) central report section
+
+### Hourglass
+
+* Opening: introduce characters and question.
+* Challenge: specific question.
+* Method, Action, Discussion: what it means?
+  * multiple results + discussions may be in the same paragraph for multiple methods
+* Resolution, Conclusion: home message.
+
+### Cone
+
+* background
+* knowledge
+* hypothesis, question, purpose
+* approach, proposed solution
+
+### Inverting cone
+
+* answer
+* support the conclusion
+* defend the conclusion
+* big-picture, take-home message
+
+### The abstract of the paper
+
+Tense depends on how it is mean to write the abstract.
+
+* The paper: present simple.
+* General fact: present simple.
+* The study/experiment/test: past simple.
+  * Working on during experiments: past simple.
+* Possible implications (new general fact): present simple.
+
+### Tenses in abstract
+* gap/problem: present simple
+* what the paper itself does/what is actually in the paper itself: present simple
+* methodology, during the research period: past simple
+* methodology, in the paper itself: present simple
+* results: present simple
+* results: past simple
+* achievements: present perfect
+* achievements: present simple
+* applications: present simple
+
+* completed actions: past simple
+* assertions that continue to be true: present simple
+
+### Tenses in the introduction
+
+* preset perfect strategically
+
+### Tenses in the methodology
+
+* methods used: past simple
+* standard procedures: present simple
+* describing how data are presented in paper: present simple
+
+### Tenses in the results
+
+* copmleted actions: past simple
+* assertions that continue to be true: present simple
+
+### Tenses in the discussion and conclusion
+
+* study detail, results, analyses and background research: past simple
+* what the data suggest: present simple
