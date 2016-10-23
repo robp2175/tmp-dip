@@ -307,3 +307,146 @@ Tense depends on how it is mean to write the abstract.
 
 * study detail, results, analyses and background research: past simple
 * what the data suggest: present simple
+
+## Week 3 - Writing the Abstract (prep)
+
+* Persuade people to read the article.
+* Standalone, self-contained description of the research article.
+
+### Structure
+```
+       | abstract |
+   ____________________
+   \                  /
+    \  introduction  /
+     \______________/
+      |             |
+      | methodology |
+      |_____________| \__ central report
+      |             | /      section
+      |   results   |
+      |_____________|
+     /               \
+    /   discussion/   \
+   /    conclusion     \
+  /_____________________\
+```
+
+1. Deals with all the main subsections.
+2. Focuses primarily on one or two aspects of study, usually method and results (more common).
+
+### Grammar and Writing Skills
+
+#### Verb tense
+
+* especially important
+* strict word limit
+
+* the gap/problem in present simple
+* what paper itself does, what is in paper itself: present simple
+* methodology: past simple
+  * referring to calculations/equations in paper: present simple
+* results: present simple, past simple
+* achievements, discussion/conclusion: present perfect, present simple
+* applications: present simple
+
+#### Length
+
+* 80-150 words
+* single paragraph
+* don't submit abstracts over limit
+
+#### Language
+
+* keywords in abstract
+* slightly less technical
+
+### Vocabulary
+
+* simpler, more conventional language
+
+### Writing an Abstract
+
+### Creating a Title
+
+"Many more people will read the title than the Abstract, and many more will read the Abstract than the whole paper." Glasman, Deal Writing the Abstract.
+
+* ask questions
+* predict and describe the content of the paper
+* title should include key words
+* beware of multi-meanings of prepositions
+* make it neutrally
+  * not may/might/could
+  * not reliable
+  * not expectations
+
+
+## Week 3 - Pavel Exner
+
+* What is ERC?
+  * European Research Council
+  * HORIZON 2020 structure
+
+
+## Week 3 - Title, Introduction, Abstract
+
+### Title
+
+* Be concise and use keywords prominently.
+* Start with the keyword. Then explanation.
+* Noun phrase, statement, or question?
+* Avoid ambiguity!
+* Try to help the reader as much as possible.
+* Case study/More general survey.
+* Any noun as adjective before another noun.
+  * When nouns used as adjactives, always the singular.
+
+* Capitalizing
+  * Headline-style
+  * Sentence-style
+  * Prepositions yes if first or last word.
+
+### Abstract
+
+* Overview of the main story - gives the highlights.
+* Don't do a sloppy job!
+
+2 major types:
+1. Very structured, similar to a summary
+2. Focused on 1 or 2 main aspects.
+  * usually method and results
+  * more common
+
+* Author Guidelines for the journal
+
+* Avoid vague (small, better, ...)
+* Be specific about key results.
+* Include descriptive adjectives (avoid misunderstandings)
+
+### Sentence structure and word order
+
+subject - verb - object(s)/complement
+
+* subject explicitly stated
+* some verbs require
+  * an object
+  * two objects
+  * an adverbial
+* normal order of iformation: Firstly known info, then important new info.
+
+### Introduction
+
+1. what's known
+2. what's unknown (limitations and gaps in previous studies)
+3. question/hypothesis/aim
+4. experimental approach
+5. why approach is new/different/important (fills the gaps)
+
+* keep paragraphs short
+* write for general audience
+* take reader step by step from known to unknown, end with specific question
+* emphasize how study fills gaps
+* explicitly state question/hypothesis/aim
+* do NOT answer research question
+* summarize; leave details to discussion
+* provide direction from the very beginning
