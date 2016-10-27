@@ -450,3 +450,20 @@ subject - verb - object(s)/complement
 * do NOT answer research question
 * summarize; leave details to discussion
 * provide direction from the very beginning
+
+
+## Week 4 - Articles Quirk
+
+### specific and generic reference
+* specific = particular specimens of the class X in mind
+  * definite/indefinite (important)
+  * singular/plural (important)
+* generic = thinking of the class X
+```
+|           |     definite                                  |     indefinite                                |
+|           | coun                  | noncount              | count                 | noncount              |
+| --------- | --------------------- | --------------------- | --------------------- | --------------------- |
+| singular  | the car (!)           | the furniture         | a car (!)             | (some) furniture (!)  |
+| plural    | the cars              |                       | (some) cars (!)       |                       |
+```
+(!) are used for generic reference.
