@@ -467,3 +467,102 @@ subject - verb - object(s)/complement
 | plural    | the cars              |                       | (some) cars (!)       |                       |
 ```
 (!) are used for generic reference.
+
+## Week 4 - Articles
+### When worry about articles?
+* Use noun that is not preceded by another central determiner.
+  * In previous chapter we presented results of study. (Really, really bad :)
+    * variable in previous chapters
+    * variable in results
+    * variable in study
+  * Other option is ... (also bad)
+    * Another option ...
+    * The other option ...
+
+* Have I takled about it?
+* Specific?
+
+* Generic
+* Non-generic
+  * indefinite
+  * definite
+
+* singular, countable (1.)
+* singular, uncountable and plural (behave same) (2.)
+
+### Reference
+* Water is important for life. (class vs. object)
+
+### Generic
+* Dogs are animals.
+* Water is crucial to life.
+* => plural/singular uncountable => nothing
+
+* A dog is an animal. (any dog is an animal) (object)
+* The dog is an aniimal. (same as Dogs are animals.) (class)
+* => the/a 
+
+### Non-generic, indefinite
+* some representatives in the class
+* indefinite for reader, listener
+* singular, countable: a/an
+* plural/singular uncountable: nothing
+
+#### indefinite, non-specific
+
+#### indefinite, specific
+
+### Non-generic, definite
+* "the" used
+* definite for reader/listener
+* use when you have good reason to think that reader/listener know
+
+* anaphoric: already mentioned
+* cataphoric: explained immediately
+* anaphonic associative
+* situational reference
+* unique reference
+* "logical" reference
+  * superlative
+  * the only, the same
+  * the first, the second, ...
+* sporadic reference
+  * magnet for exceptions
+  * refering to idea, concept (Let's go to the cinema.)
+  * excaptions:
+    * some institutions (school, home)
+    * means of transport (train)
+    * times of day (night, evening)
+    * seasons (autumn)
+    * meals (breakfast)
+    * illnesses (fever)
+    * parallel structures (side by side)
+    * fixed phrases
+
+### Reference
+#### Generic
+    * Singular countable: a/any; the
+    * Singular uncountable: zero article
+    * Plural: zero article
+#### Non-generic
+* Indefinite
+  * Specific
+    * Singular countable: a (...it)
+    * Singular uncountable: zero article (/some)
+    * Plural: zero article (/some)
+  * Non-specific
+    * Singular countable: a (...one)
+    * Singular uncountable: zero article (/some)
+    * Plural: zero article (/some)
+* Definite
+  * Anaphoric
+  * Cataphoric
+  * Anaphoric associative
+  * Situational
+  * Unique referent
+  * "Logical"
+  * Sporadic
+  * FOR ALL OF THESE:
+    * singular countable: the
+    * singular uncountable: the
+    * plural: the
