@@ -4,4 +4,4 @@
 # This script is shortcut to Sailfish OS SDK.
 #
 
-~/sailfish-sdk/bin/qtcreator
+/opt/SailfishOS/bin/qtcreator
