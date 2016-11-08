@@ -4,18 +4,21 @@
 # This script runs the second monitor on the right side, 90 dgree rotated.
 #
 
+PRIMARY=eDP1
+SECONDARY=HDMI1
+
 case "$1" in
   off)
-    xrandr --output eDP1 --auto --output HDMI1 --off
+    xrandr --output ${SECONDARY} --off --output ${PRIMARY} --auto
     ;;
   c)
-    xrandr --output eDP1 --auto --mode 1024x768 --output HDMI1 --auto --mode 1024x768 --same-as eDP1
+    xrandr --output ${PRIMARY} --auto --mode 1024x768 --output ${SECONDARY} --auto --mode 1024x768 --same-as ${PRIMARY}
     ;;
   l)
-    xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate left --brightness 0.8
+    xrandr --output ${PRIMARY} --auto --output ${SECONDARY} --auto --left-of ${PRIMARY} --rotate left --brightness 0.8
     ;;
   *)
-    xrandr --output eDP1 --auto --output HDMI1 --auto --left-of eDP1 --rotate normal --brightness 0.8
+    xrandr --output ${PRIMARY} --auto --output ${SECONDARY} --auto --left-of ${PRIMARY} --rotate normal --brightness 0.8
     ;;
 esac
 
