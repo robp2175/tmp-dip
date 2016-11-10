@@ -566,3 +566,68 @@ subject - verb - object(s)/complement
     * singular countable: the
     * singular uncountable: the
     * plural: the
+
+# Week 6 - Method and result section
+## Method section
+* show the listener wall before explaining brick
+* first overview then discussion
+* details + show that care was taken
+* don not hide negligible (it could mean that they ware forgotten)
+
+## Result section
+* figures and tables should stand alone and tell a complete story (not refer to main text)
+* summarize everything in result section
+* tips:
+  * break to subsections with headings
+  * complement info in tables and figures
+  * give precise values
+  * use significant for statistically significant
+  * do not forget negative and control results
+* important things
+
+## Connecting sentences
+### Overlap
+* finish sentence and start new one
+* sometimes it is good to repeat
+* avoid ambiguities
+
+* claim mens that people may disagree, prove is needed
+
+### Connect two independent sentences
+* two sentences
+* , and
+* ;
+* BUT NOT JUST BY COMMA
+
+* my brother, who lives in London, is comming to visit me
+  * separate, because it's understoodable without info
+* my brother who lives in London is commint to visit me
+  * multiple brothers and living in London is identifier of extra info
+
+* use which as czech "coz" - always use comma
+
+### Reformulate preposition followed by subject (TODO its reformulating of ... OF IT ... things)
+* of it, of that, on it, on that -> thereof, thereon, therein, thereafter
+* some of them -> to relative class -> some of whom ... were experienced...
+  * subject -> who
+  * object -> whom
+
+### connectors: cause
+* due to
+* on account of
+* in view of
+* ownig to
+* thanks to
+* as
+* because (of)
+* since
+
+### results
+* therefore
+* consequenty
+* hence
+* as a result (of which)
+* which is wy
+* thus
+* so  (informal, don't use)
+* then
