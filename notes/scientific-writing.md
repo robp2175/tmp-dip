@@ -631,3 +631,45 @@ subject - verb - object(s)/complement
 * thus
 * so  (informal, don't use)
 * then
+
+# Week 7 -
+* notably (connection, when important example I want to highlined)
+* despite + noun/despite + -ing
+
+# Week 7 - Skype conference
+## Plagiatism
+* citations needed!
+* use quote marks
+* page number?use:not use;
+* british harward format/other formats/whatever form
+* standard phrases, summary from others, etc.
+
+### Q&A
+* cite original, if accessible
+  * track it
+  * make sure that what you do is acceptable for journal
+  * cite the path (?)
+
+## Data falsification
+* worthless data => worthless results
+* replicability (take data, take algorithm => make results)
+
+## Image manipulation
+* sw in camera manipulate the picture
+* image can be manipulated (rendered)
+* much clearer details, colors
+* applications for recognition manipulated jpeg
+
+### Q&A
+* crop image (allowed)
+* white balance (whole image) (allowed)
+* color manipulation (not allowed)
+
+## Notes
+* plagiatism check tools
+* H2020 Open Data
+* definition of plagiatism
+  * make sure you cite people
+* "writing with integrity"
+* data organization
+* citation management sw: My EndNote, Mendeley (even mobile), Citace.com, zotero
