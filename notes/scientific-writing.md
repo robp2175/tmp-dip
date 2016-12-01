@@ -673,3 +673,13 @@ subject - verb - object(s)/complement
 * "writing with integrity"
 * data organization
 * citation management sw: My EndNote, Mendeley (even mobile), Citace.com, zotero
+
+# Week 8
+* IF (impact factor in YEAR) = number of citations in (YEAR-1 + YEAR-2) /
+  number of papers in (YEAR-1 + YEAR-2)
+* web of science
+
+## Evaluation of CRO - Three Main Pilars
+1. Evaluation of publications
+2. Peer review of selected results
+3. Evaluation of patents and non-publication results of applied research
