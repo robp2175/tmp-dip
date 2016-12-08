@@ -683,3 +683,69 @@ subject - verb - object(s)/complement
 1. Evaluation of publications
 2. Peer review of selected results
 3. Evaluation of patents and non-publication results of applied research
+
+# Week 9
+## Commas
+* *Because of* at beginning... use *comma*.
+* *Comma* before *i.e.*, *e.g.*.
+* Five worlds or more of ...something like First, For the first, ... at the beginning => use *comma*.
+* If explaining (not specifiing further), use *comma*.
+* Use *comma* for additional information.
+
+## Prepositions
+### Advantage
+
+### Compare
+* *with* - looking for differencies/similarities
+* *to* - they are similar, here is how
+
+### Connect
+* *to* - one sided (I to Internet, but not Internet to me)
+* *with* - bidirectinal connections
+
+### Contrast
+* *with*/*to*
+
+### Difference
+* different *from*
+
+### Improvement
+* new model better then first => improvement *over* the first
+
+### Increase
+
+### Lack
+* *lacked for nothing* - phrase
+
+### Result
+* *result from*
+* *result in*
+
+# Week 9 - From Submission to Publication
+Scenes From the Life of a Paper
+
+* Video on Youtube: *What are the preprints?*.
+
+## From Manuscript to Paper
+* **A**uthor(s)
+* **E**ditor
+* **R**eviewers
+* **P**roduction services
+
+## Making the Process Fair and Smooth
+* ready to accept criticism
+* be positive
+* try to learn from comments
+* avoid extremes
+* be constructive
+* express gratitude to reviewers
+
+* run a spell checker
+* trun on line numbering
+* mark changes in the revised manuscript
+* explain how you treated individual comments
+
+* do not get depressed by criticism
+
+## Getting Credit for Reviewing
+* *publons.com*
