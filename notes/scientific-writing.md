@@ -749,3 +749,7 @@ Scenes From the Life of a Paper
 
 ## Getting Credit for Reviewing
 * *publons.com*
+
+# Week 10
+* to have an effect on something = to affect
+* to effect = to put something into effect
