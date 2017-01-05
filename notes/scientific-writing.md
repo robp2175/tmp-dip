@@ -753,3 +753,25 @@ Scenes From the Life of a Paper
 # Week 10
 * to have an effect on something = to affect
 * to effect = to put something into effect
+
+# Week 13 - prof. Jiri Matas: How to finish PhD in 4 years
+
+## The goal of the PhD
+* contribute to the state of the art
+* "Why as this problem not be studied before?"
+
+## Reading papers
+1. Knowing basics is a must
+  * read the standard textbooks
+2. It is impossible to read everything
+
+## Good practice
+* check people who cite you
+* what is *arcade* (program)?
+
+## References
+A. Karpaty: A Survival Guide to a PhD
+http://karpathy.github.io/2016/09/07/phd/
+
+# Week 13 - modal verbs
+table
