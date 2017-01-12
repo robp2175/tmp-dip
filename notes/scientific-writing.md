@@ -775,3 +775,13 @@ http://karpathy.github.io/2016/09/07/phd/
 
 # Week 13 - modal verbs
 table
+
+# Week 11 - stylistic issues
+## informality
+
+be clear
+be concise
+be precise
+be forthright
+be familiar
+be fluid
