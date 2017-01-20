@@ -785,3 +785,65 @@ be precise
 be forthright
 be familiar
 be fluid
+
+# Week 13 - Making a text flow well
+* Subject before the verb.
+
+## List vs. story:
+* Topic (to Topic) .. stress | Topic .. stress
+* Topic .. stress (to Topic) -> Topic .. stress
+
+## Jumping themes
+* Not say something that is explained later - better to explain before.
+
+## Sentence/paragraph length
+* Average sentece length below 20 words.
+* Change sentence legnths every 2/3 sentences.
+* Occasionally use short or a long sentence.
+* Average paragraph length between 7 and 14 lines.
+* Occasionally use short/long paragraph.
+* Paragraph at least 3 sentences.
+
+## Needless complex typography
+### Abbreviations
+* e.g. -> for example (e.g. only in "()")
+* fig. -> figure
+
+### Capitals
+* FORTRAN -> Fortran
+* APPOLLO -> Apollo
+
+### Numerals
+* 19 -> nineteen
+* $13,00,000 -> $13 million
+
+## Energizing writing
+Only use the passive voice strategically.
+* to control perspective
+* to hide the actor
+
+Just use "we".
+
+### Avoid "fuzzy verbs"
+* Be specific.
+
+### Don't overuse nominalizations
+
+## Language focus: articles
+* "the" is not used when refering to *now* or *last*/*next* week
+* if I am telling story in past time, use "the"
+* countable + singular -> use *the* or *a*
+  * say *any* instead of *the* -> see, if it is general reference
+* articles: moodle -> week 4
+* if not sure about countability, see dictionary
+* Broca's area vs. the Broca area ('s difference)
+* the majority vs. a majority
+* in other words - phrase
+* other not working alone (the other would.., Another is..)
+* if you can say "some ...", you may leave the article
+
+## %
+* percent, no percents
+* permil
+* permille
+* per mil
