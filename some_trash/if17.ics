@@ -1,0 +1,412 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VTIMEZONE
+TZID:Europe/Prague
+X-LIC-LOCATION:Europe/Prague
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART;TZID=Europe/Prague:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART;TZID=Europe/Prague:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T094500
+DTEND;TZID=Europe/Prague:20170304T095500
+UID: [T1] aptitude install fest (<a href='https://twitter.com/PetrHodac'>Petr Hodač</a>)
+SUMMARY: [T1] aptitude install fest (<a href='https://twitter.com/PetrHodac'>Petr Hodač</a>)
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T100000
+DTEND;TZID=Europe/Prague:20170304T105500
+UID: [T1] Jak si přizpůsobit bash [MP] (<a href='https://twitter.com/flash_sh'>Lukáš Bařinka</a>)
+SUMMARY: [T1] Jak si přizpůsobit bash [MP] (<a href='https://twitter.com/flash_sh'>Lukáš Bařinka</a>)
+DESCRIPTION:Bash nabízí celou řadu možností, jak si jej přizpůsobit. Od proměnných, přes nastavení (set) až k volbám (shopt) a funkcím. Některá nastavení jsou užitečná při interaktivní práci, jiná zase při skriptování. Přednáška se zabývá těmito možnostmi a jejich použitím v konfiguračních souborech.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T110000
+DTEND;TZID=Europe/Prague:20170304T115500
+UID: [T1] Co se děje v linuxovém síťování. [P] (Michal Kubeček)
+SUMMARY: [T1] Co se děje v linuxovém síťování. [P] (Michal Kubeček)
+DESCRIPTION:Zajímavá témata z aktuálního vývoje síťového subsystému linuxového jádra. Přednáška se zaměří zejména na problémy, které před jeho kód staví na jedné straně stále se zvyšující přenosová rychlost a na druhé stále komplikovanější kombinace síťových protokolů (např. ve virtualizovaných prostředích a cloudech), a na způsoby jejich řešení.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T120000
+DTEND;TZID=Europe/Prague:20170304T123000
+UID: [T1] Představení Orange Pi [Z] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>)
+SUMMARY: [T1] Představení Orange Pi [Z] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>)
+DESCRIPTION:Krátké představení ""čínského klonu"" Raspberry Pi, ukázka Zero a One, jak s nimi začít a co si s nimi počít. Srovnání s jinými jednodeskovými počítači.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T140000
+DTEND;TZID=Europe/Prague:20170304T142500
+UID: [T1] Gitlab + CI [MP] (<a href='https://twitter.com/jindrichskupa'>Jindrich Skupa</a>)
+SUMMARY: [T1] Gitlab + CI [MP] (<a href='https://twitter.com/jindrichskupa'>Jindrich Skupa</a>)
+DESCRIPTION:Přednáška představí alternativu k populárnímu GitHubu, která se rozhodně nemá za co stydět. Představena bude především komunitní verze na vlastním prostředí. Přednáška bude obsahovat integraci s dalšími nástroji a především integrované CI.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T143500
+DTEND;TZID=Europe/Prague:20170304T145500
+UID: [T1] 3 problémy při práci na 3 počítačích [MP] (<a href='https://twitter.com/karel_koci'>Karel Kočí</a>)
+SUMMARY: [T1] 3 problémy při práci na 3 počítačích [MP] (<a href='https://twitter.com/karel_koci'>Karel Kočí</a>)
+DESCRIPTION:Při používání 3 pracovních počítačů jsem řešil 3 problémy, synchronizace souborů a konfigurací a údržba. Představím řešení které jsou výrazně založené na specializovaných shell skriptech. Mým cílem je pak na mém osobním příkladu ukázat jednoduchost specializovaného řešení, které se řídí heslem ""napiš si skript"".
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T150000
+DTEND;TZID=Europe/Prague:20170304T155500
+UID: [T1] Arduino bootloader [MP] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>)
+SUMMARY: [T1] Arduino bootloader [MP] (<a href='https://twitter.com/joysfera'>Petr Stehlík</a>)
+DESCRIPTION:Lehké seznámení s bootloaderem v Arduinu a jeho využití pro vzdálené nahrávání nových verzí programu (OTA update) přes Bluetooth, Ethernet a WiFi.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T160000
+DTEND;TZID=Europe/Prague:20170304T165500
+UID: [T1] Serverless - neřešte servery kde nemusíte [P] (David Karban)
+SUMMARY: [T1] Serverless - neřešte servery kde nemusíte [P] (David Karban)
+DESCRIPTION:Co je serverless? Způsob, jakým se lze v některých případech zbavit serverů (a s tím spojené konfigurace a údržby). A řešit jen aplikační logiku. Má to výhody? Jistě. Má to nevýhody? Jistě! O obou se dozvíte na přednášce.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T170000
+DTEND;TZID=Europe/Prague:20170304T175000
+UID: [T1] Jak propojujeme nejen český internet [Z] (<a href='https://twitter.com/MartinSemrad'>Martin Semrád</a>)
+SUMMARY: [T1] Jak propojujeme nejen český internet [Z] (<a href='https://twitter.com/MartinSemrad'>Martin Semrád</a>)
+DESCRIPTION:Již 20 let funguje v ČR neutrální výměný uzel. K čemu takový výměný uzel slouží a jak se během dvou dekád vyvíjel a rozšiřoval se můžete dozvědět na této přednášce.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T180000
+DTEND;TZID=Europe/Prague:20170304T183000
+UID: [T1] Efektivní psaní na klávesnici [Z] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+SUMMARY: [T1] Efektivní psaní na klávesnici [Z] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+DESCRIPTION:Psaní deseti prsty patří mezi nesporné výhody ajťáka. Ukážeme si hlavní faktory, které mají vliv na rychlost a chybovost psaní. Ukážeme si jak začít, na co si dát pozor a kudy se vydat.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T103000
+DTEND;TZID=Europe/Prague:20170304T105500
+UID: [T2] ZoKB z pohledu implementátora [P] (<a href='https://twitter.com/h00ked'>Miroslav Marcišin</a>)
+SUMMARY: [T2] ZoKB z pohledu implementátora [P] (<a href='https://twitter.com/h00ked'>Miroslav Marcišin</a>)
+DESCRIPTION:Jak v reálu probíhá implementace zákona o kybernetické bezpečnosti ve firmách a státních institucích? Co vše je vlastně potřeba a co vše říká zákon? Jaké jsou aktuální změny a existuje přímá souvislost s GDPR?
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T110000
+DTEND;TZID=Europe/Prague:20170304T115500
+UID: [T2] Systémy (desktop a servery) na státní správě [Z] (<a href='https://twitter.com/bejzz'>Dalibor Fanta</a>)
+SUMMARY: [T2] Systémy (desktop a servery) na státní správě [Z] (<a href='https://twitter.com/bejzz'>Dalibor Fanta</a>)
+DESCRIPTION:Přednáška o systémech na uživatelských počítačích a na serverech Státní plavební správy pohledem správce některých klíčových služeb. Zaměřeno na začínající adminy ""správce sítě a serverů a státní dozor"", kteří se pracovně prolínají mezi Linuxem, Windows, státní a evropskou legislativou, informačními službami a vodními cestami nevyjímaje. Konkrétně půjde o představení koncepce sítě, serverů, uživatelských stanic, stanic administrátorů, běžících služeb atd. na OS Debian, OS Ubuntu server, OS Windows 7/.., OS Win Srv 20xx a na DB MS SQL, My/lite SQL, systémech dodavatelů klíčových služeb RIS (ris.eu) - plavba, hydrologická a meteorogická data, mezinárodní výměna dat apod. Prostě takových dopravniinfo.cz
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T120000
+DTEND;TZID=Europe/Prague:20170304T130000
+UID: [T2] Kontejnery kolem nas [Z] (<a href='https://twitter.com/_l_d_j_'>David Becvatrik</a>)
+SUMMARY: [T2] Kontejnery kolem nas [Z] (<a href='https://twitter.com/_l_d_j_'>David Becvatrik</a>)
+DESCRIPTION:Docker neni jedinou technologii pro kontejnery. Dokonce se asi ani nehodi pro vsechny scenare pouziti kontejneru. Prednaska ma za cil ukazat, jak kontejnery v linuxu funguji a jake implementace teto technologie mame k dispozici a proc je pouzivat.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T140000
+DTEND;TZID=Europe/Prague:20170304T145500
+UID: [T2] Jak rychle nasazovat webové aplikace, aneb jsou kontejnery infrastruktura nebo platforma? [MP] (Tomáš Vondra)
+SUMMARY: [T2] Jak rychle nasazovat webové aplikace, aneb jsou kontejnery infrastruktura nebo platforma? [MP] (Tomáš Vondra)
+DESCRIPTION:Jako vývojáři webových aplikací možná řešíte, jak si opatřit vývojovou, testovací a produkční infrastrukturu tak, abyste s ní měli co nejméně práce a aby pokud možno byla všechna prostředí stejná. Nechce se Vám studovat manuály k serverovému softwaru. Odevšad se na vás valí návody na kontejnerová řešení. Existuje skutečně jen to jedno? Co mají všechna společného a neexistuje nějaké, které lze použít bez toho, abyste se museli bát o bezpečnost a učili se stavět clusterované databáze? Autor přednášky dělá výzkum v oblasti performance engineeringu a cloudu, jeden cloud taky staví a možná bude trochu propagovat platformu Cloud Foundry.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T150000
+DTEND;TZID=Europe/Prague:20170304T155500
+UID: [T2] Flatpak: desktopové aplikace v kontejnerech [MP] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>)
+SUMMARY: [T2] Flatpak: desktopové aplikace v kontejnerech [MP] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>)
+DESCRIPTION:Kontejnery dnes hýbou linuxovým světem a desktop není výjimkou. Na kontejnerech postavený Flatpak přináší způsob, jak distribuovat, instalovat a provozovat aplikaci na různých distribucích, a to pokud možno v co nejbezpečnější formě. Přednáška se bude věnovat historii projektu, technickému pozadí, co nabízí nyní a co se plánuje do budoucna.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T160000
+DTEND;TZID=Europe/Prague:20170304T163000
+UID: [T2] X v kontejnerech [MP] (<a href='https://twitter.com/aaannz'>Ondrej Holecek</a>)
+SUMMARY: [T2] X v kontejnerech [MP] (<a href='https://twitter.com/aaannz'>Ondrej Holecek</a>)
+DESCRIPTION:Použít kontejnery pro izolování serverových aplikací není nic nového. Když však přišla řada na aplikace desktopové (aka vyžadující grafické prostředí), nebyla úloha až tak přímočará. O projektech, které se tento problém pokoušely řešit a cestou se staly metodou distribuce, se bavit nebudeme. Ukážeme si však, jak relativně bezpečně izolovat GUI aplikaci, neprásknout na sebe vše a pěkně manuálně, ""old school"".
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T163000
+DTEND;TZID=Europe/Prague:20170304T165500
+UID: [T2] Docker - jak nenasazovat aplikaci [P] (<a href='https://twitter.com/Verosk'>Věroš Kaplan</a>)
+SUMMARY: [T2] Docker - jak nenasazovat aplikaci [P] (<a href='https://twitter.com/Verosk'>Věroš Kaplan</a>)
+DESCRIPTION:Docker je úžasná technologie pro nasazování aplikací, říkali mi. Pojďme se společně podívat, kde může být zakopán pes a jak by měla moderní aplikace vypadat, aby jeji nasazování moc nebolelo.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T170000
+DTEND;TZID=Europe/Prague:20170304T175500
+UID: [T2] Programovaci jazyk Rust [P] (Pavel Tisnovsky)
+SUMMARY: [T2] Programovaci jazyk Rust [P] (Pavel Tisnovsky)
+DESCRIPTION:Popis nejdulezitejsich vlastnosti noveho programovaciho jazyka Rust.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T180000
+DTEND;TZID=Europe/Prague:20170304T183000
+UID: [T2] Docker, Prometheus and Grafana from scratch [Z] (<a href='https://twitter.com/pdostal_en'>Pavel Dostál</a>)
+SUMMARY: [T2] Docker, Prometheus and Grafana from scratch [Z] (<a href='https://twitter.com/pdostal_en'>Pavel Dostál</a>)
+DESCRIPTION:I'll show you how to monitor your infrastructure using Prometheus and Grafana. We'll use Docker and docker-compose to make it easier to implement the whole stack from scratch.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T100000
+DTEND;TZID=Europe/Prague:20170304T105500
+UID: [T3] Když tučňáci koncertují [MP] (<a href='https://twitter.com/Sukovec'>SUK</a>)
+SUMMARY: [T3] Když tučňáci koncertují [MP] (<a href='https://twitter.com/Sukovec'>SUK</a>)
+DESCRIPTION:Hudební vystoupení lze udělat zajímavějším různými způsoby. Třeba hezkou zpěvačkou. A nebo taky za pomocí světel a různých podkladů. A právě toto si ukážeme - předprogramovaná světelná show a podklady pouštěné do rytmu. Vše samozřejmě pouze s OSS a Linuxem.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T110000
+DTEND;TZID=Europe/Prague:20170304T115500
+UID: [T3] Assembler v Linuxu: davno prekonana technologie ci jazyk vhodny (nejenom) pro IoT? [P] (Pavel Tisnovsky)
+SUMMARY: [T3] Assembler v Linuxu: davno prekonana technologie ci jazyk vhodny (nejenom) pro IoT? [P] (Pavel Tisnovsky)
+DESCRIPTION:Je pouziti assembleru (nejenom v Linuxu) pouze okrajova a davno prekonana zalezitost nebo se s vyvojem novych IoT zarizeni budeme stale casteji s touto technologii setkavat? Prednaska pro programatory, kteri se budou chtit seznamit se zaklady pouziti assembleru na ruznych platformach, predevsim i386, x86-64, ARM32 a taktez AArch64. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T120000
+DTEND;TZID=Europe/Prague:20170304T123000
+UID: [T3] Infinit - Distribuovaný FS [MP] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>)
+SUMMARY: [T3] Infinit - Distribuovaný FS [MP] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>)
+DESCRIPTION:Novy distribuovany souborovy system, ktery si klade za cil resit persistentni storage pro kontejnery - to je Inifnit. V kratke prednasce si Infinit predstavime, podivame se na jeho klicove vlastnosti a mozna stihneme rychle demo.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T150000
+DTEND;TZID=Europe/Prague:20170304T152500
+UID: [T3] Python a průběžná integrace (continuous integration) v GitLabu [MP] (Vlastimil Zíma)
+SUMMARY: [T3] Python a průběžná integrace (continuous integration) v GitLabu [MP] (Vlastimil Zíma)
+DESCRIPTION:Průběžná integrace (continuous integration, CI) označuje sadu nástojů pro urychlení a automatizaci vývoje. Jedním z projektů, které integrovaly nástroje pro CI, je GitLab, správce repozitářů v Gitu. Přednáška se zaměří na použití CI na projekty v Pythonu, zvláště Django aplikace. Budou představeny nástroje isort a flake8 pro statickou kontrolu kódu a jejich použití v CI. Hlavním bodem bude příprava prostředí a spouštění jednotkových testů v CI, včetně případu několika úzce propojených projektů.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T153000
+DTEND;TZID=Europe/Prague:20170304T155500
+UID: [T3] Novinky ve Vimu 8 [MP] (Pavel Tisnovsky)
+SUMMARY: [T3] Novinky ve Vimu 8 [MP] (Pavel Tisnovsky)
+DESCRIPTION:Popis novinek ve Vimu 8, jak pro bezne uzivatele tohoto editoru, tak i pro autory pluginu.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T160000
+DTEND;TZID=Europe/Prague:20170304T163000
+UID: [T3] Firewall pfSense [MP] (<a href='https://twitter.com/smejdil'>Lukáš Malý</a>)
+SUMMARY: [T3] Firewall pfSense [MP] (<a href='https://twitter.com/smejdil'>Lukáš Malý</a>)
+DESCRIPTION:Firewall distribucí exituje celá řada. Po dlouhodbých zkušenostech s pfSense bych se rád podělil o své zkušenosti s tímto zajímavým systémem pro potřeby řešení různých síťových úloh od základních firewalových pravidel a nastaveni VLAN až po např. certifikační autoritu a VPN nebo IPSec.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T163000
+DTEND;TZID=Europe/Prague:20170304T165500
+UID: [T3] Ansible snadno a rychle [MP] (<a href='https://twitter.com/jindrichskupa'>Jindrich Skupa</a>)
+SUMMARY: [T3] Ansible snadno a rychle [MP] (<a href='https://twitter.com/jindrichskupa'>Jindrich Skupa</a>)
+DESCRIPTION:Krátký úvod do ansible. Přístup k automatizované konfiguraci serverů a služeb. Srovnání s alternativními nástroji. Proč a kdy zvolit právě Ansible. Popis struktury konfigurace: role, sablony, playbooky a další. Hello world ukázka a přiklady použití.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T180000
+DTEND;TZID=Europe/Prague:20170304T183000
+UID: [T3] Turris Omnia pro všechny [Z] (<a href='https://twitter.com/orangesunny_cz'>Václav Zbránek</a>)
+SUMMARY: [T3] Turris Omnia pro všechny [Z] (<a href='https://twitter.com/orangesunny_cz'>Václav Zbránek</a>)
+DESCRIPTION:Čeho už jsme s projektem dosáhli, co jsme se naučili a k čemu všemu router uživatelům může být.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T100000
+DTEND;TZID=Europe/Prague:20170305T102500
+UID: [T1] Analýza otrávené DNS cache [P] (<a href='https://twitter.com/Oskar456'>Ondřej Caletka</a>)
+SUMMARY: [T1] Analýza otrávené DNS cache [P] (<a href='https://twitter.com/Oskar456'>Ondřej Caletka</a>)
+DESCRIPTION:V přednášce předvedeme postup pátrání po příčinách výpadku známého e‑mailového blacklistu Uceprotect. Zaměříme se také na techniky, jak podobným incidentům předcházet.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T103000
+DTEND;TZID=Europe/Prague:20170305T105500
+UID: [T1] Python @click – skriptovací pomocník [P] (<a href='https://twitter.com/tbedrich'>Tomáš Bedřich</a>)
+SUMMARY: [T1] Python @click – skriptovací pomocník [P] (<a href='https://twitter.com/tbedrich'>Tomáš Bedřich</a>)
+DESCRIPTION:Skripty občas píše asi každý. Pokud se zuby nehty nedržíte skriptování v shellu, ale připustíte i Python, mohu vám ukázat, jak za 10 minut vytvořit nádherné ""CUI"" (command-line user interface) s pomocí modulu click. Pokročilé parsování argumentů je jenom začátek – je libo barvičky nebo progressbar?
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T110000
+DTEND;TZID=Europe/Prague:20170305T112500
+UID: [T1] Git Flow v praxi [MP] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+SUMMARY: [T1] Git Flow v praxi [MP] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+DESCRIPTION:Metodika Git Flow je skvělá, ale náročná na údržbu. Představíme si nástroj OMGF na podporu postupu podle této metodiky. Předvedeme si použití nástroje na ilustrativních příkladech. Bonus: automatizace nasazování různých provozních verzí na vlastní server.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T113000
+DTEND;TZID=Europe/Prague:20170305T123000
+UID: [T1] Centrální správa logů pomocí ELKu, rabbitmq a syslogu [MP] (<a href='https://twitter.com/snipercze'>Ondřej Flídr</a>)
+SUMMARY: [T1] Centrální správa logů pomocí ELKu, rabbitmq a syslogu [MP] (<a href='https://twitter.com/snipercze'>Ondřej Flídr</a>)
+DESCRIPTION:Dokud máte pod správou pár serverů, není problém dohledávat logy na konkrétním stroji. Jakmile jich ale máte pár desítek, stovek nebo desítek tisíc, hodí se centrální sběrné místo, na kterém najdete logy z celého clusteru a jste schopni je procházet, analyzovat a korelovat. Právě takové centrální místo si na přednášce představíme a ukážeme si, jak do něj napojit nejen servery, ale i Vaší business aplikaci. Od sbírání logů, přes jejich analýzu až po přehledné zobrazení a to vše na free software.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T140000
+DTEND;TZID=Europe/Prague:20170305T145500
+UID: [T1] Nebojte se OTP [MP] (Šimon Formánek)
+SUMMARY: [T1] Nebojte se OTP [MP] (Šimon Formánek)
+DESCRIPTION:Vernamova šifra je jediný kryptografický algoritmus, pro který existuje matematický důkaz neprolomitelnosti. Přesto ji používají takřka výhradně armády, diplomacie a teroristé. Teoretický ú vod: proč a za jakých podmínek je OTP neprolomitelné, proč se říká, že je pro běžné uživatele těžko použitelná (distribuce šifry) a proč si myslím, že je to naopak výhoda. Potřebujete k tom u jenom velký pytel náhody a svůj oblíbený programovací jazyk: důvěřovat něčemu, co si sám nenapíšu, zejména pokud jde o kryptografii se nevyplácí. Praxe: předvedu vlastní implementaci OTP od konfigurace generátoru náhodných čísel po samotný algoritmus krok za krokem v Pythonu a PHP. OTP everywhere....
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T150000
+DTEND;TZID=Europe/Prague:20170305T152500
+UID: [T1] Základy 3D tisku [Z] (<a href='https://twitter.com/zollda1'>David Zollpriester</a>)
+SUMMARY: [T1] Základy 3D tisku [Z] (<a href='https://twitter.com/zollda1'>David Zollpriester</a>)
+DESCRIPTION:Základy a princip 3D tisku, volba materiálu a technologie. Práce se SW a kalibrace tiskárny....
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T153000
+DTEND;TZID=Europe/Prague:20170305T155500
+UID: [T1] Alpine Linux: minimalistická distribuce nejen na server [Z] (<a href='https://twitter.com/krcmar'>Petr Krčmář</a>)
+SUMMARY: [T1] Alpine Linux: minimalistická distribuce nejen na server [Z] (<a href='https://twitter.com/krcmar'>Petr Krčmář</a>)
+DESCRIPTION:Prostředí linuxových distribucí je dnes z velké části unifikované a stabilní. Občas ale přijde svěží vítr, jako například v podobě distribuce Alpine Linux. Ta staví na čistotě a jednoduchosti a nezaplaví vás zbytečnostmi.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T160000
+DTEND;TZID=Europe/Prague:20170305T165000
+UID: [T1] Nespravujte počítač ručně [MP] (David Karban)
+SUMMARY: [T1] Nespravujte počítač ručně [MP] (David Karban)
+DESCRIPTION:Možná si říkáte, že automatizovat si svůj linuxový desktop nemá smysl. A že když se ten linux teprve učíte, tak vás nějaká automatizace nazajímá. Zkusím vás přesvědčit o opaku :).
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T103000
+DTEND;TZID=Europe/Prague:20170305T105500
+UID: [T2] Představení EndlessOS [Z] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>)
+SUMMARY: [T2] Představení EndlessOS [Z] (<a href='https://twitter.com/sesivany'>Jiří Eischmann</a>)
+DESCRIPTION:O EndlessOS se toho u nás mnoho neví, přestože se po světě prodávají tisíce počítačů s tímto systémem. Je totiž zaměřený na rozvojový trh. Nicméně společnosti Endless se podařilo vytvořit systém, který je unikátní a může zaujmout i u nás. Přednáška nabídne demo systému a ukázku počítačů, které se s tímto systémem prodávají. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T110000
+DTEND;TZID=Europe/Prague:20170305T112500
+UID: [T2] SaltStack v RD [Z] (Martin Čaj)
+SUMMARY: [T2] SaltStack v RD [Z] (Martin Čaj)
+DESCRIPTION:SaltStack z pohledu senior Linux administratora: Implamentace do existujíci infrastruktůry. Změna v managmentu serverů a služeb. Je to změna k lepšímu nabo jen další ""Slowdown"" proces ?
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T113000
+DTEND;TZID=Europe/Prague:20170305T123000
+UID: [T2] Nebojte se Emacs! [MP] (<a href='https://twitter.com/_l_d_j_'>David Becvarik</a>)
+SUMMARY: [T2] Nebojte se Emacs! [MP] (<a href='https://twitter.com/_l_d_j_'>David Becvarik</a>)
+DESCRIPTION:Potrebujete zorganizovat svuj zivot? Chcete efektivne editovat soubory? Cist mejly? Komunikovat po IRC? Emacs ma mod pro vse. Zapomente na sve zastarale editory postavene na JavaScriptu/Pythonu a prijdte se seznamit s editorem, ktery zmeni vas zivot.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T123000
+DTEND;TZID=Europe/Prague:20170305T130000
+UID: [T2] Apparmor [Z] (<a href='https://twitter.com/n1djz88'>Zdeněk Kubala</a>)
+SUMMARY: [T2] Apparmor [Z] (<a href='https://twitter.com/n1djz88'>Zdeněk Kubala</a>)
+DESCRIPTION:Co to je Apparmor, k cemu slouzi, jak jej pouzivat. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T140000
+DTEND;TZID=Europe/Prague:20170305T145500
+UID: [T2] GNU/Linux a programovatelná logika v řídicích aplikacích [MP] (Pavel Píša)
+SUMMARY: [T2] GNU/Linux a programovatelná logika v řídicích aplikacích [MP] (Pavel Píša)
+DESCRIPTION:Pokračování v přednáškách o použití systému GNU/Linux v řídicích aplikacích. Tato přednáška bude zaměřená na použití programovatelné logiky (FPGA) v kombinaci s procesorovými systémy. Podrobněji bude představená platforma Xilinx Zynq-7000 a její použití s RT variantami jádra Linux. Zmíněné však budou i další procesorové architektury a systémy vhodné pro řídicí aplikace. Přednáška navazuje předchozí přednášky prezentované na konferencích InstallFest a LinuxDays a na články uveřejněné na serveru Root.czProcesorové systémy a nejen GNU/Linux v řídicích aplikacích http://www.root.cz/clanky/gnu-linux-pro-rizeni-a-rychlost-jeho-odezvy/ Linux pro řízení: minimalistické řešení řízení stejnosměrného mo­toru  https://www.root.cz/clanky/linux-pro-rizeni-minimalisticke-reseni-rizeni-stejnosmerneho-motoru/
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T150000
+DTEND;TZID=Europe/Prague:20170305T152500
+UID: [T2] Firefox Sync na vlastním serveru [Z] (<a href='https://twitter.com/zelitomas'>Tomáš Zelina</a>)
+SUMMARY: [T2] Firefox Sync na vlastním serveru [Z] (<a href='https://twitter.com/zelitomas'>Tomáš Zelina</a>)
+DESCRIPTION:Vadí vám, že jsou vaše záložky a hesla odesílány (ač šifrovaně) kamsi ""do cloudu"", ale zároveň nechcete přijít o výhody synchronizace? Spusťte si Firefox Sync na vlastním serveru!
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T153000
+DTEND;TZID=Europe/Prague:20170305T155500
+UID: [T2] FreeBSD na notebooku [Z] (<a href='https://twitter.com/_mbily'>Martin Bílý</a>)
+SUMMARY: [T2] FreeBSD na notebooku [Z] (<a href='https://twitter.com/_mbily'>Martin Bílý</a>)
+DESCRIPTION:Jako dlouholetý správce serverů s FreeBSD jsem dlouhodobě testoval toleranci chovatelů tučňáků k MS Windows na mém dosavadním notebooku. Odhodlal jsem se ke změně, na nový notebook zkusím také nasadit FreeBSD. Dosud jsem ale FreeBSD v desktopové roli nikdy nepoužíval. Jak instalace dopadla, co vše jsem jako BFU zjistil a naučil se, s tím vás zkusím seznámit.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T101500
+DTEND;TZID=Europe/Prague:20170304T111500
+UID: [WS1] Základy šifrování s GPG [Z] (Emil Miler)
+SUMMARY: [WS1] Základy šifrování s GPG [Z] (Emil Miler)
+DESCRIPTION:Velice málo lidí používá šifrování při výměně emailových zpráv, nebo při zpracování souborů na Internetu. Workshop má za úkol sblížit GnuPG s lidmi, kteří o šifrování třeba ani nevědí, nebo se ho nikdy neodhodlali používat. Po jeho konci by měli všichni umět pracovat s klíči, šifrovat i dešifrovat soubory a bezpečně pracovat s emailem pomocí nejběžnějších mailových klientů.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T113000
+DTEND;TZID=Europe/Prague:20170304T123000
+UID: [WS1] Shellová session pro zkušené programátory [P] (Jan Žďárek)
+SUMMARY: [WS1] Shellová session pro zkušené programátory [P] (Jan Žďárek)
+DESCRIPTION:Programujete v některém shellu a máte chuť si chvilku zaprogramovat i na InstallFestu a potvrdit (si) svoji výkonnost? Dáte si nějaké úlohy a tentokrát vám do řešení pro změnu nebudu mluvit. Tento díl seriálu nebude ani pro začátečníky, ani pro ty, co by rádi znali jedinou správnou cestu k cíli. K cíli je možné se dostat libovolnou cestou, pokud dává korektní výsledky.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T130000
+DTEND;TZID=Europe/Prague:20170304T135500
+UID: [WS1] Instalace LAMP + HTTP/2 + Let's Encrypt + nginx [Z] (Petr Štéc)
+SUMMARY: [WS1] Instalace LAMP + HTTP/2 + Let's Encrypt + nginx [Z] (Petr Štéc)
+DESCRIPTION:Praktická ukázka instalace LAMP serveru obohaceného o nginx jako reverzní proxy, která se postará o moderní HTTP/2 protokol a SSL/TLS offloading. Současně si k webu nainstalujeme důveryhodný Let's Encrypt certifikát a nastavíme jeho pravidelnou obnovu. Získáme tak vše pro provoz webové aplikace na VPS včetně HTTPS a zbude-li čas, nakonfigurujeme si šifry tak, abychom na Qualys SSL Labs získali známku minimálně ""A"".
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T140000
+DTEND;TZID=Europe/Prague:20170304T145500
+UID: [WS1] Naučte se VIM na #vimpivo [Z] (<a href='https://twitter.com/PetrHodac'>Petr Hodač</a>)
+SUMMARY: [WS1] Naučte se VIM na #vimpivo [Z] (<a href='https://twitter.com/PetrHodac'>Petr Hodač</a>)
+DESCRIPTION:Vim je nejznámější pokročilý textový editor na světě, který zvládá nevídané operace, ze kterých se vám bude tajit dech. Přijďte se alespoň část těchto kouzel naučit na #vimpivo workshop.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T150000
+DTEND;TZID=Europe/Prague:20170304T165500
+UID: [WS1] Testování kódu Pythonu: py.test [MP] (<a href='https://twitter.com/hroncok'>Miro Hrončok</a>)
+SUMMARY: [WS1] Testování kódu Pythonu: py.test [MP] (<a href='https://twitter.com/hroncok'>Miro Hrončok</a>)
+DESCRIPTION:Předpokládám, že umíte napsat kód v Pythonu, ale nemáte zkušenost s psaním  jednotkovými a integračních testů pomocí py.testu. Pojďme si na příkladu Twitter Wall do terminálu napsané v Pythonu ukázat, jak jednoduše a efektivně psát testy, jak je pouštět a jaké jsou common practices ve světě Pythonu.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170304T170000
+DTEND;TZID=Europe/Prague:20170304T175000
+UID: [WS1] kubernetes 101 [MP] (<a href='https://twitter.com/verosk'>věroš Kaplan </a>)
+SUMMARY: [WS1] kubernetes 101 [MP] (<a href='https://twitter.com/verosk'>věroš Kaplan </a>)
+DESCRIPTION:Kubernetes jsou zajímavá a levná cesta,  jak zajistit,  že aplikace poběží skoro pořád. Pojďme se podívat na to, jak Kubernetes fungují a zkusíme si tam nasadit nějakou aplikaci odolnou proti ChasMonkey. 
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T120000
+DTEND;TZID=Europe/Prague:20170305T130000
+UID: [WS1] Git Flow pro každého [MP] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+SUMMARY: [WS1] Git Flow pro každého [MP] (<a href='https://twitter.com/jiripavelka'>Jiří Pavelka</a>)
+DESCRIPTION:Vyzkoušejte si metodiku Git Flow na praktickém příkladu správy konfiguračních souborů. Projdeme si typické situace, které poukáží na silné stránky metodiky. Práci s metodikou nám usnadní nástroj příkazové řádky OMGF.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T140000
+DTEND;TZID=Europe/Prague:20170305T150000
+UID: [WS1] SaltStack Workshop [MP] (<a href='https://twitter.com/tampakrap'>Theo Chatzimichos</a>)
+SUMMARY: [WS1] SaltStack Workshop [MP] (<a href='https://twitter.com/tampakrap'>Theo Chatzimichos</a>)
+DESCRIPTION:Úvod do SaltStacku Chtěl bych Vám představit Remote Execution a Configuration Management nástroj SaltStack. Workshop bude v angličtině ale mluvim trochu česky :-)
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T150000
+DTEND;TZID=Europe/Prague:20170305T155500
+UID: [WS1] Instalace Archlinuxu [Z] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>)
+SUMMARY: [WS1] Instalace Archlinuxu [Z] (<a href='https://twitter.com/romanovcze'>Václav Pužman</a>)
+DESCRIPTION:V navaznosti na lonske predstaveni distribuce Archlinux bude na letosnim Installfestu moznost si vyzkouset jeho instalaci na virtualni stroj. Projdeme instalaci zakladniho systemu, grafickeho rozhrani a vyzkousime si i instalaci balicku z AUR - Arch User Repository - pomoci nastroje yaourt.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T160000
+DTEND;TZID=Europe/Prague:20170305T165500
+UID: [WS1] Rasberry Pi shield v Kicadu [MP] (Petr Hodina)
+SUMMARY: [WS1] Rasberry Pi shield v Kicadu [MP] (Petr Hodina)
+DESCRIPTION:Tvorba jednoduchého PCB pro Raspberry Pi v programu Kicad.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T110000
+DTEND;TZID=Europe/Prague:20170305T120000
+UID: [WS2] Seznamte se s Turris Omnia [MP] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>)
+SUMMARY: [WS2] Seznamte se s Turris Omnia [MP] (<a href='https://twitter.com/ImiskaI'>Michal Hrusecky</a>)
+DESCRIPTION:Prijdte si osahat Omnii, vyzkouset si jak se ovlada a zkusit si neco jednoducheho nastavit. Na workshopu bude 16 Omnii k zapujceni na vyzkouseni. Spolu si zkusime si par zajimavych moznosti jez Omnie nabizi.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T130000
+DTEND;TZID=Europe/Prague:20170305T145500
+UID: [WS2] ESP8266 [Z] (<a href='https://twitter.com/bastlirna'>Adam Hořčica, Vojtěch Suk</a>)
+SUMMARY: [WS2] ESP8266 [Z] (<a href='https://twitter.com/bastlirna'>Adam Hořčica, Vojtěch Suk</a>)
+DESCRIPTION:Workshop o programováni ESP8266 pomocí PlatformIO (C/C++). Návštěvníci si vyzkouší na zapůjčeném demo-boardu programování ESP8266 na příkladech z IoT oblasti (mimo jiné např. měření teploty, cvakání relé, konfigurace a připojení na WiFi a hlavně MQTT komunikaci).
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T150000
+DTEND;TZID=Europe/Prague:20170305T155500
+UID: [WS2] Uvod do LXD [MP] (<a href='https://twitter.com/luborjurena'>Lubor Jurena</a>)
+SUMMARY: [WS2] Uvod do LXD [MP] (<a href='https://twitter.com/luborjurena'>Lubor Jurena</a>)
+DESCRIPTION:Prineste si zariadenie s predinstalovanym/virtualizovanym Ubuntu, na ktorom si nainstalujeme kontajnerovy hypervizor LXD. Ukazeme si zakladnu konfiguraciu a spustime si vlastne kontajnery.
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Prague:20170305T160000
+DTEND;TZID=Europe/Prague:20170305T165500
+UID: [WS2] Emacs Org mode aneb organizujte svůj život v ASCII [MP] (<a href='https://twitter.com/wentasah'>Michal Sojka</a>)
+SUMMARY: [WS2] Emacs Org mode aneb organizujte svůj život v ASCII [MP] (<a href='https://twitter.com/wentasah'>Michal Sojka</a>)
+DESCRIPTION:Org mode je velmi zajímavá součást textového editoru Emacs. Lze pomocí něj efektivně psát poznámky, spravovat ""TODO listy"", vytvářet podklady pro výzkumné či školní práce, evidovat pracovní dobu, organizovat vývojový tým a kdo ví co ještě. Během workshopu projdeme jak základy práce s Org mode, tak i pokročilejší věci jako spouštění externího kódu či vestavěný tabulkový procesor.
+END:VEVENT
+END:VCALENDAR
