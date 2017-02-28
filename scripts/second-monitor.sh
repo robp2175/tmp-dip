@@ -5,7 +5,7 @@
 #
 
 PRIMARY=eDP1
-SECONDARY=HDMI1
+SECONDARY=DP1-1
 
 case "$1" in
   off)
