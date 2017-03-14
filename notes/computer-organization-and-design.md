@@ -24,6 +24,10 @@ CPU performance
 `Time = Seconds/Program = Instructions/Program * Clock cycles/Instruction *
 Seconds/Clock cycle`
 
+Two key principles
+------------------
+* Instructions represented as numbers.
+* Programs stored in memory (to be read/written), like numbers.
 
 Equations
 =========
@@ -46,6 +50,7 @@ Hardware design principles
 1. Simplicity favors regularity.
 2. Smaller is faster.
 3. Make the common case fast.
+4. Good design demands good compromises.
 
 TOC
 ===
