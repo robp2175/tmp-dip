@@ -52,6 +52,16 @@ Hardware design principles
 3. Make the common case fast.
 4. Good design demands good compromises.
 
+Instruction types
+=================
+* R-type (register)
+    * ( op (6b), rs (5b), rt (5b), rd (5b), shamt (5b), funct (6b) )
+* I-type (immediate)
+    * ( op (6b), rs (5b), rt (5b), constant or address (16b) )
+* J-type (jump)
+    * ( op (6b), address (26b) )
+    * ( op (6b), rs (5b), rt (5b), address (16b) )
+
 TOC
 ===
 Contents
