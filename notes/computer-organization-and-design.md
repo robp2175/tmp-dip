@@ -62,6 +62,13 @@ Instruction types
     * ( op (6b), address (26b) )
     * ( op (6b), rs (5b), rt (5b), address (16b) )
 
+Translate program
+=================
+Compiler: C -> assembly
+Assembler: assembly -> object
+Linker: object -> executable
+Loader: Executable -> memory
+
 TOC
 ===
 Contents
