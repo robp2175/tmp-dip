@@ -6,4 +6,4 @@
 # tiling window manager
 #
 
-_JAVA_AWT_WM_NONREPARENTING=1 /usr/bin/josm
+_JAVA_AWT_WM_NONREPARENTING=1 java -jar ~/download/josm-tested.jar
