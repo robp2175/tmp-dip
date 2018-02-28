@@ -14,11 +14,11 @@ case "$1" in
   c)
     xrandr --output ${PRIMARY} --auto --mode 1024x768 --output ${SECONDARY} --auto --mode 1024x768 --same-as ${PRIMARY}
     ;;
-  l)
-    xrandr --output ${PRIMARY} --auto --output ${SECONDARY} --auto --left-of ${PRIMARY} --rotate left --brightness 0.8
+  n)
+    xrandr --output ${PRIMARY} --off --output ${SECONDARY} --auto --right-of ${PRIMARY} --rotate normal
     ;;
   *)
-    xrandr --output ${PRIMARY} --auto --output ${SECONDARY} --auto --left-of ${PRIMARY} --rotate normal --brightness 0.8
+    xrandr --output ${PRIMARY} --off --output ${SECONDARY} --auto --right-of ${PRIMARY} --rotate left
     ;;
 esac
 
